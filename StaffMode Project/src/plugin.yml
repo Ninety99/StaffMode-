@@ -1,0 +1,13 @@
+name: StaffMode
+main: me.NinetyNine.staff.Staff
+version: 0.1
+author: NinetyNine
+description: A Staff Mode plugin.
+commands:
+  staff:
+    usage: /<command>
+    description: Toggles staff mode.
+    permissions: staffmode.toggle
+permissions:
+  staffmode.toggle:
+    default: op
