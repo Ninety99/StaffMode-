@@ -13,7 +13,7 @@ import me.NinetyNine.staff.utils.StaffUtils;
 public interface StaffAbility extends Listener {
 	
 	/*
-	 * I tried to do it like anni but I can't kek.
+	 * I tried to do it like anni but I can't lol.
 	 */
 	
 	public ItemStack getAbilityItem();
