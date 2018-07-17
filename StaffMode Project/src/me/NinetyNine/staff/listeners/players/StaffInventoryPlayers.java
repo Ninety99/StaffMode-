@@ -27,21 +27,22 @@ public class StaffInventoryPlayers implements Listener {
 
 		if (e.getCurrentItem() == null)
 			return;
-		
-		if (e.getCurrentItem().getType() == Material.SKULL_ITEM && e.getCurrentItem().hasItemMeta()) {
-			e.setCancelled(true);
 
-			ItemStack skull = e.getCurrentItem();
-			SkullMeta skullmeta = (SkullMeta) skull.getItemMeta();
+		if (!(e.getCurrentItem().getType() == Material.SKULL_ITEM && e.getCurrentItem().hasItemMeta()))
+			return;
 
-			for (Player all : Bukkit.getServer().getOnlinePlayers())
-				if (skullmeta.getOwner().equalsIgnoreCase(all.getName())) {
-					e.setCancelled(true);
-					player.closeInventory();
-					player.teleport(all);
-					player.sendMessage(StaffUtils.format("&7You have been teleported to " + all.getName()));
-					break;
-				}
-		}
+		e.setCancelled(true);
+
+		ItemStack skull = e.getCurrentItem();
+		SkullMeta skullmeta = (SkullMeta) skull.getItemMeta();
+
+		for (Player all : Bukkit.getServer().getOnlinePlayers())
+			if (skullmeta.getOwner().equalsIgnoreCase(all.getName())) {
+				e.setCancelled(true);
+				player.closeInventory();
+				player.teleport(all);
+				player.sendMessage(StaffUtils.format("&7You have been teleported to " + all.getName()));
+				break;
+			}
 	}
 }

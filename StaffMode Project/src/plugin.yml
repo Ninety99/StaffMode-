@@ -2,12 +2,19 @@ name: StaffMode
 main: me.NinetyNine.staff.Staff
 version: 0.1
 author: NinetyNine
+depend: [ProtocolLib]
 description: A Staff Mode plugin.
 commands:
   staff:
     usage: /<command>
     description: Toggles staff mode.
     permissions: staffmode.toggle
+  quitgmsp:
+    usage: /<command>
+    description: Quits gamemode SPECTATOR.
+    permissions: staffmode.gmsp
 permissions:
   staffmode.toggle:
+    default: op
+  staffmode.gmsp:
     default: op

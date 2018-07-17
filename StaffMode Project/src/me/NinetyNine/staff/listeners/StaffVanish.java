@@ -36,9 +36,6 @@ public class StaffVanish implements Listener {
 		if (e.getItem().getType() == Material.AIR)
 			return;
 
-		if (e.getItem().getType() != Material.INK_SACK)
-			return;
-
 		if (!e.getItem().hasItemMeta())
 			return;
 

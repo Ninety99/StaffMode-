@@ -10,11 +10,17 @@ import me.NinetyNine.staff.listeners.StaffFly;
 import me.NinetyNine.staff.listeners.StaffInspect;
 import me.NinetyNine.staff.listeners.StaffRandomTP;
 import me.NinetyNine.staff.listeners.StaffVanish;
+import me.NinetyNine.staff.listeners.chest.StaffChest;
+import me.NinetyNine.staff.listeners.chest.StaffInventoryChest;
+import me.NinetyNine.staff.listeners.chest.StaffPLChest;
 import me.NinetyNine.staff.listeners.gmchanger.StaffGMChanger;
 import me.NinetyNine.staff.listeners.gmchanger.StaffInventoryGM;
 import me.NinetyNine.staff.listeners.misc.StaffAntiNexus;
+import me.NinetyNine.staff.listeners.misc.StaffBlockPlace;
 import me.NinetyNine.staff.listeners.misc.StaffDrop;
+import me.NinetyNine.staff.listeners.misc.StaffEat;
 import me.NinetyNine.staff.listeners.misc.StaffHitEvent;
+import me.NinetyNine.staff.listeners.misc.StaffInventoryDrag;
 import me.NinetyNine.staff.listeners.misc.StaffJoin;
 import me.NinetyNine.staff.listeners.misc.StaffPickupItem;
 import me.NinetyNine.staff.listeners.misc.StaffQuit;
@@ -32,7 +38,9 @@ public class Staff extends JavaPlugin {
 		instance = this;
 
 		registerListeners();
-		registerCommand();
+		registerCommands();
+		StaffPLChest.setupAnimationListener();
+		StaffPLChest.setupSoundListener();
 		StaffConfig.loadConfig();
 		StaffConfig.save();
 		Bukkit.getServer().getLogger().info("StaffMode has been enabled");
@@ -54,17 +62,21 @@ public class Staff extends JavaPlugin {
 		pm.registerEvents(new StaffVanish(), this);
 		pm.registerEvents(new StaffAntiNexus(), this);
 		pm.registerEvents(new StaffConfig(), this);
-		pm.registerEvents(new StaffDrop(), this);
 		pm.registerEvents(new StaffInventoryGM(), this);
 		pm.registerEvents(new StaffFly(), this);
 		pm.registerEvents(new StaffInspect(), this);
 		pm.registerEvents(new StaffPlayers(), this);
 		pm.registerEvents(new StaffGMChanger(), this);
-		pm.registerEvents(new StaffInventoryGM(), this);
 		pm.registerEvents(new StaffDrop(), this);
 		pm.registerEvents(new StaffInventoryPlayers(), this);
 		pm.registerEvents(new StaffPickupItem(), this);
 		pm.registerEvents(new StaffQuit(), this);
+		pm.registerEvents(new StaffBlockPlace(), this);
+		pm.registerEvents(new StaffEat(), this);
+		pm.registerEvents(new StaffChest(), this);
+		pm.registerEvents(new StaffInventoryDrag(), this);
+		pm.registerEvents(new StaffPLChest(), this);
+		pm.registerEvents(new StaffInventoryChest(), this);
 	}
 
 	private void clearAll() {
@@ -74,7 +86,9 @@ public class Staff extends JavaPlugin {
 		StaffFly.clear();
 	}
 
-	private void registerCommand() {
-		getCommand("staff").setExecutor(new StaffCommands());
+	private void registerCommands() {
+		StaffCommands cmd = new StaffCommands();
+		getCommand("staff").setExecutor(cmd);
+		getCommand("quitgmsp").setExecutor(cmd);
 	}
 }

@@ -18,20 +18,16 @@ public class StaffInventoryGM implements Listener {
 		if (!(e.getInventory().getName().equals(ChatColor.RED + "Gamemode Changer")))
 			return;
 
+		if (!(StaffUtils.isInStaffMode((Player) e.getWhoClicked())))
+			return;
+
 		if (e.getCurrentItem() == null)
 			return;
 
 		Player player = (Player) e.getWhoClicked();
 
-		if (!(StaffUtils.isInStaffMode(player)))
-			return;
-
 		if (!(e.getCurrentItem().getType().equals(Material.AIR)) && e.getCurrentItem().hasItemMeta()) {
-			switch (e.getCurrentItem().getType()) {
-			default:
-				e.setCancelled(true);
-				break;
-			case GRASS:
+			if (e.getCurrentItem().getType().equals(Material.GRASS)) {
 				if (player.hasPermission(StaffConfig.getString("gmchangerpermgm0"))) {
 					player.closeInventory();
 					player.setGameMode(GameMode.SURVIVAL);
@@ -40,11 +36,13 @@ public class StaffInventoryGM implements Listener {
 				} else {
 					e.setCancelled(true);
 					player.sendMessage(
-							StaffUtils.format("&cYou do not have permissions to change your gamemode to &5SURVIVAL"));
+							StaffUtils.format("&cYou do not have permissions to change your gamemode to &fCREATIVE"));
 					player.closeInventory();
-					break;
+					return;
 				}
-			case WOOL:
+			}
+
+			if (e.getCurrentItem().getType().equals(Material.WOOL)) {
 				if (player.hasPermission(StaffConfig.getString("gmchangerpermgm1"))) {
 					player.closeInventory();
 					player.setGameMode(GameMode.CREATIVE);
@@ -55,9 +53,11 @@ public class StaffInventoryGM implements Listener {
 					player.sendMessage(
 							StaffUtils.format("&cYou do not have permissions to change your gamemode to &fCREATIVE"));
 					player.closeInventory();
-					break;
+					return;
 				}
-			case GLASS:
+			}
+
+			if (e.getCurrentItem().getType().equals(Material.GLASS)) {
 				if (player.hasPermission(StaffConfig.getString("gmchangerpermgm2"))) {
 					player.closeInventory();
 					player.setGameMode(GameMode.ADVENTURE);
@@ -68,9 +68,11 @@ public class StaffInventoryGM implements Listener {
 					player.sendMessage(
 							StaffUtils.format("&cYou do not have permissions to change your gamemode to &9ADVENTURE"));
 					player.closeInventory();
-					break;
+					return;
 				}
-			case EYE_OF_ENDER:
+			}
+
+			if (e.getCurrentItem().getType().equals(Material.EYE_OF_ENDER)) {
 				if (player.hasPermission(StaffConfig.getString("gmchangerpermgm3"))) {
 					player.closeInventory();
 					player.setGameMode(GameMode.SPECTATOR);
@@ -81,7 +83,7 @@ public class StaffInventoryGM implements Listener {
 					player.sendMessage(
 							StaffUtils.format("&cYou do not have permissions to change your gamemode to &rSPECTATOR"));
 					player.closeInventory();
-					break;
+					return;
 				}
 			}
 		} else
