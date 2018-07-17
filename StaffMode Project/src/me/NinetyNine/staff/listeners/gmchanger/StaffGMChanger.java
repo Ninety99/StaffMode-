@@ -1,4 +1,4 @@
-package me.NinetyNine.staff.listeners;
+package me.NinetyNine.staff.listeners.gmchanger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -48,17 +48,10 @@ public class StaffGMChanger implements Listener {
 
 		Inventory gmInventory = Bukkit.createInventory(null, 9, ChatColor.RED + "Gamemode Changer");
 
-		/*
-		 * TODO: Fix colors.
-		 */
-		
-		StaffItems.createWool(gmInventory, 1, new ItemStack(Material.WOOL), ChatColor.GOLD + "Survival", 1);
-		StaffItems.createWool(gmInventory, 3, new ItemStack(Material.WOOL, 1, (byte) 0), ChatColor.WHITE + "Creative",
-				0);
-		StaffItems.createWool(gmInventory, 5, new ItemStack(Material.WOOL, 1, (byte) 3),
-				ChatColor.DARK_BLUE + "Adventure", 3);
-		StaffItems.createWool(gmInventory, 7, new ItemStack(Material.WOOL, 1, (byte) 2),
-				ChatColor.DARK_RED + "Spectator", 2);
+		StaffItems.createItem(gmInventory, 1, new ItemStack(Material.GRASS), ChatColor.GOLD + "Survival", null);
+		StaffItems.createItem(gmInventory, 3, new ItemStack(Material.WOOL), ChatColor.WHITE + "Creative", null);
+		StaffItems.createItem(gmInventory, 5, new ItemStack(Material.GLASS), ChatColor.DARK_BLUE + "Adventure", null);
+		StaffItems.createItem(gmInventory, 7, new ItemStack(Material.EYE_OF_ENDER), ChatColor.DARK_RED + "Spectator", null);
 
 		player.openInventory(gmInventory);
 	}

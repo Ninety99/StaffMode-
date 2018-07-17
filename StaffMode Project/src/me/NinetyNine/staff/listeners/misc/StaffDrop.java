@@ -1,4 +1,4 @@
-package me.NinetyNine.staff.listeners;
+package me.NinetyNine.staff.listeners.misc;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

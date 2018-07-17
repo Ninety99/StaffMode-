@@ -1,4 +1,4 @@
-package me.NinetyNine.staff.listeners;
+package me.NinetyNine.staff.listeners.players;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

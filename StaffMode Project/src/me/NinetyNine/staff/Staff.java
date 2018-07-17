@@ -6,20 +6,20 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import lombok.Getter;
 import me.NinetyNine.staff.commands.StaffCommands;
-import me.NinetyNine.staff.listeners.StaffAntiGetInventory;
-import me.NinetyNine.staff.listeners.StaffAntiNexus;
-import me.NinetyNine.staff.listeners.StaffDrop;
 import me.NinetyNine.staff.listeners.StaffFly;
-import me.NinetyNine.staff.listeners.StaffGMChanger;
-import me.NinetyNine.staff.listeners.StaffHitEvent;
 import me.NinetyNine.staff.listeners.StaffInspect;
-import me.NinetyNine.staff.listeners.StaffInventoryGM;
-import me.NinetyNine.staff.listeners.StaffInventoryPlayers;
-import me.NinetyNine.staff.listeners.StaffJoin;
-import me.NinetyNine.staff.listeners.StaffPickupItem;
-import me.NinetyNine.staff.listeners.StaffPlayers;
 import me.NinetyNine.staff.listeners.StaffRandomTP;
 import me.NinetyNine.staff.listeners.StaffVanish;
+import me.NinetyNine.staff.listeners.gmchanger.StaffGMChanger;
+import me.NinetyNine.staff.listeners.gmchanger.StaffInventoryGM;
+import me.NinetyNine.staff.listeners.misc.StaffAntiNexus;
+import me.NinetyNine.staff.listeners.misc.StaffDrop;
+import me.NinetyNine.staff.listeners.misc.StaffHitEvent;
+import me.NinetyNine.staff.listeners.misc.StaffJoin;
+import me.NinetyNine.staff.listeners.misc.StaffPickupItem;
+import me.NinetyNine.staff.listeners.misc.StaffQuit;
+import me.NinetyNine.staff.listeners.players.StaffInventoryPlayers;
+import me.NinetyNine.staff.listeners.players.StaffPlayers;
 import me.NinetyNine.staff.utils.StaffConfig;
 
 public class Staff extends JavaPlugin {
@@ -54,7 +54,6 @@ public class Staff extends JavaPlugin {
 		pm.registerEvents(new StaffVanish(), this);
 		pm.registerEvents(new StaffAntiNexus(), this);
 		pm.registerEvents(new StaffConfig(), this);
-		pm.registerEvents(new StaffAntiGetInventory(), this);
 		pm.registerEvents(new StaffDrop(), this);
 		pm.registerEvents(new StaffInventoryGM(), this);
 		pm.registerEvents(new StaffFly(), this);
@@ -65,6 +64,7 @@ public class Staff extends JavaPlugin {
 		pm.registerEvents(new StaffDrop(), this);
 		pm.registerEvents(new StaffInventoryPlayers(), this);
 		pm.registerEvents(new StaffPickupItem(), this);
+		pm.registerEvents(new StaffQuit(), this);
 	}
 
 	private void clearAll() {

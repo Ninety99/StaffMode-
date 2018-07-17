@@ -24,7 +24,7 @@ public class StaffUtils {
 			player.getInventory().clear();
 			Vanisher.vanish(player);
 			StaffItems.addStaffItems(player);
-			player.sendMessage(format("&9Staff Mode has been &aenabled&9."));
+			player.sendMessage(format("&9Staff Mode has been &aenabled&9. &7(You have been vanished)"));
 			return;
 		} else
 			removeStaff(player);
@@ -37,8 +37,9 @@ public class StaffUtils {
 			getStaff().remove(player);
 			player.setGameMode(GameMode.SURVIVAL);
 			Vanisher.unvanish(player);
-			player.sendMessage(format("&9Staff Mode has been &cdisabled&9."));
-		}
+			player.sendMessage(format("&9Staff Mode has been &cdisabled&9. &7(You have been unvanished)"));
+		} else
+			return;
 	}
 
 	public static boolean isInStaffMode(Player player) {
