@@ -6,6 +6,7 @@ import java.util.List;
 import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -39,8 +40,7 @@ public class StaffVanish implements Listener {
 		if (!e.getItem().hasItemMeta())
 			return;
 
-		if (e.getItem().getItemMeta().getDisplayName() != ChatColor.RED + "Vanish"
-				|| e.getItem().getItemMeta().getDisplayName() != ChatColor.GREEN + "Vanished")
+		if (e.getItem().getItemMeta().getDisplayName() != ChatColor.RED + "Vanish")
 			return;
 
 		Player player = e.getPlayer();
@@ -64,7 +64,7 @@ public class StaffVanish implements Listener {
 		@SuppressWarnings("deprecation")
 		ItemStack a = new ItemStack(Material.INK_SACK, 1, (short) DyeColor.LIME.getData());
 		ItemMeta am = a.getItemMeta();
-		am.setDisplayName(ChatColor.GREEN + "Vanished");
+		am.addEnchant(Enchantment.DURABILITY, 1, true);
 		a.setItemMeta(am);
 
 		return a;
@@ -74,7 +74,7 @@ public class StaffVanish implements Listener {
 		@SuppressWarnings("deprecation")
 		ItemStack a = new ItemStack(Material.INK_SACK, 1, (short) DyeColor.GRAY.getData());
 		ItemMeta am = a.getItemMeta();
-		am.setDisplayName(ChatColor.RED + "Vanish");
+		am.getEnchants().clear();
 		a.setItemMeta(am);
 
 		return a;

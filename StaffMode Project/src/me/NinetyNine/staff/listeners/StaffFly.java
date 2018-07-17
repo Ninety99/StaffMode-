@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -35,7 +36,7 @@ public class StaffFly implements Listener {
 
 		if (e.getItem().getType() == Material.AIR)
 			return;
-		
+
 		if (!(e.getItem().getType() == Material.FEATHER))
 			return;
 
@@ -45,9 +46,13 @@ public class StaffFly implements Listener {
 		if (!getFly().contains(player)) {
 			getFly().add(player);
 			Flyer.setFly(player);
+			e.getItem().getItemMeta().addEnchant(Enchantment.DURABILITY, 1, true);
 			player.sendMessage(StaffUtils.format("&9Fly &7mode has been &aenabled!"));
 			return;
 		} else {
+			if (e.getItem().getItemMeta().getEnchants() != null)
+				e.getItem().getItemMeta().removeEnchant(Enchantment.DURABILITY);
+
 			getFly().remove(player);
 			Flyer.removeFly(player);
 			player.sendMessage(StaffUtils.format("&9Fly &7mode has been &cdisabled!"));
