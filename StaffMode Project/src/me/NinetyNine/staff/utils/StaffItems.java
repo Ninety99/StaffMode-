@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 
 public class StaffItems {
 
@@ -47,7 +48,7 @@ public class StaffItems {
 	}
 
 	private static ItemStack addGMChanger(Player player) {
-		return createItem(player.getInventory(), 8, new ItemStack(Material.MELON),
+		return createItem(player.getInventory(), 8, new ItemStack(Material.WATCH),
 				ChatColor.DARK_BLUE + "Gamemode Changer " + ChatColor.GRAY + "(Right Click)", null);
 	}
 
@@ -61,6 +62,17 @@ public class StaffItems {
 		item.setItemMeta(meta);
 
 		inventory.setItem(slot, item);
+
+		return item;
+	}
+
+	public static ItemStack createSkull(ItemStack item, String displayName, String owner, List<String> lore) {
+		item = new ItemStack(item.getType());
+		SkullMeta meta = (SkullMeta) item.getItemMeta();
+		meta.setDisplayName(displayName);
+		meta.setOwner(owner);
+		meta.setLore(lore);
+		item.setItemMeta(meta);
 
 		return item;
 	}

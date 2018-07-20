@@ -12,8 +12,9 @@ public class StaffQuit implements Listener {
 	public void onPlayerQuit(PlayerQuitEvent e) {
 		if (!(StaffUtils.isInStaffMode(e.getPlayer())))
 			return;
-		
-		StaffUtils.toggleStaff(e.getPlayer());
-		return;
+		else {
+			StaffUtils.toggleStaff(e.getPlayer());
+			return;
+		}
 	}
 }

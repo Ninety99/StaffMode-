@@ -9,6 +9,7 @@ public class Flyer {
 			return;
 		
 		player.setAllowFlight(true);
+		return;
 	}
 	
 	public static void removeFly(Player player) {
@@ -16,5 +17,6 @@ public class Flyer {
 			return;
 		
 		player.setAllowFlight(false);
+		return;
 	}
 }

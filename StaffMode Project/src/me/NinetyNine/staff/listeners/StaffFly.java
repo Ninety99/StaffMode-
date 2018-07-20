@@ -23,13 +23,13 @@ public class StaffFly implements Listener {
 
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent e) {
+		if (!StaffUtils.isInStaffMode(e.getPlayer()))
+			return;
+		
 		if (!(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK))
 			return;
 
 		Player player = e.getPlayer();
-
-		if (!StaffUtils.isInStaffMode(player))
-			return;
 
 		if (e.getItem() == null)
 			return;
@@ -37,10 +37,10 @@ public class StaffFly implements Listener {
 		if (e.getItem().getType() == Material.AIR)
 			return;
 
-		if (!(e.getItem().getType() == Material.FEATHER))
+		if (e.getItem().getType() != Material.FEATHER)
 			return;
 
-		if (e.getItem().getItemMeta().getDisplayName() == ChatColor.DARK_BLUE + "Fly")
+		if (e.getItem().getItemMeta().getDisplayName() != ChatColor.DARK_BLUE + "Fly")
 			return;
 
 		if (!getFly().contains(player)) {

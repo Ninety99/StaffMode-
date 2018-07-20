@@ -12,14 +12,14 @@ import me.NinetyNine.staff.utils.StaffUtils;
 public class StaffInventoryChest implements Listener {
 
 	@EventHandler
-	public void onInventoryDrag(InventoryClickEvent e) {
+	public void onInventoryClick(InventoryClickEvent e) {
 		if (!(StaffUtils.isInStaffMode((Player) e.getWhoClicked())))
 			return;
 
 		if (e.getCurrentItem() == null && e.getCurrentItem().getType() == Material.AIR)
 			return;
-		
-		if (!(e.getInventory().getType() == InventoryType.CHEST))
+
+		if (e.getInventory().getType() != InventoryType.CHEST)
 			return;
 
 		e.setCancelled(true);

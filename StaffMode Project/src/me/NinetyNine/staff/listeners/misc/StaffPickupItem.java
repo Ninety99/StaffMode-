@@ -1,6 +1,7 @@
 package me.NinetyNine.staff.listeners.misc;
 
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 
@@ -8,11 +9,14 @@ import me.NinetyNine.staff.utils.StaffUtils;
 
 public class StaffPickupItem implements Listener {
 
-	@EventHandler
+	@EventHandler(priority = EventPriority.MONITOR)
 	public void onPlayerPickupItem(PlayerPickupItemEvent e) {
 		if (!(StaffUtils.isInStaffMode(e.getPlayer())))
 			return;
-		else
+		else {
 			e.setCancelled(true);
+			e.getPlayer().sendMessage(StaffUtils.format("&cYou cannot pickup any items while in Staff Mode!"));
+			return;
+		}
 	}
 }

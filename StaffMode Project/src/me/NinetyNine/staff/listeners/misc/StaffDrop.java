@@ -12,9 +12,10 @@ public class StaffDrop implements Listener {
 	public void onPlayerDropItem(PlayerDropItemEvent e) {
 		if (!StaffUtils.isInStaffMode(e.getPlayer()))
 			return;
-
-		e.setCancelled(true);
-		System.out.println("double?");
-		e.getPlayer().sendMessage(StaffUtils.format("&cYou cannot drop items whilst in Staff mode!"));
+		else {
+			e.setCancelled(true);
+			e.getPlayer().sendMessage(StaffUtils.format("&cYou cannot drop items whilst in Staff mode!"));
+			return;
+		}
 	}
 }

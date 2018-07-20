@@ -33,7 +33,7 @@ public class StaffGMChanger implements Listener {
 		if (e.getItem().getType() == (Material.AIR))
 			return;
 
-		if (!(e.getItem().getType().equals(Material.MELON)))
+		if (!(e.getItem().getType().equals(Material.WATCH)))
 			return;
 
 		if (!(e.getItem().getItemMeta().getDisplayName()
@@ -43,15 +43,18 @@ public class StaffGMChanger implements Listener {
 		if (!(player.hasPermission(StaffConfig.getString("gmchangerpermgm0"))
 				|| player.hasPermission(StaffConfig.getString("gmchangerpermgm1"))
 				|| player.hasPermission(StaffConfig.getString("gmchangerpermgm2"))
-				|| player.hasPermission(StaffConfig.getString("gmchangerpermgm3"))))
+				|| player.hasPermission(StaffConfig.getString("gmchangerpermgm3")))) {
+			player.sendMessage(StaffUtils.format("&cYou do not have permissions to use this feature!"));
 			return;
+		}
 
 		Inventory gmInventory = Bukkit.createInventory(null, 9, ChatColor.RED + "Gamemode Changer");
 
 		StaffItems.createItem(gmInventory, 1, new ItemStack(Material.GRASS), ChatColor.GOLD + "Survival", null);
 		StaffItems.createItem(gmInventory, 3, new ItemStack(Material.WOOL), ChatColor.WHITE + "Creative", null);
 		StaffItems.createItem(gmInventory, 5, new ItemStack(Material.GLASS), ChatColor.DARK_BLUE + "Adventure", null);
-		StaffItems.createItem(gmInventory, 7, new ItemStack(Material.EYE_OF_ENDER), ChatColor.DARK_RED + "Spectator", null);
+		StaffItems.createItem(gmInventory, 7, new ItemStack(Material.EYE_OF_ENDER), ChatColor.DARK_RED + "Spectator",
+				null);
 
 		player.openInventory(gmInventory);
 	}

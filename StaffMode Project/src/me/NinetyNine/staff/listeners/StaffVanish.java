@@ -26,9 +26,10 @@ public class StaffVanish implements Listener {
 
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent e) {
-		if (!(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK))
-			return;
 		if (!StaffUtils.isInStaffMode(e.getPlayer()))
+			return;
+
+		if (!(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK))
 			return;
 
 		if (e.getItem() == null)
@@ -40,7 +41,8 @@ public class StaffVanish implements Listener {
 		if (!e.getItem().hasItemMeta())
 			return;
 
-		if (e.getItem().getItemMeta().getDisplayName() != ChatColor.RED + "Vanish")
+		if (e.getItem().getItemMeta().getDisplayName() != ChatColor.RED + "Vanish"
+				&& e.getItem().getItemMeta().getDisplayName() != ChatColor.GREEN + "Vanish")
 			return;
 
 		Player player = e.getPlayer();
@@ -62,8 +64,9 @@ public class StaffVanish implements Listener {
 
 	private ItemStack lime() {
 		@SuppressWarnings("deprecation")
-		ItemStack a = new ItemStack(Material.INK_SACK, 1, (short) DyeColor.LIME.getData());
+		ItemStack a = new ItemStack(Material.INK_SACK, 1, DyeColor.LIME.getDyeData());
 		ItemMeta am = a.getItemMeta();
+		am.setDisplayName(ChatColor.GREEN + "Vanish");
 		am.addEnchant(Enchantment.DURABILITY, 1, true);
 		a.setItemMeta(am);
 
@@ -72,8 +75,9 @@ public class StaffVanish implements Listener {
 
 	private ItemStack gray() {
 		@SuppressWarnings("deprecation")
-		ItemStack a = new ItemStack(Material.INK_SACK, 1, (short) DyeColor.GRAY.getData());
+		ItemStack a = new ItemStack(Material.INK_SACK, 1, DyeColor.GRAY.getDyeData());
 		ItemMeta am = a.getItemMeta();
+		am.setDisplayName(ChatColor.RED + "Vanish");
 		am.getEnchants().clear();
 		a.setItemMeta(am);
 

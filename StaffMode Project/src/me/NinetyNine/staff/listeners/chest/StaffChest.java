@@ -20,18 +20,18 @@ public class StaffChest implements Listener {
 
 	@Getter
 	private static Map<Player, Chest> chest = new HashMap<Player, Chest>();
-	
+
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent e) {
 		if (!(StaffUtils.isInStaffMode(e.getPlayer())))
 			return;
-		
-		if (!(e.getAction() == Action.RIGHT_CLICK_BLOCK))
+
+		if (e.getAction() != Action.RIGHT_CLICK_BLOCK)
 			return;
-		
+
 		if (!(e.getClickedBlock().getState() instanceof Chest))
 			return;
-		
+
 		Player player = e.getPlayer();
 		getChest().put(player, (Chest) e.getClickedBlock().getState());
 		Inventory inventory = Bukkit.createInventory(null, InventoryType.CHEST);
@@ -39,8 +39,8 @@ public class StaffChest implements Listener {
 		player.openInventory(inventory);
 		player.sendMessage(StaffUtils.format("&9Opening chest silently"));
 	}
-	
-	public static void clear() { 
+
+	public static void clear() {
 		getChest().clear();
 	}
 }
