@@ -105,7 +105,6 @@ public class Staff extends JavaPlugin {
 		StaffVanish.clear();
 		StaffRandomTP.clear();
 		StaffChest.clear();
-
 	}
 
 	private void registerCommands() {

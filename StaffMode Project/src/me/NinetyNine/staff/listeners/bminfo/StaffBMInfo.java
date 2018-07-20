@@ -21,7 +21,7 @@ public class StaffBMInfo implements Listener {
 			Player player = e.getPlayer();
 			Player clicked = (Player) e.getRightClicked();
 			
-			StaffBMInfoHook bminfo = new StaffBMInfo2();
+			StaffBMInfoInterface bminfo = new StaffBMInfoHook();
 			bminfo.getHistory(player, clicked);
 			return;
 		}
