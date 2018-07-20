@@ -9,9 +9,12 @@ public class StaffBMInfo extends StaffBMInfoHook implements Listener {
 
 	@EventHandler
 	public void onPlayerInteractAtEntity(PlayerInteractAtEntityEvent e) {
-		if ((e.getRightClicked() instanceof Player))
+		if (!(e.getRightClicked() instanceof Player))
 			return;
 
+		if (e.getRightClicked() == null)
+			return;
+		
 		if (e.getPlayer().getItemInHand() != null)
 			return;
 		else {
@@ -19,6 +22,7 @@ public class StaffBMInfo extends StaffBMInfoHook implements Listener {
 			Player clicked = (Player) e.getRightClicked();
 
 			getHistory(player, clicked);
+			return;
 		}
 	}
 }

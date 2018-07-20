@@ -9,10 +9,6 @@ commands:
     usage: /<command>
     description: Toggles staff mode.
     permissions: staffmode.toggle
-  quitgmsp:
-    usage: /<command>
-    description: Quits gamemode SPECTATOR.
-    permissions: staffmode.gmsp
 permissions:
   staffmode.toggle:
     default: op

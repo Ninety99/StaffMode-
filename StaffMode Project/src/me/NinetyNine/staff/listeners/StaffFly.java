@@ -11,6 +11,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import lombok.Getter;
 import me.NinetyNine.staff.utils.Flyer;
@@ -25,8 +27,8 @@ public class StaffFly implements Listener {
 	public void onPlayerInteract(PlayerInteractEvent e) {
 		if (!StaffUtils.isInStaffMode(e.getPlayer()))
 			return;
-		
-		if (!(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK))
+
+		if (e.getAction() != Action.RIGHT_CLICK_AIR && e.getAction() != Action.RIGHT_CLICK_BLOCK)
 			return;
 
 		Player player = e.getPlayer();
@@ -40,24 +42,44 @@ public class StaffFly implements Listener {
 		if (e.getItem().getType() != Material.FEATHER)
 			return;
 
-		if (e.getItem().getItemMeta().getDisplayName() != ChatColor.DARK_BLUE + "Fly")
+		if (!(e.getItem().getItemMeta().getDisplayName().equals(ChatColor.LIGHT_PURPLE + "Fly")
+				|| e.getItem().getItemMeta().getDisplayName().equals(ChatColor.GREEN + "Fly")))
 			return;
 
 		if (!getFly().contains(player)) {
 			getFly().add(player);
 			Flyer.setFly(player);
-			e.getItem().getItemMeta().addEnchant(Enchantment.DURABILITY, 1, true);
+			add(e.getItem());
 			player.sendMessage(StaffUtils.format("&9Fly &7mode has been &aenabled!"));
 			return;
 		} else {
 			if (e.getItem().getItemMeta().getEnchants() != null)
 				e.getItem().getItemMeta().removeEnchant(Enchantment.DURABILITY);
+			System.out.println("removed enchant");
 
 			getFly().remove(player);
+			System.out.println("removing player");
+			remove(e.getItem());
+			System.out.println("removed enchant");
 			Flyer.removeFly(player);
+			System.out.println("remove fly mode for player");
 			player.sendMessage(StaffUtils.format("&9Fly &7mode has been &cdisabled!"));
 			return;
 		}
+	}
+
+	private void add(ItemStack feather) {
+		ItemMeta featherm = feather.getItemMeta();
+		featherm.addEnchant(Enchantment.DURABILITY, 1, true);
+		featherm.setDisplayName(ChatColor.GREEN + "Fly");
+		feather.setItemMeta(featherm);
+	}
+
+	private void remove(ItemStack feather) {
+		ItemMeta featherm = feather.getItemMeta();
+		featherm.removeEnchant(Enchantment.DURABILITY);
+		featherm.setDisplayName(ChatColor.LIGHT_PURPLE + "Fly");
+		feather.setItemMeta(featherm);
 	}
 
 	public static void clear() {

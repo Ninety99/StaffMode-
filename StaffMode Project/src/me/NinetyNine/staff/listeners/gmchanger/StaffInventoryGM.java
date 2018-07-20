@@ -77,7 +77,7 @@ public class StaffInventoryGM implements Listener {
 					player.closeInventory();
 					player.setGameMode(GameMode.SPECTATOR);
 					player.sendMessage(StaffUtils.format("&9Your gamemode has been changed to &bSPECTATOR"));
-					player.sendMessage(StaffUtils.format("&7Use /quitgmsp to quit &bSPECTATOR &7mode!"));
+					player.sendMessage(StaffUtils.format("&7Use /staff quitgmsp to quit &bSPECTATOR &7mode!"));
 					return;
 				} else {
 					e.setCancelled(true);

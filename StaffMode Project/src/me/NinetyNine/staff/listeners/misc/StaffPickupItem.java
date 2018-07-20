@@ -15,7 +15,6 @@ public class StaffPickupItem implements Listener {
 			return;
 		else {
 			e.setCancelled(true);
-			e.getPlayer().sendMessage(StaffUtils.format("&cYou cannot pickup any items while in Staff Mode!"));
 			return;
 		}
 	}

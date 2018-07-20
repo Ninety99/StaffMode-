@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.ChatColor;
-import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -29,20 +28,22 @@ public class StaffVanish implements Listener {
 		if (!StaffUtils.isInStaffMode(e.getPlayer()))
 			return;
 
-		if (!(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK))
+		if (e.getAction() != Action.RIGHT_CLICK_AIR && e.getAction() != Action.RIGHT_CLICK_BLOCK)
 			return;
-
 		if (e.getItem() == null)
 			return;
 
 		if (e.getItem().getType() == Material.AIR)
 			return;
 
+		if (e.getItem().getType() != Material.REDSTONE_TORCH_ON && e.getItem().getType() != Material.TORCH)
+			return;
+
 		if (!e.getItem().hasItemMeta())
 			return;
 
-		if (e.getItem().getItemMeta().getDisplayName() != ChatColor.RED + "Vanish"
-				&& e.getItem().getItemMeta().getDisplayName() != ChatColor.GREEN + "Vanish")
+		if (!(e.getItem().getItemMeta().getDisplayName().equals(ChatColor.RED + "Vanish")
+				|| e.getItem().getItemMeta().getDisplayName().equals(ChatColor.GREEN + "Vanish")))
 			return;
 
 		Player player = e.getPlayer();
@@ -50,38 +51,32 @@ public class StaffVanish implements Listener {
 		if (!getVanishedPlayers().contains(player)) {
 			getVanishedPlayers().add(player);
 			Vanisher.vanish(player);
-			e.getItem().setType(lime().getType());
-			player.sendMessage(StaffUtils.format("&9You are now &avanished&9!"));
+			on(e.getItem());
+			player.sendMessage(StaffUtils.format("&9You are now &avanished!"));
 			return;
 		} else {
 			getVanishedPlayers().remove(player);
 			Vanisher.unvanish(player);
-			e.getItem().setType(gray().getType());
-			player.sendMessage(StaffUtils.format("&9You are now &cunvanished&9!"));
+			off(e.getItem());
+			player.sendMessage(StaffUtils.format("&9You are now &cunvanished!"));
 			return;
 		}
 	}
 
-	private ItemStack lime() {
-		@SuppressWarnings("deprecation")
-		ItemStack a = new ItemStack(Material.INK_SACK, 1, DyeColor.LIME.getDyeData());
+	private void on(ItemStack a) {
+		a.setType(Material.REDSTONE_TORCH_ON);
 		ItemMeta am = a.getItemMeta();
 		am.setDisplayName(ChatColor.GREEN + "Vanish");
 		am.addEnchant(Enchantment.DURABILITY, 1, true);
 		a.setItemMeta(am);
-
-		return a;
 	}
 
-	private ItemStack gray() {
-		@SuppressWarnings("deprecation")
-		ItemStack a = new ItemStack(Material.INK_SACK, 1, DyeColor.GRAY.getDyeData());
+	private void off(ItemStack a) {
+		a.setType(Material.TORCH);
 		ItemMeta am = a.getItemMeta();
 		am.setDisplayName(ChatColor.RED + "Vanish");
-		am.getEnchants().clear();
+		am.removeEnchant(Enchantment.DURABILITY);
 		a.setItemMeta(am);
-
-		return a;
 	}
 
 	public static void clear() {

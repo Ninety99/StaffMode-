@@ -24,6 +24,8 @@ public class StaffUtils {
 			player.getInventory().clear();
 			Vanisher.vanish(player);
 			StaffItems.addStaffItems(player);
+			player.setFoodLevel(20);
+			player.setHealth(20);
 			player.sendMessage(format("&9Staff Mode has been &aenabled&9. &7(You have been vanished)"));
 			return;
 		} else

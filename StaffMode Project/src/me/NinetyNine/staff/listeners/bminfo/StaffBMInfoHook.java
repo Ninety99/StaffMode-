@@ -3,7 +3,7 @@ package me.NinetyNine.staff.listeners.bminfo;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
-public abstract class StaffBMInfoHook {
+public class StaffBMInfoHook {
 
 	protected void getHistory(Player checker, OfflinePlayer target) {
 		checker.performCommand("bminfo " + target.getName());

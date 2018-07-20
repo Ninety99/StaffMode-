@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.bukkit.ChatColor;
-import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -37,14 +36,14 @@ public class StaffItems {
 				ChatColor.RED + "Players " + ChatColor.GRAY + "(Right Click)", null);
 	}
 
-	@SuppressWarnings("deprecation")
 	private static ItemStack addVanishItem(Player player) {
-		return createItem(player.getInventory(), 5,
-				new ItemStack(Material.INK_SACK, 1, (short) DyeColor.GRAY.getData()), ChatColor.RED + "Vanish", null);
+		return createItem(player.getInventory(), 5, new ItemStack(Material.REDSTONE_TORCH_ON), ChatColor.RED + "Vanish",
+				null);
 	}
 
 	private static ItemStack addFlyItem(Player player) {
-		return createItem(player.getInventory(), 6, new ItemStack(Material.FEATHER), ChatColor.DARK_BLUE + "Fly", null);
+		return createItem(player.getInventory(), 6, new ItemStack(Material.FEATHER), ChatColor.LIGHT_PURPLE + "Fly",
+				null);
 	}
 
 	private static ItemStack addGMChanger(Player player) {
