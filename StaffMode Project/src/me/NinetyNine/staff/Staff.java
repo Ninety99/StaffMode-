@@ -8,7 +8,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import lombok.Getter;
 import me.NinetyNine.staff.commands.StaffCommands;
 import me.NinetyNine.staff.listeners.StaffFly;
-import me.NinetyNine.staff.listeners.StaffInspect;
 import me.NinetyNine.staff.listeners.StaffRandomTP;
 import me.NinetyNine.staff.listeners.StaffVanish;
 import me.NinetyNine.staff.listeners.bminfo.StaffBMInfo;
@@ -17,6 +16,8 @@ import me.NinetyNine.staff.listeners.chest.StaffInventoryChest;
 import me.NinetyNine.staff.listeners.chest.StaffPLChest;
 import me.NinetyNine.staff.listeners.gmchanger.StaffGMChanger;
 import me.NinetyNine.staff.listeners.gmchanger.StaffInventoryGM;
+import me.NinetyNine.staff.listeners.inspect.StaffInspect;
+import me.NinetyNine.staff.listeners.inspect.StaffInspectInventory;
 import me.NinetyNine.staff.listeners.misc.StaffAntiEat;
 import me.NinetyNine.staff.listeners.misc.StaffAntiNexus;
 import me.NinetyNine.staff.listeners.misc.StaffBlockBreak;
@@ -88,6 +89,7 @@ public class Staff extends JavaPlugin {
 		pm.registerEvents(new StaffFly(), this);
 
 		pm.registerEvents(new StaffInspect(), this);
+		pm.registerEvents(new StaffInspectInventory(), this);
 
 		pm.registerEvents(new StaffPlayers(), this);
 		pm.registerEvents(new StaffInventoryPlayers(), this);

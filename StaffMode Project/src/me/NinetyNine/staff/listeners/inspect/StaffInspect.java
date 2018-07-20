@@ -1,4 +1,4 @@
-package me.NinetyNine.staff.listeners;
+package me.NinetyNine.staff.listeners.inspect;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -6,7 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerInteractEntityEvent;
+import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.inventory.Inventory;
 
 import me.NinetyNine.staff.utils.StaffUtils;;
@@ -14,7 +14,7 @@ import me.NinetyNine.staff.utils.StaffUtils;;
 public class StaffInspect implements Listener {
 
 	@EventHandler
-	public void onPlayerInteract(PlayerInteractEntityEvent e) {
+	public void onPlayerInteractAtEntity(PlayerInteractAtEntityEvent e) {
 		Player player = e.getPlayer();
 
 		if (!StaffUtils.isInStaffMode(player))
