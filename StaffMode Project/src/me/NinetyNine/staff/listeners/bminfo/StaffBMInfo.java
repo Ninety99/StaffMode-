@@ -5,7 +5,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 
-public class StaffBMInfo extends StaffBMInfoHook implements Listener {
+public class StaffBMInfo implements Listener {
 
 	@EventHandler
 	public void onPlayerInteractAtEntity(PlayerInteractAtEntityEvent e) {
@@ -14,14 +14,15 @@ public class StaffBMInfo extends StaffBMInfoHook implements Listener {
 
 		if (e.getRightClicked() == null)
 			return;
-		
+
 		if (e.getPlayer().getItemInHand() != null)
 			return;
 		else {
 			Player player = e.getPlayer();
 			Player clicked = (Player) e.getRightClicked();
-
-			getHistory(player, clicked);
+			
+			StaffBMInfoHook bminfo = new StaffBMInfo2();
+			bminfo.getHistory(player, clicked);
 			return;
 		}
 	}

@@ -21,6 +21,7 @@ import me.NinetyNine.staff.listeners.misc.StaffAntiEat;
 import me.NinetyNine.staff.listeners.misc.StaffAntiNexus;
 import me.NinetyNine.staff.listeners.misc.StaffBlockBreak;
 import me.NinetyNine.staff.listeners.misc.StaffBlockPlace;
+import me.NinetyNine.staff.listeners.misc.StaffDamage;
 import me.NinetyNine.staff.listeners.misc.StaffDrop;
 import me.NinetyNine.staff.listeners.misc.StaffHitEvent;
 import me.NinetyNine.staff.listeners.misc.StaffInventoryClick;
@@ -71,6 +72,7 @@ public class Staff extends JavaPlugin {
 		pm.registerEvents(new StaffChest(), this);
 		pm.registerEvents(new StaffInventoryClick(), this);
 		pm.registerEvents(new StaffBlockBreak(), this);
+		pm.registerEvents(new StaffDamage(), this);
 
 		pm.registerEvents(new StaffRandomTP(), this);
 

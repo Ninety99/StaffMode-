@@ -1,5 +1,6 @@
 package me.NinetyNine.staff.listeners.misc;
 
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
@@ -16,14 +17,17 @@ public class StaffBlockBreak implements Listener {
 		if (!StaffUtils.isInStaffMode(e.getPlayer()))
 			return;
 		else {
-			Block block = e.getBlock();
-			Material blockType = block.getType();
-			if (blockType == Material.GRASS)
-				e.getPlayer().getInventory().addItem(new ItemStack(Material.DIRT));
-			else
-				e.getPlayer().getInventory().addItem(new ItemStack(blockType));
-			block.setType(Material.AIR);
-			return;
+			if (e.getPlayer().getGameMode() != GameMode.CREATIVE) {
+				Block block = e.getBlock();
+				Material blockType = block.getType();
+				if (blockType == Material.GRASS)
+					e.getPlayer().getInventory().addItem(new ItemStack(Material.DIRT));
+				else
+					e.getPlayer().getInventory().addItem(new ItemStack(blockType));
+				block.setType(Material.AIR);
+				return;
+			} else
+				return;
 		}
 	}
 }

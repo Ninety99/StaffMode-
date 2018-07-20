@@ -3,29 +3,15 @@ package me.NinetyNine.staff.listeners.bminfo;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
-public class StaffBMInfoHook {
+public interface StaffBMInfoHook {
 
-	protected void getHistory(Player checker, OfflinePlayer target) {
-		checker.performCommand("bminfo " + target.getName());
-	}
+	void getHistory(Player checker, OfflinePlayer target);
 
-	protected int getBans(Player checker, OfflinePlayer target) {
-		checker.performCommand("bminfo " + target.getName() + " -b");
-		return Integer.parseInt("0");
-	}
+	int getBans(Player checker, OfflinePlayer target);
 
-	protected int getMutes(Player checker, OfflinePlayer target) {
-		checker.performCommand("bminfo " + target.getName() + " -m");
-		return Integer.parseInt("0");
-	}
+	int getMutes(Player checker, OfflinePlayer target);
 
-	protected int getKicks(Player checker, OfflinePlayer target) {
-		checker.performCommand("bminfo " + target.getName() + " -k");
-		return Integer.parseInt("0");
-	}
+	int getKicks(Player checker, OfflinePlayer target);
 
-	protected int getWarns(Player checker, OfflinePlayer target) {
-		checker.performCommand("bminfo " + target.getName() + " -w");
-		return Integer.parseInt("0");
-	}
+	int getWarns(Player checker, OfflinePlayer target);
 }

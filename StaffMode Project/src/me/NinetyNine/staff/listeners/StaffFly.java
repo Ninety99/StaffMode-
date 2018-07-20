@@ -46,24 +46,17 @@ public class StaffFly implements Listener {
 				|| e.getItem().getItemMeta().getDisplayName().equals(ChatColor.GREEN + "Fly")))
 			return;
 
-		if (!getFly().contains(player)) {
+		if (Flyer.isInFly(player)) {
+			getFly().remove(player);
+			remove(e.getItem());
+			Flyer.removeFly(player);
+			player.sendMessage(StaffUtils.format("&9Fly &7mode has been &cdisabled!"));
+			return;
+		} else {
 			getFly().add(player);
 			Flyer.setFly(player);
 			add(e.getItem());
 			player.sendMessage(StaffUtils.format("&9Fly &7mode has been &aenabled!"));
-			return;
-		} else {
-			if (e.getItem().getItemMeta().getEnchants() != null)
-				e.getItem().getItemMeta().removeEnchant(Enchantment.DURABILITY);
-			System.out.println("removed enchant");
-
-			getFly().remove(player);
-			System.out.println("removing player");
-			remove(e.getItem());
-			System.out.println("removed enchant");
-			Flyer.removeFly(player);
-			System.out.println("remove fly mode for player");
-			player.sendMessage(StaffUtils.format("&9Fly &7mode has been &cdisabled!"));
 			return;
 		}
 	}

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -37,13 +38,13 @@ public class StaffItems {
 	}
 
 	private static ItemStack addVanishItem(Player player) {
-		return createItem(player.getInventory(), 5, new ItemStack(Material.REDSTONE_TORCH_ON), ChatColor.RED + "Vanish",
-				null);
+		return createItemWithEnch(player.getInventory(), 5, new ItemStack(Material.REDSTONE_TORCH_ON),
+				ChatColor.GREEN + "Vanish", null, Enchantment.DURABILITY, 1);
 	}
 
 	private static ItemStack addFlyItem(Player player) {
-		return createItem(player.getInventory(), 6, new ItemStack(Material.FEATHER), ChatColor.LIGHT_PURPLE + "Fly",
-				null);
+		return createItemWithEnch(player.getInventory(), 6, new ItemStack(Material.FEATHER), ChatColor.GREEN + "Fly",
+				null, Enchantment.DURABILITY, 1);
 	}
 
 	private static ItemStack addGMChanger(Player player) {
@@ -72,6 +73,20 @@ public class StaffItems {
 		meta.setOwner(owner);
 		meta.setLore(lore);
 		item.setItemMeta(meta);
+
+		return item;
+	}
+
+	public static ItemStack createItemWithEnch(Inventory inventory, int slot, ItemStack item, String displayName,
+			List<String> lore, Enchantment enchantment, int level) {
+		item = new ItemStack(item.getType());
+		ItemMeta meta = item.getItemMeta();
+		meta.setDisplayName(displayName);
+		meta.setLore(lore);
+		meta.addEnchant(enchantment, level, true);
+		item.setItemMeta(meta);
+
+		inventory.setItem(slot, item);
 
 		return item;
 	}

@@ -8,19 +8,32 @@ import me.NinetyNine.staff.listeners.StaffVanish;
 public class Vanisher {
 
 	public static void vanish(Player player) {
-		if (!StaffVanish.getVanishedPlayers().contains(player)) {
-			for (Player all : Bukkit.getServer().getOnlinePlayers()) {
-				all.hidePlayer(player);
-			}
+		if (StaffUtils.isInStaffMode(player)) {
+			if (!isInVanish(player)) {
+				for (Player all : Bukkit.getServer().getOnlinePlayers()) {
+					all.hidePlayer(player);
+				}
+			} else
+				return;
 		} else
 			return;
 	}
 
 	public static void unvanish(Player player) {
-		if (StaffVanish.getVanishedPlayers().contains(player)) {
-			for (Player all : Bukkit.getServer().getOnlinePlayers())
-				all.showPlayer(player);
+		if (StaffUtils.isInStaffMode(player)) {
+			if (isInVanish(player)) {
+				for (Player all : Bukkit.getServer().getOnlinePlayers())
+					all.showPlayer(player);
+			} else
+				return;
 		} else
 			return;
+	}
+
+	public static boolean isInVanish(Player player) {
+		if (StaffVanish.getVanishedPlayers().contains(player))
+			return true;
+		else
+			return false;
 	}
 }

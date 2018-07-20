@@ -48,17 +48,17 @@ public class StaffVanish implements Listener {
 
 		Player player = e.getPlayer();
 
-		if (!getVanishedPlayers().contains(player)) {
-			getVanishedPlayers().add(player);
-			Vanisher.vanish(player);
-			on(e.getItem());
-			player.sendMessage(StaffUtils.format("&9You are now &avanished!"));
-			return;
-		} else {
+		if (Vanisher.isInVanish(player)) {
 			getVanishedPlayers().remove(player);
 			Vanisher.unvanish(player);
 			off(e.getItem());
-			player.sendMessage(StaffUtils.format("&9You are now &cunvanished!"));
+			player.sendMessage(StaffUtils.format("&9Vanish &7has been &cdisabled!"));
+			return;
+		} else {
+			getVanishedPlayers().add(player);
+			Vanisher.vanish(player);
+			on(e.getItem());
+			player.sendMessage(StaffUtils.format("&9Vanish &7has been &aenabled"));
 			return;
 		}
 	}
