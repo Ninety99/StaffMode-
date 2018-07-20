@@ -16,6 +16,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import lombok.Getter;
+import me.NinetyNine.staff.listeners.bminfo.StaffBMInfoHook;
+import me.NinetyNine.staff.listeners.bminfo.StaffBMInfoInterface;
 import me.NinetyNine.staff.utils.StaffItems;
 import me.NinetyNine.staff.utils.StaffUtils;
 
@@ -75,17 +77,24 @@ public class StaffPlayers implements Listener {
 			inventory = Bukkit.createInventory(null, size + 8, ChatColor.BLUE + "Players");
 		}
 
+		/*
+		 * Not completed yet
+		 */
+		
 		for (Player all : Bukkit.getServer().getOnlinePlayers()) {
 			ItemStack skull = new ItemStack(Material.SKULL_ITEM, 1, (byte) 3);
 			SkullMeta skullmeta = (SkullMeta) skull.getItemMeta();
 			skullmeta.setOwner(all.getName());
 			skullmeta.setDisplayName(ChatColor.GRAY + all.getName());
 			List<String> lore = new ArrayList<String>();
+			
+			StaffBMInfoInterface bminfo = new StaffBMInfoHook();
+			
 			lore.add(ChatColor.AQUA + "BMInfo:");
-//			lore.add(ChatColor.RED + "Bans: " + getBans(e.getPlayer(), all.getPlayer()));
-//			lore.add(ChatColor.RED + "Mutes " + getMutes(e.getPlayer(), all.getPlayer()));
-//			lore.add(ChatColor.RED + "Kicks " + getKicks(e.getPlayer(), all.getPlayer()));
-//			lore.add(ChatColor.RED + "Warns " + getWarns(e.getPlayer(), all.getPlayer()));
+			lore.add(ChatColor.RED + "Bans: " + bminfo.getBans(e.getPlayer(), all.getPlayer()));
+			lore.add(ChatColor.RED + "Mutes " + bminfo.getMutes(e.getPlayer(), all.getPlayer()));
+			lore.add(ChatColor.RED + "Kicks " + bminfo.getKicks(e.getPlayer(), all.getPlayer()));
+			lore.add(ChatColor.RED + "Warns " + bminfo.getWarns(e.getPlayer(), all.getPlayer()));
 			skullmeta.setLore(lore);
 			skull.setItemMeta(skullmeta);
 
