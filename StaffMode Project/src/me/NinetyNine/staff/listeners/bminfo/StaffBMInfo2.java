@@ -7,6 +7,8 @@ public class StaffBMInfo2 implements StaffBMInfoHook {
 
 	@Override
 	public void getHistory(Player checker, OfflinePlayer target) {
+		// TODO: Send message to checker
+
 		getBans(checker, target);
 		getMutes(checker, target);
 		getKicks(checker, target);
