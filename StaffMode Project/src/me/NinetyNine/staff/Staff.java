@@ -1,36 +1,32 @@
 package me.NinetyNine.staff;
 
-
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import lombok.Getter;
+import me.NinetyNine.staff.bminfo.StaffBMInfo;
+import me.NinetyNine.staff.chest.StaffChest;
+import me.NinetyNine.staff.chest.StaffInventoryChest;
+import me.NinetyNine.staff.chest.StaffPLChest;
 import me.NinetyNine.staff.commands.StaffCommands;
-import me.NinetyNine.staff.listeners.StaffFly;
-import me.NinetyNine.staff.listeners.StaffRandomTP;
-import me.NinetyNine.staff.listeners.StaffVanish;
-import me.NinetyNine.staff.listeners.bminfo.StaffBMInfo;
-import me.NinetyNine.staff.listeners.chest.StaffChest;
-import me.NinetyNine.staff.listeners.chest.StaffInventoryChest;
-import me.NinetyNine.staff.listeners.chest.StaffPLChest;
-import me.NinetyNine.staff.listeners.gmchanger.StaffGMChanger;
-import me.NinetyNine.staff.listeners.gmchanger.StaffInventoryGM;
-import me.NinetyNine.staff.listeners.inspect.StaffInspect;
-import me.NinetyNine.staff.listeners.inspect.StaffInspectInventory;
-import me.NinetyNine.staff.listeners.misc.StaffAntiEat;
-import me.NinetyNine.staff.listeners.misc.StaffAntiNexus;
-import me.NinetyNine.staff.listeners.misc.StaffBlockBreak;
-import me.NinetyNine.staff.listeners.misc.StaffBlockPlace;
-import me.NinetyNine.staff.listeners.misc.StaffDamage;
-import me.NinetyNine.staff.listeners.misc.StaffDrop;
-import me.NinetyNine.staff.listeners.misc.StaffHitEvent;
-import me.NinetyNine.staff.listeners.misc.StaffInventoryClick;
-import me.NinetyNine.staff.listeners.misc.StaffJoin;
-import me.NinetyNine.staff.listeners.misc.StaffPickupItem;
-import me.NinetyNine.staff.listeners.misc.StaffQuit;
-import me.NinetyNine.staff.listeners.players.StaffInventoryPlayers;
-import me.NinetyNine.staff.listeners.players.StaffPlayers;
+import me.NinetyNine.staff.gmchanger.StaffGMChanger;
+import me.NinetyNine.staff.gmchanger.StaffInventoryGM;
+import me.NinetyNine.staff.inspect.StaffInspect;
+import me.NinetyNine.staff.inspect.StaffInspectInventory;
+import me.NinetyNine.staff.misc.StaffAntiEat;
+import me.NinetyNine.staff.misc.StaffAntiNexus;
+import me.NinetyNine.staff.misc.StaffBlockBreak;
+import me.NinetyNine.staff.misc.StaffBlockPlace;
+import me.NinetyNine.staff.misc.StaffDamage;
+import me.NinetyNine.staff.misc.StaffDrop;
+import me.NinetyNine.staff.misc.StaffHitEvent;
+import me.NinetyNine.staff.misc.StaffInventoryClick;
+import me.NinetyNine.staff.misc.StaffJoin;
+import me.NinetyNine.staff.misc.StaffPickupItem;
+import me.NinetyNine.staff.misc.StaffQuit;
+import me.NinetyNine.staff.players.StaffInventoryPlayers;
+import me.NinetyNine.staff.players.StaffPlayers;
 import me.NinetyNine.staff.utils.StaffConfig;
 
 public class Staff extends JavaPlugin {

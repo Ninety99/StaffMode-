@@ -3,7 +3,7 @@ package me.NinetyNine.staff.utils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import me.NinetyNine.staff.listeners.StaffVanish;
+import me.NinetyNine.staff.StaffVanish;
 
 public class Vanisher {
 
