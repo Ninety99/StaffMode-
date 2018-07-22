@@ -9,7 +9,7 @@ import org.bukkit.inventory.ItemStack;
 
 import lombok.Getter;
 import me.NinetyNine.staff.StaffFly;
-import me.NinetyNine.staff.StaffVanish;
+import me.NinetyNine.staff.actionbar.StaffActionBar;
 
 public class StaffUtils {
 
@@ -26,12 +26,12 @@ public class StaffUtils {
 				getStaff().put(player, player.getInventory().getContents());
 				player.getInventory().clear();
 				Vanisher.vanish(player);
-				StaffVanish.getVanishedPlayers().add(player);
 				Flyer.setFly(player);
 				StaffFly.getFly().add(player);
 				StaffItems.addStaffItems(player);
 				player.setFoodLevel(20);
 				player.setHealth(20);
+				StaffActionBar.sendActionBar(player, ChatColor.GREEN + "You are currently vanished", 9999);
 				player.sendMessage(format("&9Staff Mode has been &aenabled&9. &7(&6Vanish &7and &6Fly &aenabled&7)"));
 				return;
 			} else
@@ -48,8 +48,8 @@ public class StaffUtils {
 				Flyer.removeFly(player);
 				StaffFly.getFly().remove(player);
 				Vanisher.unvanish(player);
-				StaffVanish.getVanishedPlayers().remove(player);
 				getStaff().remove(player);
+				StaffActionBar.sendActionBar(player, ChatColor.RED + "You are now unvanished", 10);
 				player.setGameMode(GameMode.SURVIVAL);
 				player.sendMessage(format("&9Staff Mode has been &cdisabled&9. &7(&6Vanish &7and &6Fly &cdisabled&7)"));
 				return;

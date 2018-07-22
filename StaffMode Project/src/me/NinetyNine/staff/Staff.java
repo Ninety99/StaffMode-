@@ -5,6 +5,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import lombok.Getter;
+import me.NinetyNine.staff.actionbar.StaffActionBar;
 import me.NinetyNine.staff.bminfo.StaffBMInfo;
 import me.NinetyNine.staff.chest.StaffChest;
 import me.NinetyNine.staff.chest.StaffInventoryChest;
@@ -27,7 +28,13 @@ import me.NinetyNine.staff.misc.StaffPickupItem;
 import me.NinetyNine.staff.misc.StaffQuit;
 import me.NinetyNine.staff.players.StaffInventoryPlayers;
 import me.NinetyNine.staff.players.StaffPlayers;
+import me.NinetyNine.staff.randomtp.PlayerRandomTPJoin;
+import me.NinetyNine.staff.randomtp.PlayerRandomTPQuit;
+import me.NinetyNine.staff.randomtp.StaffRandomTP;
 import me.NinetyNine.staff.utils.StaffConfig;
+import me.NinetyNine.staff.vanish.PlayerVanishJoin;
+import me.NinetyNine.staff.vanish.PlayerVanishQuit;
+import me.NinetyNine.staff.vanish.StaffVanish;
 
 public class Staff extends JavaPlugin {
 
@@ -39,6 +46,7 @@ public class Staff extends JavaPlugin {
 		instance = this;
 
 		registerListeners();
+		registerActionBar();
 		registerCommands();
 		StaffPLChest.setupAnimationListener();
 		StaffPLChest.setupSoundListener();
@@ -72,8 +80,12 @@ public class Staff extends JavaPlugin {
 		pm.registerEvents(new StaffDamage(), this);
 
 		pm.registerEvents(new StaffRandomTP(), this);
+		pm.registerEvents(new PlayerRandomTPJoin(), this);
+		pm.registerEvents(new PlayerRandomTPQuit(), this);
 
 		pm.registerEvents(new StaffVanish(), this);
+		pm.registerEvents(new PlayerVanishJoin(), this);
+		pm.registerEvents(new PlayerVanishQuit(), this);
 
 		pm.registerEvents(new StaffAntiNexus(), this);
 
@@ -101,6 +113,18 @@ public class Staff extends JavaPlugin {
 		StaffVanish.clear();
 		StaffRandomTP.clear();
 		StaffChest.clear();
+	}
+
+	private void registerActionBar() {
+		StaffActionBar.plugin = this;
+		StaffActionBar.nmsver = Bukkit.getServer().getClass().getPackage().getName();
+		StaffActionBar.nmsver = StaffActionBar.nmsver.substring(StaffActionBar.nmsver.lastIndexOf(".") + 1);
+
+		if (StaffActionBar.nmsver.equalsIgnoreCase("v1_8_") && StaffActionBar.nmsver.equalsIgnoreCase("v1_9_")
+				&& StaffActionBar.nmsver.equalsIgnoreCase("v1_10_") && StaffActionBar.nmsver.equalsIgnoreCase("v1_11_")
+				&& StaffActionBar.nmsver.equalsIgnoreCase("v1_12_") || StaffActionBar.nmsver.startsWith("v1_7_")) {
+			StaffActionBar.useOldMethods = true;
+		}
 	}
 
 	private void registerCommands() {

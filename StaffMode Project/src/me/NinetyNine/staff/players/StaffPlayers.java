@@ -16,6 +16,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import lombok.Getter;
+import me.NinetyNine.staff.bminfo.StaffBMInfoHook;
+import me.NinetyNine.staff.bminfo.StaffBMInfoInterface;
 import me.NinetyNine.staff.utils.StaffItems;
 import me.NinetyNine.staff.utils.StaffUtils;
 
@@ -50,8 +52,8 @@ public class StaffPlayers implements Listener {
 			return;
 
 		Inventory inventory = null;
-		Inventory inventory2 = null;
-		Inventory inventory3 = null;
+		Inventory inventory2 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players");
+		Inventory inventory3 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players");
 
 		int size = Bukkit.getServer().getOnlinePlayers().size();
 
@@ -85,41 +87,32 @@ public class StaffPlayers implements Listener {
 			skullmeta.setDisplayName(all.getName());
 			List<String> lore = new ArrayList<String>();
 
-//			StaffBMInfoInterface bminfo = new StaffBMInfoHook();
+			StaffBMInfoInterface bminfo = new StaffBMInfoHook();
 
 			lore.add(ChatColor.AQUA + "BMInfo:");
 			lore.add(" ");
-			lore.add(ChatColor.RED + "Bans: ");
-//			+ bminfo.getBans(e.getPlayer(), all.getPlayer()));
-			lore.add(ChatColor.RED + "Mutes ");
-//			+ bminfo.getMutes(e.getPlayer(), all.getPlayer()));
-			lore.add(ChatColor.RED + "Kicks ");
-//			+ bminfo.getKicks(e.getPlayer(), all.getPlayer()));
-			lore.add(ChatColor.RED + "Warns ");
-//			+ bminfo.getWarns(e.getPlayer(), all.getPlayer()));
+			lore.add(ChatColor.RED + "Bans: " + bminfo.getBans(e.getPlayer(), all.getPlayer()));
+			lore.add(ChatColor.RED + "Mutes: " + bminfo.getMutes(e.getPlayer(), all.getPlayer()));
+			lore.add(ChatColor.RED + "Kicks: " + bminfo.getKicks(e.getPlayer(), all.getPlayer()));
+			lore.add(ChatColor.RED + "Warns: " + bminfo.getWarns(e.getPlayer(), all.getPlayer()));
+
 			skullmeta.setLore(lore);
 			skull.setItemMeta(skullmeta);
 
-			for (int i = 0; i < inventory.getSize(); i++) {
-				if (inventory.getContents().length > 52)
-					inventory.setItem(i, skull);
-				else if (inventory.getContents().length > 52) {
-					inventory2 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players");
-					inventory2.setItem(i, skull);
-				} else if (inventory2.getContents().length > 52) {
-					inventory3 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players");
-					inventory3.setItem(i, skull);
-				}
-			}
+			if (inventory.getContents().length > 52)
+				inventory.addItem(skull);
+			else if (inventory.getContents().length > 52)
+				inventory2.addItem(skull);
+			else if (inventory2.getContents().length > 52)
+				inventory3.addItem(skull);
 		}
 
 		getRealInventory().setContents(inventory.getContents());
+		StaffItems.createItem(realInventory, 53, new ItemStack(Material.BARRIER), ChatColor.GREEN + "Next", null);
 
 		if (getRealInventory().getContents().length > 52) {
-			StaffItems.createItem(realInventory, 53, new ItemStack(Material.BARRIER), ChatColor.GREEN + "Next",
-					null);
+			;
 		} else if (getRealInventory().getContents().length > 52) {
-			inventory2 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players");
 			getRealInventory2().setContents(inventory2.getContents());
 			StaffItems.createItem(getRealInventory2(), 53, new ItemStack(Material.BARRIER), ChatColor.GREEN + "Next",
 					null);
@@ -134,11 +127,11 @@ public class StaffPlayers implements Listener {
 					null);
 		}
 
-		if (getRealInventory2() == null && getRealInventory3() == null)
+//		if (getRealInventory2() == null && getRealInventory3() == null)
 			e.getPlayer().openInventory(getRealInventory());
-		else if (getRealInventory3() == null)
-			e.getPlayer().openInventory(getRealInventory2());
-		else if (getRealInventory3() != null)
-			e.getPlayer().openInventory(getRealInventory3());
+//		else if (getRealInventory3() == null)
+//			e.getPlayer().openInventory(getRealInventory2());
+//		else if (getRealInventory3() != null)
+//			e.getPlayer().openInventory(getRealInventory3());
 	}
 }

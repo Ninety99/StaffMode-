@@ -27,39 +27,53 @@ public class StaffBMInfoHook implements StaffBMInfoInterface {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public long getBans(Player checker, OfflinePlayer target) {
+	public int getBans(Player checker, OfflinePlayer target) {
 		ArrayList arg47 = GCBanz.sql.getHistory(target.getName());
 		Map arg49 = (Map) arg47.stream().collect(Collectors.groupingBy(Violation::getType));
-		long arg52 = (long) ((ArrayList) arg49.get(Type.BAN)).size();
+		int arg52 = ((ArrayList) arg49.get(Type.BAN)).size();
+
+		if (arg47 == null || arg49 == null || arg52 == 0)
+			return 0;
 
 		return arg52;
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public long getMutes(Player checker, OfflinePlayer target) {
+	public int getMutes(Player checker, OfflinePlayer target) {
 		ArrayList arg47 = GCBanz.sql.getHistory(target.getName());
 		Map arg49 = (Map) arg47.stream().collect(Collectors.groupingBy(Violation::getType));
-		long arg52 = (long) ((ArrayList) arg49.get(Type.MUTE)).size();
+		int arg52 = ((ArrayList) arg49.get(Type.MUTE)).size();
+
+		if (arg47 == null || arg49 == null || arg52 == 0)
+			return 0;
 
 		return arg52;
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public long getKicks(Player checker, OfflinePlayer target) {
+	public int getKicks(Player checker, OfflinePlayer target) {
 		ArrayList arg47 = GCBanz.sql.getHistory(target.getName());
 		Map arg49 = (Map) arg47.stream().collect(Collectors.groupingBy(Violation::getType));
-		long arg52 = (long) ((ArrayList) arg49.get(Type.KICK)).size();
+		int arg52 = ((ArrayList) arg49.get(Type.KICK)).size();
+
+		if (arg47 == null || arg49 == null || arg52 == 0)
+			return 0;
+
 		return arg52;
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public long getWarns(Player checker, OfflinePlayer target) {
+	public int getWarns(Player checker, OfflinePlayer target) {
 		ArrayList arg47 = GCBanz.sql.getHistory(target.getName());
 		Map arg49 = (Map) arg47.stream().collect(Collectors.groupingBy(Violation::getType));
-		long arg52 = (long) ((ArrayList) arg49.get(Type.WARN)).size();
+		int arg52 = ((ArrayList) arg49.get(Type.WARN)).size();
+
+		if (arg47 == null || arg49 == null || arg52 == 0)
+			return 0;
+
 		return arg52;
 	}
 }

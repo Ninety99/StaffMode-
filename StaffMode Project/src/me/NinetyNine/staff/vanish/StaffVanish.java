@@ -1,4 +1,4 @@
-package me.NinetyNine.staff;
+package me.NinetyNine.staff.vanish;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +20,11 @@ import me.NinetyNine.staff.utils.Vanisher;
 
 public class StaffVanish implements Listener {
 
-	@Getter
+	@Getter // vanished players | All players
 	private static List<Player> vanishedPlayers = new ArrayList<Player>();
+
+	@Getter
+	private static List<Player> allPlayers = new ArrayList<Player>();
 
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent e) {
@@ -50,13 +53,11 @@ public class StaffVanish implements Listener {
 
 		if (Vanisher.isInVanish(player)) {
 			Vanisher.unvanish(player);
-			getVanishedPlayers().remove(player);
 			off(e.getItem());
 			player.sendMessage(StaffUtils.format("&9Vanish &7has been &cdisabled!"));
 			return;
 		} else {
 			Vanisher.vanish(player);
-			getVanishedPlayers().add(player);
 			on(e.getItem());
 			player.sendMessage(StaffUtils.format("&9Vanish &7has been &aenabled"));
 			return;
@@ -81,5 +82,6 @@ public class StaffVanish implements Listener {
 
 	public static void clear() {
 		getVanishedPlayers().clear();
+		getAllPlayers().clear();
 	}
 }
