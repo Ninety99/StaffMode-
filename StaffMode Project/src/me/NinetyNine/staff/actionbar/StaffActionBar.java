@@ -5,10 +5,16 @@ import java.lang.reflect.Method;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class StaffActionBar {
+public class StaffActionBar implements Listener {
+
+	/*
+	 * From a guy at bukkit.org
+	 */
+
 	public static String nmsver;
 	public static boolean works = true;
 	public static boolean useOldMethods = false;
@@ -100,27 +106,18 @@ public class StaffActionBar {
 		}
 	}
 
-	public static void sendActionBar(final Player player, final String message, int duration) {
-		sendActionBar(player, message);
+	public static void sendActionBar(Player player, String message, int duration) {
+		new BukkitRunnable() {
+			int dura = duration;
 
-		if (duration >= 0) {
-			new BukkitRunnable() {
-				@Override
-				public void run() {
-					sendActionBar(player, "");
-				}
-			}.runTaskLater(plugin, duration + 1);
-		}
-
-		while (duration > 40) {
-			duration -= 40;
-			new BukkitRunnable() {
-				@Override
-				public void run() {
+			public void run() {
+				if (dura != 0) {
 					sendActionBar(player, message);
-				}
-			}.runTaskLater(plugin, (long) duration);
-		}
+					dura--;
+				} else
+					cancel();
+			}
+		}.runTaskTimer(plugin, 20L, (long) duration);
 	}
 
 	public static void sendActionBarToAllPlayers(String message) {

@@ -15,6 +15,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import lombok.Getter;
+import me.NinetyNine.staff.actionbar.StaffActionBar;
 import me.NinetyNine.staff.utils.StaffUtils;
 import me.NinetyNine.staff.utils.Vanisher;
 
@@ -54,11 +55,13 @@ public class StaffVanish implements Listener {
 		if (Vanisher.isInVanish(player)) {
 			Vanisher.unvanish(player);
 			off(e.getItem());
+			StaffActionBar.sendActionBar(player, ChatColor.RED + "You are now unvanished", 1);
 			player.sendMessage(StaffUtils.format("&9Vanish &7has been &cdisabled!"));
 			return;
 		} else {
 			Vanisher.vanish(player);
 			on(e.getItem());
+			StaffActionBar.sendActionBar(player, ChatColor.GREEN + "You are currently vanished", 1);
 			player.sendMessage(StaffUtils.format("&9Vanish &7has been &aenabled"));
 			return;
 		}

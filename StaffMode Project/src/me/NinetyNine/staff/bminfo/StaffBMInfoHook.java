@@ -29,12 +29,17 @@ public class StaffBMInfoHook implements StaffBMInfoInterface {
 	@Override
 	public int getBans(Player checker, OfflinePlayer target) {
 		ArrayList arg47 = GCBanz.sql.getHistory(target.getName());
-		Map arg49 = (Map) arg47.stream().collect(Collectors.groupingBy(Violation::getType));
-		int arg52 = ((ArrayList) arg49.get(Type.BAN)).size();
 
-		if (arg47 == null || arg49 == null || arg52 == 0)
+		if (arg47 == null)
 			return 0;
 
+		Map arg49 = (Map) arg47.stream().collect(Collectors.groupingBy(Violation::getType));
+
+		if (arg49 == null)
+			return 0;
+
+		int arg52 = ((ArrayList) arg49.get(Type.BAN)).size();
+		
 		return arg52;
 	}
 
@@ -42,12 +47,17 @@ public class StaffBMInfoHook implements StaffBMInfoInterface {
 	@Override
 	public int getMutes(Player checker, OfflinePlayer target) {
 		ArrayList arg47 = GCBanz.sql.getHistory(target.getName());
-		Map arg49 = (Map) arg47.stream().collect(Collectors.groupingBy(Violation::getType));
-		int arg52 = ((ArrayList) arg49.get(Type.MUTE)).size();
 
-		if (arg47 == null || arg49 == null || arg52 == 0)
+		if (arg47 == null)
 			return 0;
 
+		Map arg49 = (Map) arg47.stream().collect(Collectors.groupingBy(Violation::getType));
+
+		if (arg49 == null)
+			return 0;
+
+		int arg52 = ((ArrayList) arg49.get(Type.MUTE)).size();
+		
 		return arg52;
 	}
 
@@ -55,12 +65,17 @@ public class StaffBMInfoHook implements StaffBMInfoInterface {
 	@Override
 	public int getKicks(Player checker, OfflinePlayer target) {
 		ArrayList arg47 = GCBanz.sql.getHistory(target.getName());
-		Map arg49 = (Map) arg47.stream().collect(Collectors.groupingBy(Violation::getType));
-		int arg52 = ((ArrayList) arg49.get(Type.KICK)).size();
 
-		if (arg47 == null || arg49 == null || arg52 == 0)
+		if (arg47 == null)
 			return 0;
 
+		Map arg49 = (Map) arg47.stream().collect(Collectors.groupingBy(Violation::getType));
+
+		if (arg49 == null)
+			return 0;
+
+		int arg52 = ((ArrayList) arg49.get(Type.KICK)).size();
+		
 		return arg52;
 	}
 
@@ -68,12 +83,17 @@ public class StaffBMInfoHook implements StaffBMInfoInterface {
 	@Override
 	public int getWarns(Player checker, OfflinePlayer target) {
 		ArrayList arg47 = GCBanz.sql.getHistory(target.getName());
-		Map arg49 = (Map) arg47.stream().collect(Collectors.groupingBy(Violation::getType));
-		int arg52 = ((ArrayList) arg49.get(Type.WARN)).size();
 
-		if (arg47 == null || arg49 == null || arg52 == 0)
+		if (arg47 == null)
 			return 0;
 
+		Map arg49 = (Map) arg47.stream().collect(Collectors.groupingBy(Violation::getType));
+
+		if (arg49 == null)
+			return 0;
+
+		int arg52 = ((ArrayList) arg49.get(Type.WARN)).size();
+		
 		return arg52;
 	}
 }

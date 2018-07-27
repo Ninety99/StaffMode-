@@ -15,13 +15,12 @@ public class StaffBMInfo implements Listener {
 		if (e.getRightClicked() == null)
 			return;
 
-		if (e.getPlayer().getItemInHand() != null)
-			return;
-		else {
+		if (e.getPlayer().getItemInHand() != null) {
 			Player player = e.getPlayer();
 			Player clicked = (Player) e.getRightClicked();
 			player.performCommand("bminfo " + clicked.getName());
 			return;
-		}
+		} else
+			return;
 	}
 }

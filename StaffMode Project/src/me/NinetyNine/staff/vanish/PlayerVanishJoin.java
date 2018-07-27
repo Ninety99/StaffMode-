@@ -12,11 +12,10 @@ public class PlayerVanishJoin implements Listener {
 		if (StaffVanish.getAllPlayers().contains(e.getPlayer()))
 			return;
 		else {
-			StaffVanish.getAllPlayers().add(e.getPlayer());
-			
 			for (Player vanished : StaffVanish.getVanishedPlayers())
 				e.getPlayer().hidePlayer(vanished);
 			
+			StaffVanish.getAllPlayers().add(e.getPlayer());
 			return;
 		}
 	}

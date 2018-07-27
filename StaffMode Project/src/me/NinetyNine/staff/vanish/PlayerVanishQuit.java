@@ -12,11 +12,10 @@ public class PlayerVanishQuit implements Listener {
 		if (!(StaffVanish.getAllPlayers().contains(e.getPlayer())))
 			return;
 		else {
-			StaffVanish.getAllPlayers().remove(e.getPlayer());
-
 			for (Player vanished : StaffVanish.getVanishedPlayers())
 				e.getPlayer().showPlayer(vanished);
 			
+			StaffVanish.getAllPlayers().remove(e.getPlayer());
 			return;
 		}
 	}

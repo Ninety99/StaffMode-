@@ -11,7 +11,7 @@ public class PlayerRandomTPJoin implements Listener {
 		if (StaffRandomTP.getAll().isEmpty())
 			return;
 
-		if (StaffRandomTP.getAll().contains(e.getPlayer()))
+		if (!StaffRandomTP.getAll().contains(e.getPlayer()))
 			return;
 		else {
 			StaffRandomTP.getAll().add(e.getPlayer());

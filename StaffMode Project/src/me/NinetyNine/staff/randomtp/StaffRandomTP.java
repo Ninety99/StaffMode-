@@ -45,7 +45,7 @@ public class StaffRandomTP implements Listener {
 		for (Player p : Bukkit.getServer().getOnlinePlayers())
 			getAll().add(p);
 
-		if (Bukkit.getServer().getOnlinePlayers().size() < 2) {
+		if (Bukkit.getServer().getOnlinePlayers().size() <= 2) {
 			player.sendMessage(StaffUtils
 					.format("&cYou cannot random teleport right now because there is only less than 2 people online!"));
 			return;

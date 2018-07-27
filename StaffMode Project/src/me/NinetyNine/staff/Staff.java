@@ -106,6 +106,8 @@ public class Staff extends JavaPlugin {
 		pm.registerEvents(new StaffInventoryChest(), this);
 
 		pm.registerEvents(new StaffConfig(), this);
+		
+		pm.registerEvents(new StaffActionBar(), this);
 	}
 
 	private void clearAll() {
