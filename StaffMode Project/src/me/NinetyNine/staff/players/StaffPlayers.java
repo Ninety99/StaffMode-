@@ -23,6 +23,16 @@ import me.NinetyNine.staff.utils.StaffUtils;
 
 public class StaffPlayers implements Listener {
 
+	/*
+	 * Not completed yet
+	 */
+
+	@Getter
+	private static Inventory inventory = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players");
+	@Getter
+	private static Inventory inventory2 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players");
+	@Getter
+	private static Inventory inventory3 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players");
 	@Getter
 	private static Inventory realInventory = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players");
 	@Getter
@@ -41,45 +51,69 @@ public class StaffPlayers implements Listener {
 		if (e.getItem() == null)
 			return;
 
-		if (e.getItem().getType() == Material.AIR)
+		if (e.getItem().getType() != Material.BEACON)
 			return;
 
-		if (e.getItem().getType() != Material.BEACON)
+		if (!e.getItem().hasItemMeta())
 			return;
 
 		if (!(e.getItem().getItemMeta().getDisplayName() != ChatColor.RED + "Players " + ChatColor.GRAY
 				+ "(Right Click)"))
 			return;
+		
+		int index = 0;
+		
+		if (getNumberofContents(inventory, index) <= 54) {
+			addSkull(inventory);
+			addMisc(1);
+			setContents(inventory, realInventory);
+		} else {
+			if (getNumberofContents(inventory2, index) <= 54) {
+				addSkull(inventory2);
+				addMisc(2);
+				setContents(inventory2, realInventory2);
+			} else {
+				if (getNumberofContents(inventory3, index) <= 54) {
+					addSkull(inventory3);
+					addMisc(3);
+					setContents(inventory3, realInventory3);
+				}
+			}
+		}
 
-		Inventory inventory = null;
-		Inventory inventory2 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players");
-		Inventory inventory3 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players");
+		e.getPlayer().openInventory(getRealInventory());
+	}
 
-		int size = Bukkit.getServer().getOnlinePlayers().size();
+	private void addMisc(int number) {
+		if (getInventory(number) == inventory) {
+			StaffItems.createItem(inventory, 53, new ItemStack(Material.BARRIER), "Next", null);
+			return;
+		} else if (getInventory(number) == inventory2) {
+			StaffItems.createItem(inventory2, 45, new ItemStack(Material.BARRIER), "Previous", null);
+			StaffItems.createItem(inventory2, 53, new ItemStack(Material.BARRIER), "Next", null);
+			return;
+		} else if (getInventory(number) == inventory3) {
+			StaffItems.createItem(inventory3, 45, new ItemStack(Material.BARRIER), "Previous", null);
+			return;
+		}
+	}
 
-		if (size > 9)
-			inventory = Bukkit.createInventory(null, size, ChatColor.BLUE + "Players");
-		else if (size == 8)
-			inventory = Bukkit.createInventory(null, size + 1, ChatColor.BLUE + "Players");
-		else if (size == 7)
-			inventory = Bukkit.createInventory(null, size + 2, ChatColor.BLUE + "Players");
-		else if (size == 6)
-			inventory = Bukkit.createInventory(null, size + 3, ChatColor.BLUE + "Players");
-		else if (size == 5)
-			inventory = Bukkit.createInventory(null, size + 4, ChatColor.BLUE + "Players");
-		else if (size == 4)
-			inventory = Bukkit.createInventory(null, size + 5, ChatColor.BLUE + "Players");
-		else if (size == 3)
-			inventory = Bukkit.createInventory(null, size + 6, ChatColor.BLUE + "Players");
-		else if (size == 2)
-			inventory = Bukkit.createInventory(null, size + 7, ChatColor.BLUE + "Players");
-		else if (size == 1)
-			inventory = Bukkit.createInventory(null, size + 8, ChatColor.BLUE + "Players");
+	private void setContents(Inventory from, Inventory to) {
+		to.setContents(from.getContents());
+	}
 
-		/*
-		 * Not completed yet
-		 */
+	private Inventory getInventory(int number) {
+		if (number == 1)
+			return inventory;
+		else if (number == 2)
+			return inventory2;
+		else if (number == 3)
+			return inventory3;
 
+		return null;
+	}
+
+	private void addSkull(Inventory inventory) {
 		for (Player all : Bukkit.getServer().getOnlinePlayers()) {
 			ItemStack skull = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
 			SkullMeta skullmeta = (SkullMeta) skull.getItemMeta();
@@ -91,47 +125,33 @@ public class StaffPlayers implements Listener {
 
 			lore.add(ChatColor.AQUA + "BMInfo:");
 			lore.add(" ");
-			lore.add(ChatColor.RED + "Bans: " + bminfo.getBans(e.getPlayer(), all.getPlayer()));
-			lore.add(ChatColor.RED + "Mutes: " + bminfo.getMutes(e.getPlayer(), all.getPlayer()));
-			lore.add(ChatColor.RED + "Kicks: " + bminfo.getKicks(e.getPlayer(), all.getPlayer()));
-			lore.add(ChatColor.RED + "Warns: " + bminfo.getWarns(e.getPlayer(), all.getPlayer()));
+			lore.add(ChatColor.RED + "Bans: " + bminfo.getBans(all.getPlayer()));
+			lore.add(ChatColor.RED + "Mutes: " + bminfo.getMutes(all.getPlayer()));
+			lore.add(ChatColor.RED + "Kicks: " + bminfo.getKicks(all.getPlayer()));
+			lore.add(ChatColor.RED + "Warns: " + bminfo.getWarns(all.getPlayer()));
 
 			skullmeta.setLore(lore);
 			skull.setItemMeta(skullmeta);
 
-			if (inventory.getContents().length > 52)
+			int index = 0;
+
+			getNumberofContents(inventory, index);
+
+			if (index >= 0 && index < 55)
 				inventory.addItem(skull);
-			else if (inventory.getContents().length > 52)
-				inventory2.addItem(skull);
-			else if (inventory2.getContents().length > 52)
-				inventory3.addItem(skull);
 		}
+	}
 
-		getRealInventory().setContents(inventory.getContents());
-		StaffItems.createItem(realInventory, 53, new ItemStack(Material.BARRIER), ChatColor.GREEN + "Next", null);
-
-		if (getRealInventory().getContents().length > 52) {
-			;
-		} else if (getRealInventory().getContents().length > 52) {
-			getRealInventory2().setContents(inventory2.getContents());
-			StaffItems.createItem(getRealInventory2(), 53, new ItemStack(Material.BARRIER), ChatColor.GREEN + "Next",
-					null);
-			StaffItems.createItem(getRealInventory2(), 45, new ItemStack(Material.BARRIER), ChatColor.RED + "Previous",
-					null);
+	private int getNumberofContents(Inventory inventory, int index) {
+		for (int i = 0; i < inventory.getContents().length; i++) {
+			for (ItemStack items : inventory.getContents()) {
+				if (items == null)
+					return 0;
+				
+				if (items.getType() != null)
+					index++;
+			}
 		}
-
-		if (getRealInventory2().getContents().length > 52) {
-			realInventory3 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players");
-			getRealInventory3().setContents(inventory3.getContents());
-			StaffItems.createItem(getRealInventory3(), 45, new ItemStack(Material.BARRIER), ChatColor.RED + "Previous",
-					null);
-		}
-
-//		if (getRealInventory2() == null && getRealInventory3() == null)
-			e.getPlayer().openInventory(getRealInventory());
-//		else if (getRealInventory3() == null)
-//			e.getPlayer().openInventory(getRealInventory2());
-//		else if (getRealInventory3() != null)
-//			e.getPlayer().openInventory(getRealInventory3());
+		return index;
 	}
 }

@@ -19,26 +19,25 @@ public class StaffGMChanger implements Listener {
 
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent e) {
-		if (!(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK))
+		if (!StaffUtils.isInStaffMode(e.getPlayer()))
 			return;
 
-		Player player = e.getPlayer();
-
-		if (!(StaffUtils.isInStaffMode(player)))
+		if (e.getAction() != Action.RIGHT_CLICK_AIR && e.getAction() != Action.RIGHT_CLICK_BLOCK)
 			return;
-
 		if (e.getItem() == null)
 			return;
-
-		if (e.getItem().getType() == (Material.AIR))
+		
+		if (e.getItem().getType() != Material.WATCH)
 			return;
 
-		if (!(e.getItem().getType().equals(Material.WATCH)))
+		if (!e.getItem().hasItemMeta())
 			return;
 
 		if (!(e.getItem().getItemMeta().getDisplayName()
 				.equals(ChatColor.DARK_BLUE + "Gamemode Changer " + ChatColor.GRAY + "(Right Click)")))
 			return;
+
+		Player player = e.getPlayer();
 
 		if (!(player.hasPermission(StaffConfig.getString("gmchangerpermgm0"))
 				|| player.hasPermission(StaffConfig.getString("gmchangerpermgm1"))

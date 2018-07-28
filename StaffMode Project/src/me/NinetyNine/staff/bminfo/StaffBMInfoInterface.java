@@ -7,11 +7,11 @@ public interface StaffBMInfoInterface {
 
 	void getHistory(Player checker, OfflinePlayer target);
 
-	int getBans(Player checker, OfflinePlayer target);
+	int getBans(OfflinePlayer target);
 
-	int getMutes(Player checker, OfflinePlayer target);
+	int getMutes(OfflinePlayer target);
 
-	int getKicks(Player checker, OfflinePlayer target);
+	int getKicks(OfflinePlayer target);
 
-	int getWarns(Player checker, OfflinePlayer target);
+	int getWarns(OfflinePlayer target);
 }

@@ -22,25 +22,21 @@ public class StaffRandomTP implements Listener {
 
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent e) {
-		if (!(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK))
+		if (e.getAction() != Action.RIGHT_CLICK_AIR && e.getAction() != Action.RIGHT_CLICK_BLOCK)
 			return;
-
-		Player player = e.getPlayer();
-
-		if (!StaffUtils.isInStaffMode(player))
-			return;
-
 		if (e.getItem() == null)
 			return;
 
-		if (e.getItem().getType() == Material.AIR)
+		if (e.getItem().getType() != Material.BLAZE_ROD)
 			return;
 
-		if (!(e.getItem().getType() == Material.BLAZE_ROD))
+		if (!e.getItem().hasItemMeta())
 			return;
 
 		if (e.getItem().getItemMeta().getDisplayName() == ChatColor.AQUA + "Random TP")
 			return;
+
+		Player player = e.getPlayer();
 
 		for (Player p : Bukkit.getServer().getOnlinePlayers())
 			getAll().add(p);

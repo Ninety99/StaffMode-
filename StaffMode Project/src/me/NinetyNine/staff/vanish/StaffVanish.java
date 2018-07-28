@@ -29,15 +29,9 @@ public class StaffVanish implements Listener {
 
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent e) {
-		if (!StaffUtils.isInStaffMode(e.getPlayer()))
-			return;
-
 		if (e.getAction() != Action.RIGHT_CLICK_AIR && e.getAction() != Action.RIGHT_CLICK_BLOCK)
 			return;
 		if (e.getItem() == null)
-			return;
-
-		if (e.getItem().getType() == Material.AIR)
 			return;
 
 		if (e.getItem().getType() != Material.REDSTONE_TORCH_ON && e.getItem().getType() != Material.TORCH)
@@ -54,14 +48,14 @@ public class StaffVanish implements Listener {
 
 		if (Vanisher.isInVanish(player)) {
 			Vanisher.unvanish(player);
-			off(e.getItem());
 			StaffActionBar.sendActionBar(player, ChatColor.RED + "You are now unvanished", 1);
+			off(e.getItem());
 			player.sendMessage(StaffUtils.format("&9Vanish &7has been &cdisabled!"));
 			return;
 		} else {
 			Vanisher.vanish(player);
-			on(e.getItem());
 			StaffActionBar.sendActionBar(player, ChatColor.GREEN + "You are currently vanished", 1);
+			on(e.getItem());
 			player.sendMessage(StaffUtils.format("&9Vanish &7has been &aenabled"));
 			return;
 		}

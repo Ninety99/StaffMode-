@@ -19,15 +19,15 @@ public class StaffBMInfoHook implements StaffBMInfoInterface {
 	public void getHistory(Player checker, OfflinePlayer target) {
 		checker.sendMessage(StaffUtils.format("&9BMINFO: "));
 		checker.sendMessage(ChatColor.RED + "Results for " + ChatColor.GOLD + target.getName());
-		checker.sendMessage(ChatColor.RED + "Bans: " + ChatColor.GOLD + getBans(checker, target));
-		checker.sendMessage(ChatColor.RED + "Mutes: " + ChatColor.GOLD + getMutes(checker, target));
-		checker.sendMessage(ChatColor.RED + "Kicks: " + ChatColor.GOLD + getKicks(checker, target));
-		checker.sendMessage(ChatColor.RED + "Warns: " + ChatColor.GOLD + getWarns(checker, target));
+		checker.sendMessage(ChatColor.RED + "Bans: " + ChatColor.GOLD + getBans(target));
+		checker.sendMessage(ChatColor.RED + "Mutes: " + ChatColor.GOLD + getMutes(target));
+		checker.sendMessage(ChatColor.RED + "Kicks: " + ChatColor.GOLD + getKicks(target));
+		checker.sendMessage(ChatColor.RED + "Warns: " + ChatColor.GOLD + getWarns(target));
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public int getBans(Player checker, OfflinePlayer target) {
+	public int getBans(OfflinePlayer target) {
 		ArrayList arg47 = GCBanz.sql.getHistory(target.getName());
 
 		if (arg47 == null)
@@ -45,7 +45,7 @@ public class StaffBMInfoHook implements StaffBMInfoInterface {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public int getMutes(Player checker, OfflinePlayer target) {
+	public int getMutes(OfflinePlayer target) {
 		ArrayList arg47 = GCBanz.sql.getHistory(target.getName());
 
 		if (arg47 == null)
@@ -63,7 +63,7 @@ public class StaffBMInfoHook implements StaffBMInfoInterface {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public int getKicks(Player checker, OfflinePlayer target) {
+	public int getKicks(OfflinePlayer target) {
 		ArrayList arg47 = GCBanz.sql.getHistory(target.getName());
 
 		if (arg47 == null)
@@ -81,7 +81,7 @@ public class StaffBMInfoHook implements StaffBMInfoInterface {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public int getWarns(Player checker, OfflinePlayer target) {
+	public int getWarns(OfflinePlayer target) {
 		ArrayList arg47 = GCBanz.sql.getHistory(target.getName());
 
 		if (arg47 == null)

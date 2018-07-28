@@ -71,7 +71,7 @@ public class StaffFly implements Listener {
 	private void remove(ItemStack feather) {
 		ItemMeta featherm = feather.getItemMeta();
 		featherm.removeEnchant(Enchantment.DURABILITY);
-		featherm.setDisplayName(ChatColor.LIGHT_PURPLE + "Fly");
+		featherm.setDisplayName(ChatColor.RED + "Fly");
 		feather.setItemMeta(featherm);
 	}
 

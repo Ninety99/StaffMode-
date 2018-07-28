@@ -28,7 +28,7 @@ public class StaffItems {
 
 	private static ItemStack addRandomTP(Player player) {
 		return createItem(player.getInventory(), 1, new ItemStack(Material.BLAZE_ROD), ChatColor.AQUA + "Random TP",
-				Arrays.asList("Teleportation I"));
+				Arrays.asList(" ", "Teleportation I"));
 	}
 
 	private static ItemStack addBeacon(Player player) {
