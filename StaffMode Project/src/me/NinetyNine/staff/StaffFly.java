@@ -42,7 +42,7 @@ public class StaffFly implements Listener {
 		if (e.getItem().getType() != Material.FEATHER)
 			return;
 
-		if (!(e.getItem().getItemMeta().getDisplayName().equals(ChatColor.LIGHT_PURPLE + "Fly")
+		if (!(e.getItem().getItemMeta().getDisplayName().equals(ChatColor.RED + "Fly")
 				|| e.getItem().getItemMeta().getDisplayName().equals(ChatColor.GREEN + "Fly")))
 			return;
 

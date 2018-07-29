@@ -1,5 +1,6 @@
 package me.NinetyNine.staff.utils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,6 +11,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+
+import me.NinetyNine.staff.bminfo.StaffBMInfoHook;
+import me.NinetyNine.staff.bminfo.StaffBMInfoInterface;
 
 public class StaffItems {
 
@@ -73,6 +77,29 @@ public class StaffItems {
 		meta.setLore(lore);
 		meta.addEnchant(enchantment, level, true);
 		item.setItemMeta(meta);
+
+		inventory.setItem(slot, item);
+
+		return item;
+	}
+
+	public static ItemStack createItemWithBMInfo(Player target, Inventory inventory, int slot, ItemStack item,
+			String displayName) {
+		item = new ItemStack(item.getType());
+		ItemMeta meta = item.getItemMeta();
+		meta.setDisplayName(displayName);
+		List<String> lore = new ArrayList<String>();
+
+		StaffBMInfoInterface bminfo = new StaffBMInfoHook();
+
+		lore.add(ChatColor.AQUA + "BMInfo:");
+		lore.add(" ");
+		lore.add(ChatColor.RED + "Bans: " + ChatColor.GOLD + bminfo.getBans(target));
+		lore.add(ChatColor.RED + "Mutes: " + ChatColor.GOLD + bminfo.getMutes(target));
+		lore.add(ChatColor.RED + "Kicks: " + ChatColor.GOLD + bminfo.getKicks(target));
+		lore.add(ChatColor.RED + "Warns: " + ChatColor.GOLD + bminfo.getWarns(target));
+
+		meta.setLore(lore);
 
 		inventory.setItem(slot, item);
 

@@ -21,7 +21,7 @@ import me.NinetyNine.staff.utils.Vanisher;
 
 public class StaffVanish implements Listener {
 
-	@Getter // vanished players | All players
+	@Getter
 	private static List<Player> vanishedPlayers = new ArrayList<Player>();
 
 	@Getter
@@ -48,14 +48,18 @@ public class StaffVanish implements Listener {
 
 		if (Vanisher.isInVanish(player)) {
 			Vanisher.unvanish(player);
+			System.out.println("unvanish");
 			StaffActionBar.sendActionBar(player, ChatColor.RED + "You are now unvanished", 1);
 			off(e.getItem());
+			System.out.println("off()");
 			player.sendMessage(StaffUtils.format("&9Vanish &7has been &cdisabled!"));
 			return;
 		} else {
 			Vanisher.vanish(player);
+			System.out.println("vanish");
 			StaffActionBar.sendActionBar(player, ChatColor.GREEN + "You are currently vanished", 1);
 			on(e.getItem());
+			System.out.println("on()");
 			player.sendMessage(StaffUtils.format("&9Vanish &7has been &aenabled"));
 			return;
 		}

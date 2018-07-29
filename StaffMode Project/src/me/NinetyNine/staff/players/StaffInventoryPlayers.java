@@ -6,6 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -25,27 +26,37 @@ public class StaffInventoryPlayers implements Listener {
 		if (e.getCurrentItem() == null)
 			return;
 
-		if (e.getCurrentItem().getType() != Material.SKULL_ITEM && e.getCurrentItem().getType() != Material.BARRIER)
-			return;
-
 		Player player = (Player) e.getWhoClicked();
 		e.setCancelled(true);
 
 		ItemStack item = e.getCurrentItem();
 
-		if (item.getType() == Material.SKULL_ITEM) {
+		if (item.getType().equals(Material.SKULL_ITEM)) {
 			ItemMeta meta = item.getItemMeta();
 
-			for (Player all : Bukkit.getServer().getOnlinePlayers())
+			for (Player all : Bukkit.getServer().getOnlinePlayers()) {
 				if (meta.getDisplayName().equals(all.getName())) {
-					player.closeInventory();
-					player.teleport(all);
-					player.sendMessage(StaffUtils.format("&7You have been teleported to " + all.getName()));
-					break;
+					if (e.getClick().equals(ClickType.LEFT)) {
+						player.closeInventory();
+						player.performCommand("bminfo " + all.getName() + " -bans");
+						break;
+					}
+					if (e.getClick().equals(ClickType.RIGHT)) {
+						player.closeInventory();
+						player.performCommand("bminfo " + all.getName() + " -mutes");
+						break;
+					}
+					if (e.getClick().equals(ClickType.MIDDLE)) {
+						player.closeInventory();
+						player.teleport(all);
+						player.sendMessage(StaffUtils.format("&7You have been teleported to " + all.getName()));
+						break;
+					}
 				}
+			}
 		}
 
-		if (item.getType() == Material.BARRIER) {
+		if (item.getType().equals(Material.BARRIER)) {
 			if (item.getItemMeta().getDisplayName().equals(ChatColor.GREEN + "Next")) {
 				if (e.getInventory() == StaffPlayers.getRealInventory()) {
 					player.closeInventory();
@@ -56,6 +67,7 @@ public class StaffInventoryPlayers implements Listener {
 				if (e.getInventory() == StaffPlayers.getRealInventory2()) {
 					player.closeInventory();
 					player.openInventory(StaffPlayers.getRealInventory3());
+					return;
 				}
 			}
 

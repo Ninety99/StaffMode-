@@ -15,8 +15,6 @@ public class Vanisher {
 					StaffVanish.getVanishedPlayers().add(player);
 					if (!(StaffVanish.getAllPlayers().contains(all)))
 						StaffVanish.getAllPlayers().add(all);
-					else
-						return;
 				}
 			} else
 				return;
@@ -32,8 +30,6 @@ public class Vanisher {
 					StaffVanish.getVanishedPlayers().remove(player);
 					if (StaffVanish.getAllPlayers().contains(all))
 						StaffVanish.getAllPlayers().remove(all);
-					else
-						return;
 				}
 			} else
 				return;
