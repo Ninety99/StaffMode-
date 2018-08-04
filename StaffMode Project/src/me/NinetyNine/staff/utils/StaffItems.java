@@ -132,4 +132,16 @@ public class StaffItems {
 
 		return skull;
 	}
+
+	public static ItemStack createItemWithColor(Inventory inventory, Material item, int slot, String displayName,
+			int data) {
+		
+		ItemStack it = new ItemStack(item, 1, (short) data);
+		ItemMeta meta = it.getItemMeta();
+		meta.setDisplayName(displayName);
+		it.setItemMeta(meta);
+		inventory.setItem(slot, it);
+
+		return it;
+	}
 }

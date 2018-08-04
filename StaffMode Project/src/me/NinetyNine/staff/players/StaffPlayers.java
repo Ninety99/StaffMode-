@@ -47,7 +47,7 @@ public class StaffPlayers implements Listener {
 		if (!(e.getItem().getItemMeta().getDisplayName()
 				.equals(ChatColor.RED + "Players " + ChatColor.GRAY + "(Right Click)")))
 			return;
-		
+
 		addStuff(e.getPlayer());
 
 		e.getPlayer().openInventory(i);
@@ -115,28 +115,36 @@ public class StaffPlayers implements Listener {
 		if (invNumber == 1) {
 			addGlass(i);
 			addEmerald(i, lore);
+			addNext(i);
 			System.out.println("got item(misc) for inv 1");
 		}
 
 		if (invNumber == 2) {
+			addPrevious(i2);
 			addGlass(i2);
 			addEmerald(i2, lore);
+			addNext(i2);
 			System.out.println("got item(misc) for inv 2");
 		}
 
 		if (invNumber == 3) {
+			addPrevious(i3);
 			addGlass(i3);
 			addEmerald(i3, lore);
+			addNext(i3);
 			System.out.println("got item(misc) for inv 3");
 		}
 
 		if (invNumber == 4) {
+			addPrevious(i4);
 			addGlass(i4);
 			addEmerald(i4, lore);
+			addNext(i4);
 			System.out.println("got item(misc) for inv 4");
 		}
 
 		if (invNumber == 5) {
+			addPrevious(i5);
 			addGlass(i5);
 			addEmerald(i5, lore);
 			System.out.println("got item(misc) for inv 5");
@@ -159,5 +167,13 @@ public class StaffPlayers implements Listener {
 
 	private void addEmerald(Inventory inventory, List<String> lore) {
 		StaffItems.createItem(i5, 49, Material.EMERALD, ChatColor.GOLD + "Info", lore);
+	}
+
+	private void addNext(Inventory inventory) {
+		StaffItems.createItem(inventory, 53, Material.BARRIER, ChatColor.GREEN + "Next", null);
+	}
+
+	private void addPrevious(Inventory inventory) {
+		StaffItems.createItem(inventory, 45, Material.BARRIER, ChatColor.RED + "Previous", null);
 	}
 }

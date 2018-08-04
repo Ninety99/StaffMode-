@@ -7,6 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import lombok.Getter;
 import me.NinetyNine.staff.actionbar.StaffActionBar;
 import me.NinetyNine.staff.bminfo.StaffBMInfo;
+import me.NinetyNine.staff.chatrules.StaffChatRulesInventory;
 import me.NinetyNine.staff.chest.StaffChest;
 import me.NinetyNine.staff.chest.StaffInventoryChest;
 import me.NinetyNine.staff.chest.StaffPLChest;
@@ -108,6 +109,8 @@ public class Staff extends JavaPlugin {
 		pm.registerEvents(new StaffConfig(), this);
 		
 		pm.registerEvents(new StaffActionBar(), this);
+		
+		pm.registerEvents(new StaffChatRulesInventory(), this);
 	}
 
 	private void clearAll() {

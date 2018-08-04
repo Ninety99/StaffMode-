@@ -4,3 +4,21 @@ gmchangerpermgm2: permissions.gm2
 gmchangerpermgm3: permissions.gm3
 permchatclear: permissions.chatclear
 anniWorld: world
+chatrules:
+  - flood:
+  - spam:
+  - caps:
+  - hackusating:
+  - arguing:
+  - chattrolling:
+  - askingstaffforthings:
+  - advertisement:
+  - swearing1:
+  - swearing2:
+  - swearing3:
+  - serverdis:
+  - staffdis:
+  - bypassingfilter:
+  - ddos:
+  - threathack:
+  - inappb:
