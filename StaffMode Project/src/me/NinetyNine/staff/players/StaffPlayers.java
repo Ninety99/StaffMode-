@@ -1,7 +1,6 @@
 package me.NinetyNine.staff.players;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.bukkit.Bukkit;
@@ -13,8 +12,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.SkullMeta;
 
 import lombok.Getter;
 import me.NinetyNine.staff.bminfo.StaffBMInfoHook;
@@ -29,17 +26,19 @@ public class StaffPlayers implements Listener {
 	 */
 
 	@Getter
-	private static Inventory inventory = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players");
+	private static Inventory i = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players");
+
 	@Getter
-	private static Inventory inventory2 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players");
+	private static Inventory i2 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players");
+
 	@Getter
-	private static Inventory inventory3 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players");
+	private static Inventory i3 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players");
+
 	@Getter
-	private static Inventory realInventory = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players");
+	private static Inventory i4 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players");
+
 	@Getter
-	private static Inventory realInventory2 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players");
-	@Getter
-	private static Inventory realInventory3 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players");
+	private static Inventory i5 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players");
 
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent e) {
@@ -62,131 +61,66 @@ public class StaffPlayers implements Listener {
 				+ "(Right Click)"))
 			return;
 
-		int index = 0;
-
-		if (getNumberofContents(inventory, index) <= 54) {
-			addSkull(inventory);
-			addMisc(1);
-			setContents(inventory, realInventory);
-		} else {
-			if (getNumberofContents(inventory2, index) <= 54) {
-				addSkull(inventory2);
-				addMisc(2);
-				setContents(inventory2, realInventory2);
-			} else {
-				if (getNumberofContents(inventory3, index) <= 54) {
-					addSkull(inventory3);
-					addMisc(3);
-					setContents(inventory3, realInventory3);
-				}
-			}
-		}
-
-		e.getPlayer().openInventory(getRealInventory());
+		openInventory(e.getPlayer());
 	}
 
-	private void addMisc(int number) {
-		if (getInventory(number) == inventory) {
-			StaffItems.createItem(inventory, 45, new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 7), " ", null);
-			StaffItems.createItem(inventory, 46, new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 7), " ", null);
-			StaffItems.createItem(inventory, 47, new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 7), " ", null);
-			StaffItems.createItem(inventory, 48, new ItemStack(Material.EMERALD), "Info",
-					Arrays.asList("Left Click: Checks the ban info\n" + "of specified player.\n"
-							+ "Right Click: Checks the mute info\n" + "of the specified player.\n"
-							+ "Middle Click: Teleports you to\n" + "the specified player.\n"));
-			StaffItems.createItem(inventory, 49, new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 7), " ", null);
-			StaffItems.createItem(inventory, 50, new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 7), " ", null);
-			StaffItems.createItem(inventory, 51, new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 7), " ", null);
-			StaffItems.createItem(inventory, 52, new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 7), " ", null);
-			StaffItems.createItem(inventory, 53, new ItemStack(Material.BARRIER), ChatColor.GREEN + "Next", null);
-			return;
-		} else if (getInventory(number) == inventory2) {
-			StaffItems.createItem(inventory2, 45, new ItemStack(Material.BARRIER), ChatColor.RED + "Previous", null);
-			StaffItems.createItem(inventory2, 46, new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 7), " ", null);
-			StaffItems.createItem(inventory2, 47, new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 7), " ", null);
-			StaffItems.createItem(inventory2, 48, new ItemStack(Material.EMERALD), "Info",
-					Arrays.asList("Left Click: Checks the ban info\n" + "of specified player.\n"
-							+ "Right Click: Checks the mute info\n" + "of the specified player.\n"
-							+ "Middle Click: Teleports you to\n" + "the specified player.\n"));
-			StaffItems.createItem(inventory2, 49, new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 7), " ", null);
-			StaffItems.createItem(inventory2, 50, new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 7), " ", null);
-			StaffItems.createItem(inventory2, 51, new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 7), " ", null);
-			StaffItems.createItem(inventory2, 52, new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 7), " ", null);
-			StaffItems.createItem(inventory2, 53, new ItemStack(Material.BARRIER), ChatColor.GREEN + "Next", null);
-			return;
-		} else if (getInventory(number) == inventory3) {
-			StaffItems.createItem(inventory3, 45, new ItemStack(Material.BARRIER), ChatColor.RED + "Previous", null);
-			StaffItems.createItem(inventory3, 46, new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 7), " ", null);
-			StaffItems.createItem(inventory3, 47, new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 7), " ", null);
-			StaffItems.createItem(inventory3, 48, new ItemStack(Material.EMERALD), "Info",
-					Arrays.asList("Left Click: Checks the ban info\n" + "of specified player.\n"
-							+ "Right Click: Checks the mute info\n" + "of the specified player.\n"
-							+ "Middle Click: Teleports you to\n" + "the specified player.\n"));
-			StaffItems.createItem(inventory3, 49, new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 7), " ", null);
-			StaffItems.createItem(inventory3, 50, new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 7), " ", null);
-			StaffItems.createItem(inventory3, 51, new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 7), " ", null);
-			StaffItems.createItem(inventory3, 52, new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 7), " ", null);
-			StaffItems.createItem(inventory3, 53, new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 7), " ", null);
-
-			return;
-		}
-	}
-
-	private void setContents(Inventory from, Inventory to) {
-		to.setContents(from.getContents());
-	}
-
-	private Inventory getInventory(int number) {
-		if (number == 1)
-			return inventory;
-		else if (number == 2)
-			return inventory2;
-		else if (number == 3)
-			return inventory3;
-
-		return null;
-	}
-
-	private void addSkull(Inventory inventory) {
+	public void openInventory(Player player) {
 		for (Player all : Bukkit.getServer().getOnlinePlayers()) {
-			ItemStack skull = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
-			SkullMeta skullmeta = (SkullMeta) skull.getItemMeta();
-			skullmeta.setOwner(all.getName());
-			skullmeta.setDisplayName(all.getName());
 			List<String> lore = new ArrayList<String>();
 
 			StaffBMInfoInterface bminfo = new StaffBMInfoHook();
 
 			lore.add(ChatColor.AQUA + "BMInfo:");
 			lore.add(" ");
-			lore.add(ChatColor.RED + "Bans: " + bminfo.getBans(all.getPlayer()));
-			lore.add(ChatColor.RED + "Mutes: " + bminfo.getMutes(all.getPlayer()));
-			lore.add(ChatColor.RED + "Kicks: " + bminfo.getKicks(all.getPlayer()));
-			lore.add(ChatColor.RED + "Warns: " + bminfo.getWarns(all.getPlayer()));
+			lore.add(ChatColor.RED + "Bans: " + bminfo.getBans(all));
+			lore.add(ChatColor.RED + "Mutes: " + bminfo.getMutes(all));
+			lore.add(ChatColor.RED + "Kicks: " + bminfo.getKicks(all));
+			lore.add(ChatColor.RED + "Warns: " + bminfo.getWarns(all));
 
-			skullmeta.setLore(lore);
-			skull.setAmount(1);
-			skull.setItemMeta(skullmeta);
-
-			int index = 0;
-
-			getNumberofContents(inventory, index);
-
-			if (index >= 0 && index < 55)
-				inventory.addItem(skull);
-		}
-	}
-
-	private int getNumberofContents(Inventory inventory, int index) {
-		for (int i = 0; i < inventory.getContents().length; i++) {
-			for (ItemStack items : inventory.getContents()) {
-				if (items == null)
-					return 0;
-
-				if (items.getType() != null)
-					index++;
+			if (StaffUtils.getNumberOfContents(i) <= 54) {
+				StaffItems.createSkullWithBMInfo(i, all.getName(), lore, all.getName());
+				addMisc(i);
+				return;
+			} else {
+				if (StaffUtils.getNumberOfContents(i2) <= 54) {
+					StaffItems.createSkullWithBMInfo(i2, all.getName(), lore, all.getName());
+					addMisc(i2);
+					return;
+				} else {
+					if (StaffUtils.getNumberOfContents(i3) <= 54) {
+						StaffItems.createSkullWithBMInfo(i3, all.getName(), lore, all.getName());
+						addMisc(i3);
+						return;
+					}
+				}
 			}
 		}
-		return index;
+		
+		player.openInventory(i);
+	}
+
+	private void addMisc(Inventory inventory) {
+		StaffItems.createGlassWithColor(inventory, 45, " ", (short) 7);
+		StaffItems.createGlassWithColor(inventory, 46, " ", (short) 7);
+		StaffItems.createGlassWithColor(inventory, 47, " ", (short) 7);
+		StaffItems.createGlassWithColor(inventory, 48, " ", (short) 7);
+
+		List<String> lore = new ArrayList<String>();
+
+		lore.add(ChatColor.GOLD + "Left Click:");
+		lore.add("Left click to check ban information");
+		lore.add("about the specified player.");
+		lore.add(ChatColor.GOLD + "Right Click:");
+		lore.add("Right click to check mute information");
+		lore.add("about the specified player.");
+		lore.add(ChatColor.GOLD + "Middle Click:");
+		lore.add("Middle click to teleport to the specified player!");
+
+		StaffItems.createItem(inventory, 49, Material.EMERALD, ChatColor.GOLD + "Info", lore);
+
+		StaffItems.createGlassWithColor(inventory, 50, " ", (short) 7);
+		StaffItems.createGlassWithColor(inventory, 51, " ", (short) 7);
+		StaffItems.createGlassWithColor(inventory, 52, " ", (short) 7);
+		StaffItems.createGlassWithColor(inventory, 53, " ", (short) 7);
 	}
 }

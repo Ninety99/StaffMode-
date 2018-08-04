@@ -8,6 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -33,7 +34,6 @@ public class StaffInventoryPlayers implements Listener {
 
 		if (item.getType().equals(Material.SKULL_ITEM)) {
 			ItemMeta meta = item.getItemMeta();
-
 			for (Player all : Bukkit.getServer().getOnlinePlayers()) {
 				if (meta.getDisplayName().equals(all.getName())) {
 					if (e.getClick().equals(ClickType.LEFT)) {
@@ -41,49 +41,54 @@ public class StaffInventoryPlayers implements Listener {
 						player.performCommand("bminfo " + all.getName() + " -bans");
 						break;
 					}
+
 					if (e.getClick().equals(ClickType.RIGHT)) {
 						player.closeInventory();
 						player.performCommand("bminfo " + all.getName() + " -mutes");
 						break;
 					}
+
 					if (e.getClick().equals(ClickType.MIDDLE)) {
 						player.closeInventory();
 						player.teleport(all);
 						player.sendMessage(StaffUtils.format("&7You have been teleported to " + all.getName()));
 						break;
 					}
-				}
+				} else
+					return;
+				break;
 			}
 		}
 
 		if (item.getType().equals(Material.BARRIER)) {
 			if (item.getItemMeta().getDisplayName().equals(ChatColor.GREEN + "Next")) {
-				if (e.getInventory() == StaffPlayers.getRealInventory()) {
-					player.closeInventory();
-					player.openInventory(StaffPlayers.getRealInventory2());
+				if (e.getInventory().equals(StaffPlayers.getI())) {
+					openInventory(StaffPlayers.getI2(), player);
 					return;
 				}
 
-				if (e.getInventory() == StaffPlayers.getRealInventory2()) {
-					player.closeInventory();
-					player.openInventory(StaffPlayers.getRealInventory3());
+				if (e.getInventory().equals(StaffPlayers.getI2())) {
+					openInventory(StaffPlayers.getI3(), player);
 					return;
 				}
 			}
 
 			if (item.getItemMeta().getDisplayName().equals(ChatColor.RED + "Previous")) {
-				if (e.getInventory() == StaffPlayers.getRealInventory2()) {
-					player.closeInventory();
-					player.openInventory(StaffPlayers.getRealInventory());
+				if (e.getInventory().equals(StaffPlayers.getI2())) {
+					openInventory(StaffPlayers.getI(), player);
 					return;
 				}
 
-				if (e.getInventory() == StaffPlayers.getRealInventory3()) {
-					player.closeInventory();
-					player.openInventory(StaffPlayers.getRealInventory2());
+				if (e.getInventory().equals(StaffPlayers.getI3())) {
+					openInventory(StaffPlayers.getI2(), player);
 					return;
 				}
 			}
 		}
+	}
+
+	private void openInventory(Inventory inventory, Player player) {
+		player.closeInventory();
+		player.openInventory(inventory);
 	}
 }

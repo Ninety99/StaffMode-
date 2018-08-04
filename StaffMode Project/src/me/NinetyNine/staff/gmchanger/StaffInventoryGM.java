@@ -8,6 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
+import me.NinetyNine.staff.utils.Flyer;
 import me.NinetyNine.staff.utils.StaffConfig;
 import me.NinetyNine.staff.utils.StaffUtils;
 
@@ -31,6 +32,8 @@ public class StaffInventoryGM implements Listener {
 				if (player.hasPermission(StaffConfig.getString("gmchangerpermgm0"))) {
 					player.closeInventory();
 					player.setGameMode(GameMode.SURVIVAL);
+					if (Flyer.isInFly(player))
+						Flyer.setFly(player);
 					player.sendMessage(StaffUtils.format("&9Your gamemode has been changed to &aSURVIVAL"));
 					return;
 				} else {
@@ -61,6 +64,8 @@ public class StaffInventoryGM implements Listener {
 				if (player.hasPermission(StaffConfig.getString("gmchangerpermgm2"))) {
 					player.closeInventory();
 					player.setGameMode(GameMode.ADVENTURE);
+					if (Flyer.isInFly(player))
+						Flyer.setFly(player);
 					player.sendMessage(StaffUtils.format("&9Your gamemode has been changed to &aADVENTURE"));
 					return;
 				} else {

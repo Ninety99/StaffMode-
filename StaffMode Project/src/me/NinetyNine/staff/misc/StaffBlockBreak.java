@@ -21,9 +21,12 @@ public class StaffBlockBreak implements Listener {
 				Block block = e.getBlock();
 				Material blockType = block.getType();
 				if (blockType == Material.GRASS)
-					e.getPlayer().getInventory().addItem(new ItemStack(Material.DIRT));
+					e.getPlayer().getInventory().addItem(new ItemStack(Material.GRASS));
+				else if (blockType == Material.LONG_GRASS)
+					e.getPlayer().getInventory().addItem(new ItemStack(Material.LONG_GRASS));
 				else
 					e.getPlayer().getInventory().addItem(new ItemStack(blockType));
+				
 				block.setType(Material.AIR);
 				return;
 			} else

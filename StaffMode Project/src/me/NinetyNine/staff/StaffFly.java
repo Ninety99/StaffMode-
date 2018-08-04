@@ -39,7 +39,7 @@ public class StaffFly implements Listener {
 		if (e.getItem().getType() == Material.AIR)
 			return;
 
-		if (e.getItem().getType() != Material.FEATHER)
+		if (e.getItem().getType() != Material.COOKIE)
 			return;
 
 		if (!(e.getItem().getItemMeta().getDisplayName().equals(ChatColor.RED + "Fly")
@@ -61,18 +61,18 @@ public class StaffFly implements Listener {
 		}
 	}
 
-	private void add(ItemStack feather) {
-		ItemMeta featherm = feather.getItemMeta();
-		featherm.addEnchant(Enchantment.DURABILITY, 1, true);
-		featherm.setDisplayName(ChatColor.GREEN + "Fly");
-		feather.setItemMeta(featherm);
+	private void add(ItemStack item) {
+		ItemMeta meta = item.getItemMeta();
+		meta.addEnchant(Enchantment.DURABILITY, 1, true);
+		meta.setDisplayName(ChatColor.GREEN + "Fly");
+		item.setItemMeta(meta);
 	}
 
-	private void remove(ItemStack feather) {
-		ItemMeta featherm = feather.getItemMeta();
-		featherm.removeEnchant(Enchantment.DURABILITY);
-		featherm.setDisplayName(ChatColor.RED + "Fly");
-		feather.setItemMeta(featherm);
+	private void remove(ItemStack item) {
+		ItemMeta meta = item.getItemMeta();
+		meta.removeEnchant(Enchantment.DURABILITY);
+		meta.setDisplayName(ChatColor.RED + "Fly");
+		item.setItemMeta(meta);
 	}
 
 	public static void clear() {

@@ -1,6 +1,7 @@
 package me.NinetyNine.staff.inspect;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -11,6 +12,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
 
 import me.NinetyNine.staff.utils.StaffItems;
 import me.NinetyNine.staff.utils.StaffUtils;;
@@ -33,7 +35,7 @@ public class StaffInspect implements Listener {
 		if (player.getItemInHand().getType() == Material.AIR)
 			return;
 
-		if (!(player.getItemInHand().getType() == Material.BOOK))
+		if (!(player.getItemInHand().getType() == Material.STICK))
 			return;
 
 		if (player.getItemInHand().getItemMeta().getDisplayName() == ChatColor.GREEN + "Inspect")
@@ -49,19 +51,44 @@ public class StaffInspect implements Listener {
 				clickedInventory.setItem(i, item);
 		}
 
-		clickedInventory.setItem(39, clicked.getInventory().getHelmet());
-		clickedInventory.setItem(40, clicked.getInventory().getChestplate());
-		clickedInventory.setItem(41, clicked.getInventory().getLeggings());
-		clickedInventory.setItem(42, clicked.getInventory().getBoots());
+		clickedInventory.setItem(36, clicked.getInventory().getHelmet());
+		clickedInventory.setItem(37, clicked.getInventory().getChestplate());
+		clickedInventory.setItem(38, clicked.getInventory().getLeggings());
+		clickedInventory.setItem(39, clicked.getInventory().getBoots());
 
-		StaffItems.createItem(clickedInventory, 44, new ItemStack(Material.SPECKLED_MELON),
-				ChatColor.GRAY + "Player Info", Arrays.asList(
-						ChatColor.RED + "Health: " + clicked.getHealth() + "Food Level: " + clicked.getFoodLevel()));
-		StaffItems.createItemWithBMInfo(clicked, clickedInventory, 46, new ItemStack(Material.EMERALD),
+		List<String> lore = new ArrayList<String>();
+		for (PotionEffect effect : getPotionEffects(clicked)) {
+			lore.add(ChatColor.GOLD + effect.toString().replace("potion", "").replace("effect", ""));
+			lore.add(ChatColor.AQUA + "Duration: " + effect.getDuration());
+			lore.add(ChatColor.RED + "Amplifier(Potion Level):" + effect.getAmplifier());
+		}
+
+		StaffItems.createItem(clickedInventory, 40, Material.GLASS_BOTTLE, "Active Potion Effects", lore);
+
+		List<String> lore2 = new ArrayList<String>();
+		double health = clicked.getHealth() - 10.0;
+		lore2.add(ChatColor.RED + "Health: " + health + ChatColor.RED + "❤️");
+		lore2.add(ChatColor.RED + "Food Level: " + clicked.getFoodLevel());
+
+		StaffItems.createItem(clickedInventory, 42, Material.SPECKLED_MELON, ChatColor.GRAY + "Player Info", lore2);
+
+		StaffItems.createItemWithBMInfo(clicked, clickedInventory, 44, Material.EMERALD,
 				ChatColor.RED + "BMInfo Status");
 
 		player.openInventory(clickedInventory);
 		player.sendMessage(StaffUtils.format("&9Opening " + clicked.getName() + "'s inventory"));
 		return;
+	}
+
+	private List<PotionEffect> getPotionEffects(Player player) {
+		List<PotionEffect> pots = new ArrayList<PotionEffect>();
+
+		for (PotionEffect effect : player.getActivePotionEffects())
+			if (effect != null)
+				pots.add(effect);
+			else
+				return null;
+
+		return pots;
 	}
 }
