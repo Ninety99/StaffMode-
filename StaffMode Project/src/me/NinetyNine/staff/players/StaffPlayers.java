@@ -13,7 +13,6 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 
-import lombok.Getter;
 import me.NinetyNine.staff.bminfo.StaffBMInfoHook;
 import me.NinetyNine.staff.bminfo.StaffBMInfoInterface;
 import me.NinetyNine.staff.utils.StaffItems;
@@ -25,20 +24,11 @@ public class StaffPlayers implements Listener {
 	 * Not completed yet
 	 */
 
-	@Getter
-	private static Inventory i = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players");
-
-	@Getter
-	private static Inventory i2 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players");
-
-	@Getter
-	private static Inventory i3 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players");
-
-	@Getter
-	private static Inventory i4 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players");
-
-	@Getter
-	private static Inventory i5 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players");
+	public static Inventory i = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players");
+	public static Inventory i2 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players");
+	public static Inventory i3 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players");
+	public static Inventory i4 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players");
+	public static Inventory i5 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players");
 
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent e) {
@@ -54,17 +44,16 @@ public class StaffPlayers implements Listener {
 		if (e.getItem().getType() != Material.BEACON)
 			return;
 
-		if (!e.getItem().hasItemMeta())
+		if (!(e.getItem().getItemMeta().getDisplayName()
+				.equals(ChatColor.RED + "Players " + ChatColor.GRAY + "(Right Click)")))
 			return;
+		
+		addStuff(e.getPlayer());
 
-		if (!(e.getItem().getItemMeta().getDisplayName() != ChatColor.RED + "Players " + ChatColor.GRAY
-				+ "(Right Click)"))
-			return;
-
-		openInventory(e.getPlayer());
+		e.getPlayer().openInventory(i);
 	}
 
-	public void openInventory(Player player) {
+	public void addStuff(Player player) {
 		for (Player all : Bukkit.getServer().getOnlinePlayers()) {
 			List<String> lore = new ArrayList<String>();
 
@@ -76,35 +65,41 @@ public class StaffPlayers implements Listener {
 			lore.add(ChatColor.RED + "Mutes: " + bminfo.getMutes(all));
 			lore.add(ChatColor.RED + "Kicks: " + bminfo.getKicks(all));
 			lore.add(ChatColor.RED + "Warns: " + bminfo.getWarns(all));
+			System.out.println("got all the bminfo details");
 
 			if (StaffUtils.getNumberOfContents(i) <= 54) {
 				StaffItems.createSkullWithBMInfo(i, all.getName(), lore, all.getName());
-				addMisc(i);
+				addMisc(1);
 				return;
 			} else {
 				if (StaffUtils.getNumberOfContents(i2) <= 54) {
 					StaffItems.createSkullWithBMInfo(i2, all.getName(), lore, all.getName());
-					addMisc(i2);
+					addMisc(2);
 					return;
 				} else {
 					if (StaffUtils.getNumberOfContents(i3) <= 54) {
 						StaffItems.createSkullWithBMInfo(i3, all.getName(), lore, all.getName());
-						addMisc(i3);
+						addMisc(3);
 						return;
+					} else {
+						if (StaffUtils.getNumberOfContents(i4) <= 54) {
+							StaffItems.createSkullWithBMInfo(i4, all.getName(), lore, all.getName());
+							addMisc(4);
+							return;
+						} else {
+							if (StaffUtils.getNumberOfContents(i5) <= 54) {
+								StaffItems.createSkullWithBMInfo(i5, all.getName(), lore, all.getName());
+								addMisc(5);
+								return;
+							}
+						}
 					}
 				}
 			}
 		}
-		
-		player.openInventory(i);
 	}
 
-	private void addMisc(Inventory inventory) {
-		StaffItems.createGlassWithColor(inventory, 45, " ", (short) 7);
-		StaffItems.createGlassWithColor(inventory, 46, " ", (short) 7);
-		StaffItems.createGlassWithColor(inventory, 47, " ", (short) 7);
-		StaffItems.createGlassWithColor(inventory, 48, " ", (short) 7);
-
+	private void addMisc(int invNumber) {
 		List<String> lore = new ArrayList<String>();
 
 		lore.add(ChatColor.GOLD + "Left Click:");
@@ -115,12 +110,54 @@ public class StaffPlayers implements Listener {
 		lore.add("about the specified player.");
 		lore.add(ChatColor.GOLD + "Middle Click:");
 		lore.add("Middle click to teleport to the specified player!");
+		System.out.println("got click info lore");
 
-		StaffItems.createItem(inventory, 49, Material.EMERALD, ChatColor.GOLD + "Info", lore);
+		if (invNumber == 1) {
+			addGlass(i);
+			addEmerald(i, lore);
+			System.out.println("got item(misc) for inv 1");
+		}
+
+		if (invNumber == 2) {
+			addGlass(i2);
+			addEmerald(i2, lore);
+			System.out.println("got item(misc) for inv 2");
+		}
+
+		if (invNumber == 3) {
+			addGlass(i3);
+			addEmerald(i3, lore);
+			System.out.println("got item(misc) for inv 3");
+		}
+
+		if (invNumber == 4) {
+			addGlass(i4);
+			addEmerald(i4, lore);
+			System.out.println("got item(misc) for inv 4");
+		}
+
+		if (invNumber == 5) {
+			addGlass(i5);
+			addEmerald(i5, lore);
+			System.out.println("got item(misc) for inv 5");
+		}
+	}
+
+	private void addGlass(Inventory inventory) {
+		StaffItems.createGlassWithColor(inventory, 45, " ", (short) 7);
+		StaffItems.createGlassWithColor(inventory, 46, " ", (short) 7);
+		StaffItems.createGlassWithColor(inventory, 47, " ", (short) 7);
+		StaffItems.createGlassWithColor(inventory, 48, " ", (short) 7);
+
+		// Emerald info item here
 
 		StaffItems.createGlassWithColor(inventory, 50, " ", (short) 7);
 		StaffItems.createGlassWithColor(inventory, 51, " ", (short) 7);
 		StaffItems.createGlassWithColor(inventory, 52, " ", (short) 7);
 		StaffItems.createGlassWithColor(inventory, 53, " ", (short) 7);
+	}
+
+	private void addEmerald(Inventory inventory, List<String> lore) {
+		StaffItems.createItem(i5, 49, Material.EMERALD, ChatColor.GOLD + "Info", lore);
 	}
 }

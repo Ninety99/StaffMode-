@@ -55,32 +55,52 @@ public class StaffInventoryPlayers implements Listener {
 						break;
 					}
 				} else
-					return;
-				break;
+					break;
+				return;
 			}
 		}
 
 		if (item.getType().equals(Material.BARRIER)) {
 			if (item.getItemMeta().getDisplayName().equals(ChatColor.GREEN + "Next")) {
-				if (e.getInventory().equals(StaffPlayers.getI())) {
-					openInventory(StaffPlayers.getI2(), player);
+				if (e.getInventory().equals(StaffPlayers.i)) {
+					openInventory(StaffPlayers.i2, player);
 					return;
 				}
 
-				if (e.getInventory().equals(StaffPlayers.getI2())) {
-					openInventory(StaffPlayers.getI3(), player);
+				if (e.getInventory().equals(StaffPlayers.i2)) {
+					openInventory(StaffPlayers.i3, player);
+					return;
+				}
+				
+				if (e.getInventory().equals(StaffPlayers.i3)) {
+					openInventory(StaffPlayers.i4, player);
+					return;
+				}
+				
+				if (e.getInventory().equals(StaffPlayers.i4)) {
+					openInventory(StaffPlayers.i5, player);
 					return;
 				}
 			}
 
 			if (item.getItemMeta().getDisplayName().equals(ChatColor.RED + "Previous")) {
-				if (e.getInventory().equals(StaffPlayers.getI2())) {
-					openInventory(StaffPlayers.getI(), player);
+				if (e.getInventory().equals(StaffPlayers.i2)) {
+					openInventory(StaffPlayers.i, player);
 					return;
 				}
 
-				if (e.getInventory().equals(StaffPlayers.getI3())) {
-					openInventory(StaffPlayers.getI2(), player);
+				if (e.getInventory().equals(StaffPlayers.i3)) {
+					openInventory(StaffPlayers.i2, player);
+					return;
+				}
+
+				if (e.getInventory().equals(StaffPlayers.i4)) {
+					openInventory(StaffPlayers.i3, player);
+					return;
+				}
+
+				if (e.getInventory().equals(StaffPlayers.i5)) {
+					openInventory(StaffPlayers.i4, player);
 					return;
 				}
 			}
