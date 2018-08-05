@@ -159,19 +159,20 @@ public class StaffCommands implements Listener, CommandExecutor {
 
 	private void addRules(Inventory inventory) {
 		StaffItems.createItem(inventory, 0, Material.PAPER, ChatColor.RED + "Flood", null);
-		StaffItems.createItem(inventory, 1, Material.PAPER, ChatColor.RED + "Spam", null);
-		StaffItems.createItem(inventory, 2, Material.PAPER, ChatColor.RED + "Caps", null);
-		StaffItems.createItem(inventory, 3, Material.PAPER, ChatColor.RED + "Hackusating", null);
-		StaffItems.createItem(inventory, 4, Material.PAPER, ChatColor.RED + "Arguing", null);
-		StaffItems.createItem(inventory, 5, Material.PAPER, ChatColor.RED + "ChatTrolling", null);
-		StaffItems.createItem(inventory, 6, Material.PAPER, ChatColor.RED + "Asking Staff for Items", null);
-		StaffItems.createItem(inventory, 7, Material.PAPER, ChatColor.RED + "Advertisement", null);
-		StaffItems.createItem(inventory, 8, Material.PAPER, ChatColor.RED + "Swearing", null);
-		StaffItems.createItem(inventory, 9, Material.PAPER, ChatColor.RED + "Server Disrespect", null);
-		StaffItems.createItem(inventory, 10, Material.PAPER, ChatColor.RED + "Staff Disrespect", null);
-		StaffItems.createItem(inventory, 11, Material.PAPER, ChatColor.RED + "Bypassing Chat Filter", null);
-		StaffItems.createItem(inventory, 12, Material.PAPER, ChatColor.RED + "DDoS Threat", null);
-		StaffItems.createItem(inventory, 13, Material.PAPER, ChatColor.RED + "Hack Threat", null);
-		StaffItems.createItem(inventory, 14, Material.PAPER, ChatColor.RED + "Inappropriate Behavior", null);
+		StaffItems.createGlassWithColor(inventory, 1, " ", (short) 5);
+		StaffItems.createItem(inventory, 2, Material.PAPER, ChatColor.RED + "Spam", null);
+		StaffItems.createItem(inventory, 4, Material.PAPER, ChatColor.RED + "Caps", null);
+		StaffItems.createItem(inventory, 6, Material.PAPER, ChatColor.RED + "Hackusating", null);
+		StaffItems.createItem(inventory, 8, Material.PAPER, ChatColor.RED + "Arguing", null);
+		StaffItems.createItem(inventory, 10, Material.PAPER, ChatColor.RED + "ChatTrolling", null);
+		StaffItems.createItem(inventory, 12, Material.PAPER, ChatColor.RED + "Asking Staff for Items", null);
+		StaffItems.createItem(inventory, 14, Material.PAPER, ChatColor.RED + "Advertisement", null);
+		StaffItems.createItem(inventory, 16, Material.PAPER, ChatColor.RED + "Swearing", null);
+		StaffItems.createItem(inventory, 18, Material.PAPER, ChatColor.RED + "Server Disrespect", null);
+		StaffItems.createItem(inventory, 20, Material.PAPER, ChatColor.RED + "Staff Disrespect", null);
+		StaffItems.createItem(inventory, 22, Material.PAPER, ChatColor.RED + "Bypassing Chat Filter", null);
+		StaffItems.createItem(inventory, 24, Material.PAPER, ChatColor.RED + "DDoS Threat", null);
+		StaffItems.createItem(inventory, 26, Material.PAPER, ChatColor.RED + "Hack Threat", null);
+		StaffItems.createItem(inventory, 27, Material.PAPER, ChatColor.RED + "Inappropriate Behavior", null);
 	}
 }

@@ -84,7 +84,7 @@ public class StaffItems {
 		return item2;
 	}
 
-	public static ItemStack createItemWithBMInfo(Player target, Inventory inventory, int slot, Material item,
+	public static void createItemWithBMInfo(Player target, Inventory inventory, int slot, Material item,
 			String displayName) {
 		ItemStack item2 = new ItemStack(item);
 		ItemMeta meta = item2.getItemMeta();
@@ -104,11 +104,9 @@ public class StaffItems {
 		item2.setItemMeta(meta);
 
 		inventory.setItem(slot, item2);
-
-		return item2;
 	}
 
-	public static ItemStack createGlassWithColor(Inventory inventory, int slot, String displayName, short durability) {
+	public static void createGlassWithColor(Inventory inventory, int slot, String displayName, short durability) {
 		ItemStack glass = new ItemStack(Material.STAINED_GLASS_PANE);
 		ItemMeta meta = glass.getItemMeta();
 		meta.setDisplayName(displayName);
@@ -116,32 +114,41 @@ public class StaffItems {
 		glass.setItemMeta(meta);
 
 		inventory.setItem(slot, glass);
-
-		return glass;
 	}
 
-	public static ItemStack createSkullWithBMInfo(Inventory inventory, String displayName, List<String> lore,
-			String owner) {
-
+	public static void createSkullsWithBMInfo(Inventory inventory, Player all) {
 		ItemStack skull = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
 		SkullMeta meta = (SkullMeta) skull.getItemMeta();
-		meta.setDisplayName(displayName);
-		meta.setOwner(owner);
+		meta.setDisplayName(all.getName());
+		meta.setOwner(all.getName());
+
+		List<String> lore = new ArrayList<String>();
+
+		StaffBMInfoInterface bminfo = new StaffBMInfoHook();
+
+		lore.add(ChatColor.AQUA + "BMInfo:");
+		lore.add(" ");
+		lore.add(ChatColor.RED + "Bans: " + ChatColor.GOLD + bminfo.getBans(all));
+		lore.add(ChatColor.RED + "Mutes: " + ChatColor.GOLD + bminfo.getMutes(all));
+		lore.add(ChatColor.RED + "Kicks: " + ChatColor.GOLD + bminfo.getKicks(all));
+		lore.add(ChatColor.RED + "Warns: " + ChatColor.GOLD + bminfo.getWarns(all));
+
 		meta.setLore(lore);
 		skull.setItemMeta(meta);
+		
+		if (!inventory.contains(skull))
+			inventory.addItem(skull);
+		else
+			return;
 
-		return skull;
 	}
 
-	public static ItemStack createItemWithColor(Inventory inventory, Material item, int slot, String displayName,
-			int data) {
-		
+	public static void createItemWithColor(Inventory inventory, Material item, int slot, String displayName, int data) {
+
 		ItemStack it = new ItemStack(item, 1, (short) data);
 		ItemMeta meta = it.getItemMeta();
 		meta.setDisplayName(displayName);
 		it.setItemMeta(meta);
 		inventory.setItem(slot, it);
-
-		return it;
 	}
 }

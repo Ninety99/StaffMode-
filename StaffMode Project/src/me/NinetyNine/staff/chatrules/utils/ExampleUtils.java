@@ -112,33 +112,33 @@ public class ExampleUtils {
 			player.sendMessage(prefixe + ":" + a + getExamplespam());
 		else if (type == ExampleType.CAPS)
 			player.sendMessage(prefixe + ":" + a + getExamplecaps());
-		else if (type == ExampleType.ACCUSE)
+		else if (type == ExampleType.HACKUSATING)
 			player.sendMessage(prefixe + ":" + a + getExampleaccuse());
-		else if (type == ExampleType.ARGUE)
-			player.sendMessage(prefixe + ":" + a + getExampleaccuse());
-		else if (type == ExampleType.CHATT)
+		else if (type == ExampleType.ARGUING)
+			player.sendMessage(prefixe + ":" + a + getExampleargue());
+		else if (type == ExampleType.CHAT_TROLLING)
 			player.sendMessage(prefixe + ":" + a + getExamplechatt());
-		else if (type == ExampleType.ASKSTAFF)
+		else if (type == ExampleType.ASKING_STAFF_FOR_ITEMS)
 			player.sendMessage(prefixe + ":" + a + getExampleaskstaff());
-		else if (type == ExampleType.ADV)
+		else if (type == ExampleType.ADVERTISEMENT)
 			player.sendMessage(prefixe + ":" + a + getExampleadv());
-		else if (type == ExampleType.YTADV)
+		else if (type == ExampleType.YOUTUBE_ADVERTISEMENT)
 			player.sendMessage(prefixe + ":" + a + getExampleytadv());
-		else if (type == ExampleType.SWEAR)
+		else if (type == ExampleType.SWEARING)
 			player.sendMessage(prefixe + ":" + a + getExampleswear());
 		else if (type == ExampleType.HARASSMENT)
 			player.sendMessage(prefixe + ":" + a + getExampleharassment());
-		else if (type == ExampleType.SERVER)
+		else if (type == ExampleType.SERVERDIS)
 			player.sendMessage(prefixe + ":" + a + getExampleserver());
-		else if (type == ExampleType.STAFF)
+		else if (type == ExampleType.STAFFDIS)
 			player.sendMessage(prefixe + ":" + a + getExamplestaff());
-		else if (type == ExampleType.BYPASS)
+		else if (type == ExampleType.BYPASSING_FILTER)
 			player.sendMessage(prefixe + ":" + a + getExamplebypass());
 		else if (type == ExampleType.DDOS)
 			player.sendMessage(prefixe + ":" + a + getExampleddos());
-		else if (type == ExampleType.HACK)
+		else if (type == ExampleType.THREATHACK)
 			player.sendMessage(prefixe + ":" + a + getExamplehack());
-		else if (type == ExampleType.INAPP)
+		else if (type == ExampleType.INAPPB)
 			player.sendMessage(prefixe + ":" + a + getExampleinapp());
 	}
 }

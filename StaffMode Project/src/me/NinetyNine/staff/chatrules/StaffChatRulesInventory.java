@@ -15,12 +15,11 @@ import me.NinetyNine.staff.chatrules.utils.DetailUtils;
 import me.NinetyNine.staff.chatrules.utils.ExampleType;
 import me.NinetyNine.staff.chatrules.utils.ExampleUtils;
 import me.NinetyNine.staff.utils.StaffItems;
-import me.NinetyNine.staff.utils.StaffUtils;
 
 public class StaffChatRulesInventory implements Listener {
 
 	@Getter
-	private static Inventory chatrule = Bukkit.createInventory(null, 27, ChatColor.DARK_BLUE + "Chat Rules");
+	private static Inventory chatrule = Bukkit.createInventory(null, 36, ChatColor.DARK_BLUE + "Chat Rules");
 
 	@Getter
 	private static Inventory flood = Bukkit.createInventory(null, 9, ChatColor.RED + "Flood");
@@ -73,11 +72,9 @@ public class StaffChatRulesInventory implements Listener {
 	@Getter
 	private static Inventory inappb = Bukkit.createInventory(null, 9, ChatColor.RED + "Inappropriate Behavior");
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onInventoryClick(InventoryClickEvent e) {
-		if (!(StaffUtils.isInStaffMode((Player) e.getWhoClicked())))
-			return;
-
 		if (e.getCurrentItem() == null)
 			return;
 
@@ -145,8 +142,8 @@ public class StaffChatRulesInventory implements Listener {
 			if (displayName.equals(ChatColor.RED + "Swearing")) {
 				System.out.println("is swearing name");
 				StaffItems.createItemWithColor(swearing, Material.WOOL, 2, ChatColor.RED + "Swearing (Sev. 1)", 14);
-				StaffItems.createItemWithColor(swearing, Material.WOOL, 4, ChatColor.RED + "Swearing (Sev. 2)", 12);
-				StaffItems.createItemWithColor(swearing, Material.WOOL, 6, ChatColor.RED + "Swearing (Sev. 3)", 10);
+				StaffItems.createItemWithColor(swearing, Material.WOOL, 5, ChatColor.RED + "Swearing (Sev. 2)", 12);
+				StaffItems.createItemWithColor(swearing, Material.WOOL, 7, ChatColor.RED + "Swearing (Sev. 3)", 10);
 				StaffItems.createItem(swearing2, 2, Material.ARROW, ChatColor.GREEN + "Information", null);
 				StaffItems.createItem(swearing2, 5, Material.BOOK, ChatColor.RED + "Example", null);
 				StaffItems.createItem(swearing3, 2, Material.ARROW, ChatColor.GREEN + "Information", null);
@@ -203,35 +200,35 @@ public class StaffChatRulesInventory implements Listener {
 				return;
 			} else if (e.getInventory().getTitle().equals(ChatColor.RED + "Advertisement")) {
 				player.closeInventory();
-				DetailUtils.sendDetails(player, ExampleType.ADV);
+				DetailUtils.sendDetails(player, ExampleType.ADVERTISEMENT);
 				return;
 			} else if (e.getInventory().getTitle().equals(ChatColor.RED + "Arguing")) {
 				player.closeInventory();
-				DetailUtils.sendDetails(player, ExampleType.ARGUE);
+				DetailUtils.sendDetails(player, ExampleType.ARGUING);
 				return;
 			} else if (e.getInventory().getTitle().equals(ChatColor.RED + "Asking Staff for Items")) {
 				player.closeInventory();
-				DetailUtils.sendDetails(player, ExampleType.ASKSTAFF);
+				DetailUtils.sendDetails(player, ExampleType.ASKING_STAFF_FOR_ITEMS);
 				return;
 			} else if (e.getInventory().getTitle().equals(ChatColor.RED + "Server Disrespect")) {
 				player.closeInventory();
-				DetailUtils.sendDetails(player, ExampleType.SERVER);
+				DetailUtils.sendDetails(player, ExampleType.SERVERDIS);
 				return;
 			} else if (e.getInventory().getTitle().equals(ChatColor.RED + "Inappropriate Behavior")) {
 				player.closeInventory();
-				DetailUtils.sendDetails(player, ExampleType.INAPP);
+				DetailUtils.sendDetails(player, ExampleType.INAPPB);
 				return;
 			} else if (e.getInventory().getTitle().equals(ChatColor.RED + "Bypass Chat Filter")) {
 				player.closeInventory();
-				DetailUtils.sendDetails(player, ExampleType.BYPASS);
+				DetailUtils.sendDetails(player, ExampleType.BYPASSING_FILTER);
 				return;
 			} else if (e.getInventory().getTitle().equals(ChatColor.RED + "Chat Trolling")) {
 				player.closeInventory();
-				DetailUtils.sendDetails(player, ExampleType.CHATT);
+				DetailUtils.sendDetails(player, ExampleType.CHAT_TROLLING);
 				return;
 			} else if (e.getInventory().getTitle().equals(ChatColor.RED + "Hack Threat")) {
 				player.closeInventory();
-				DetailUtils.sendDetails(player, ExampleType.HACK);
+				DetailUtils.sendDetails(player, ExampleType.THREATHACK);
 				return;
 			} else if (e.getInventory().getTitle().equals(ChatColor.RED + "DDoS Threat")) {
 				player.closeInventory();
@@ -239,11 +236,11 @@ public class StaffChatRulesInventory implements Listener {
 				return;
 			} else if (e.getInventory().getTitle().equals(ChatColor.RED + "Staff Disrespect")) {
 				player.closeInventory();
-				DetailUtils.sendDetails(player, ExampleType.STAFF);
+				DetailUtils.sendDetails(player, ExampleType.STAFFDIS);
 				return;
 			} else if (e.getInventory().getTitle().equals(ChatColor.RED + "Hackusating")) {
 				player.closeInventory();
-				DetailUtils.sendDetails(player, ExampleType.ACCUSE);
+				DetailUtils.sendDetails(player, ExampleType.HACKUSATING);
 				return;
 			} else if (e.getInventory().getTitle().equals(ChatColor.RED + "Caps")) {
 				player.closeInventory();
@@ -251,15 +248,15 @@ public class StaffChatRulesInventory implements Listener {
 				return;
 			} else if (e.getInventory().getTitle().equals(ChatColor.RED + "Swearing")) {
 				player.closeInventory();
-				DetailUtils.sendDetails(player, ExampleType.SWEAR);
+				DetailUtils.sendDetails(player, ExampleType.SWEARING);
 				return;
 			} else if (e.getInventory().getTitle().equals(ChatColor.RED + "Swearing (Sev. 2)")) {
 				player.closeInventory();
-				DetailUtils.sendDetails(player, ExampleType.SWEAR2);
+				DetailUtils.sendDetails(player, ExampleType.SWEARING_2);
 				return;
 			} else if (e.getInventory().getTitle().equals(ChatColor.RED + "Swearing (Sev. 3)")) {
 				player.closeInventory();
-				DetailUtils.sendDetails(player, ExampleType.SWEAR3);
+				DetailUtils.sendDetails(player, ExampleType.SWEARING_3);
 				return;
 			}
 		}
@@ -276,35 +273,35 @@ public class StaffChatRulesInventory implements Listener {
 				return;
 			} else if (e.getInventory().getTitle().equals(ChatColor.RED + "Advertisement")) {
 				player.closeInventory();
-				ExampleUtils.sendExample(player, ExampleType.ADV);
+				ExampleUtils.sendExample(player, ExampleType.ADVERTISEMENT);
 				return;
 			} else if (e.getInventory().getTitle().equals(ChatColor.RED + "Arguing")) {
 				player.closeInventory();
-				ExampleUtils.sendExample(player, ExampleType.ARGUE);
+				ExampleUtils.sendExample(player, ExampleType.ARGUING);
 				return;
 			} else if (e.getInventory().getTitle().equals(ChatColor.RED + "Asking Staff for Items")) {
 				player.closeInventory();
-				ExampleUtils.sendExample(player, ExampleType.ASKSTAFF);
+				ExampleUtils.sendExample(player, ExampleType.ASKING_STAFF_FOR_ITEMS);
 				return;
 			} else if (e.getInventory().getTitle().equals(ChatColor.RED + "Server Disrespect")) {
 				player.closeInventory();
-				ExampleUtils.sendExample(player, ExampleType.SERVER);
+				ExampleUtils.sendExample(player, ExampleType.SERVERDIS);
 				return;
 			} else if (e.getInventory().getTitle().equals(ChatColor.RED + "Inappropriate Behavior")) {
 				player.closeInventory();
-				ExampleUtils.sendExample(player, ExampleType.INAPP);
+				ExampleUtils.sendExample(player, ExampleType.INAPPB);
 				return;
 			} else if (e.getInventory().getTitle().equals(ChatColor.RED + "Bypass Chat Filter")) {
 				player.closeInventory();
-				ExampleUtils.sendExample(player, ExampleType.BYPASS);
+				ExampleUtils.sendExample(player, ExampleType.BYPASSING_FILTER);
 				return;
 			} else if (e.getInventory().getTitle().equals(ChatColor.RED + "Chat Trolling")) {
 				player.closeInventory();
-				ExampleUtils.sendExample(player, ExampleType.CHATT);
+				ExampleUtils.sendExample(player, ExampleType.CHAT_TROLLING);
 				return;
 			} else if (e.getInventory().getTitle().equals(ChatColor.RED + "Hack Threat")) {
 				player.closeInventory();
-				ExampleUtils.sendExample(player, ExampleType.HACK);
+				ExampleUtils.sendExample(player, ExampleType.HACKUSATING);
 				return;
 			} else if (e.getInventory().getTitle().equals(ChatColor.RED + "DDoS Threat")) {
 				player.closeInventory();
@@ -312,11 +309,11 @@ public class StaffChatRulesInventory implements Listener {
 				return;
 			} else if (e.getInventory().getTitle().equals(ChatColor.RED + "Staff Disrespect")) {
 				player.closeInventory();
-				ExampleUtils.sendExample(player, ExampleType.STAFF);
+				ExampleUtils.sendExample(player, ExampleType.STAFFDIS);
 				return;
 			} else if (e.getInventory().getTitle().equals(ChatColor.RED + "Hackusating")) {
 				player.closeInventory();
-				ExampleUtils.sendExample(player, ExampleType.ACCUSE);
+				ExampleUtils.sendExample(player, ExampleType.HACKUSATING);
 				return;
 			} else if (e.getInventory().getTitle().equals(ChatColor.RED + "Caps")) {
 				player.closeInventory();
@@ -324,16 +321,39 @@ public class StaffChatRulesInventory implements Listener {
 				return;
 			} else if (e.getInventory().getTitle().equals(ChatColor.RED + "Swearing")) {
 				player.closeInventory();
-				ExampleUtils.sendExample(player, ExampleType.SWEAR);
+				ExampleUtils.sendExample(player, ExampleType.SWEARING);
 				return;
 			} else if (e.getInventory().getTitle().equals(ChatColor.RED + "Swearing (Sev. 2)")) {
 				player.closeInventory();
-				ExampleUtils.sendExample(player, ExampleType.SWEAR2);
+				ExampleUtils.sendExample(player, ExampleType.SWEARING_2);
 				return;
 			} else if (e.getInventory().getTitle().equals(ChatColor.RED + "Swearing (Sev. 3)")) {
 				player.closeInventory();
-				ExampleUtils.sendExample(player, ExampleType.SWEAR3);
+				ExampleUtils.sendExample(player, ExampleType.SWEARING_3);
 				return;
+			}
+		}
+
+		if (e.getInventory().getTitle().equals(ChatColor.RED + "Swearing")) {
+			System.out.println("is swearing name");
+			if (item.getType() == Material.WOOL) {
+				System.out.println("is wool");
+				switch (item.getData().getData()) {
+				default:
+					break;
+				case 2:
+					System.out.println("case 2");
+					openInventory(player, swearing);
+					break;
+				case 5:
+					System.out.println("case 5");
+					openInventory(player, swearing2);
+					break;
+				case 7:
+					System.out.println("case 7");
+					openInventory(player, swearing3);
+					break;
+				}
 			}
 		}
 	}

@@ -21,7 +21,7 @@ public class StaffInventoryPlayers implements Listener {
 		if (!(StaffUtils.isInStaffMode((Player) e.getWhoClicked())))
 			return;
 
-		if (!(e.getInventory().getTitle().equals(ChatColor.BLUE + "Players")))
+		if (!(e.getInventory().getTitle().contains(ChatColor.BLUE + "Players")))
 			return;
 
 		if (e.getCurrentItem() == null)
@@ -62,44 +62,44 @@ public class StaffInventoryPlayers implements Listener {
 
 		if (item.getType().equals(Material.BARRIER)) {
 			if (item.getItemMeta().getDisplayName().equals(ChatColor.GREEN + "Next")) {
-				if (e.getInventory().equals(StaffPlayers.i)) {
+				if (e.getInventory().getTitle().equals(StaffPlayers.i.getTitle())) {
 					openInventory(StaffPlayers.i2, player);
 					return;
 				}
 
-				if (e.getInventory().equals(StaffPlayers.i2)) {
+				if (e.getInventory().getTitle().equals(StaffPlayers.i2.getTitle())) {
 					openInventory(StaffPlayers.i3, player);
 					return;
 				}
-				
-				if (e.getInventory().equals(StaffPlayers.i3)) {
+
+				if (e.getInventory().getTitle().equals(StaffPlayers.i3.getTitle())) {
 					openInventory(StaffPlayers.i4, player);
 					return;
 				}
-				
-				if (e.getInventory().equals(StaffPlayers.i4)) {
+
+				if (e.getInventory().getTitle().equals(StaffPlayers.i4.getTitle())) {
 					openInventory(StaffPlayers.i5, player);
 					return;
 				}
 			}
 
 			if (item.getItemMeta().getDisplayName().equals(ChatColor.RED + "Previous")) {
-				if (e.getInventory().equals(StaffPlayers.i2)) {
+				if (e.getInventory().getTitle().equals(StaffPlayers.i2.getTitle())) {
 					openInventory(StaffPlayers.i, player);
 					return;
 				}
 
-				if (e.getInventory().equals(StaffPlayers.i3)) {
+				if (e.getInventory().getTitle().equals(StaffPlayers.i3.getTitle())) {
 					openInventory(StaffPlayers.i2, player);
 					return;
 				}
 
-				if (e.getInventory().equals(StaffPlayers.i4)) {
+				if (e.getInventory().getTitle().equals(StaffPlayers.i4.getTitle())) {
 					openInventory(StaffPlayers.i3, player);
 					return;
 				}
 
-				if (e.getInventory().equals(StaffPlayers.i5)) {
+				if (e.getInventory().getTitle().equals(StaffPlayers.i5.getTitle())) {
 					openInventory(StaffPlayers.i4, player);
 					return;
 				}
@@ -108,7 +108,6 @@ public class StaffInventoryPlayers implements Listener {
 	}
 
 	private void openInventory(Inventory inventory, Player player) {
-		player.closeInventory();
 		player.openInventory(inventory);
 	}
 }
