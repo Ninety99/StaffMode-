@@ -110,7 +110,7 @@ public class StaffCommands implements Listener, CommandExecutor {
 							return true;
 						}
 					}
-					
+
 					if (args[0].equalsIgnoreCase("chatrules")) {
 						addRules(StaffChatRulesInventory.getChatrule());
 						player.openInventory(StaffChatRulesInventory.getChatrule());

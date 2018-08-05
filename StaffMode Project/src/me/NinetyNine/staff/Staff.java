@@ -8,6 +8,7 @@ import lombok.Getter;
 import me.NinetyNine.staff.actionbar.StaffActionBar;
 import me.NinetyNine.staff.bminfo.StaffBMInfo;
 import me.NinetyNine.staff.chatrules.StaffChatRulesInventory;
+import me.NinetyNine.staff.chatrules.utils.DetailUtils;
 import me.NinetyNine.staff.chest.StaffChest;
 import me.NinetyNine.staff.chest.StaffInventoryChest;
 import me.NinetyNine.staff.chest.StaffPLChest;
@@ -111,6 +112,7 @@ public class Staff extends JavaPlugin {
 		pm.registerEvents(new StaffActionBar(), this);
 		
 		pm.registerEvents(new StaffChatRulesInventory(), this);
+		pm.registerEvents(new DetailUtils(), this);
 	}
 
 	private void clearAll() {
