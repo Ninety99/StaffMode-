@@ -33,6 +33,9 @@ public class StaffBMInfoHook implements StaffBMInfoInterface {
 		if (arg47 == null)
 			return 0;
 
+		if (arg47.size() == 0)
+			return 0;
+		
 		Map arg49 = (Map) arg47.stream().collect(Collectors.groupingBy(Violation::getType));
 
 		if (arg49 == null)
@@ -49,6 +52,9 @@ public class StaffBMInfoHook implements StaffBMInfoInterface {
 		ArrayList arg47 = GCBanz.sql.getHistory(target.getName());
 
 		if (arg47 == null)
+			return 0;
+
+		if (arg47.size() == 0)
 			return 0;
 
 		Map arg49 = (Map) arg47.stream().collect(Collectors.groupingBy(Violation::getType));
@@ -69,6 +75,9 @@ public class StaffBMInfoHook implements StaffBMInfoInterface {
 		if (arg47 == null)
 			return 0;
 
+		if (arg47.size() == 0)
+			return 0;
+
 		Map arg49 = (Map) arg47.stream().collect(Collectors.groupingBy(Violation::getType));
 
 		if (arg49 == null)
@@ -85,6 +94,9 @@ public class StaffBMInfoHook implements StaffBMInfoInterface {
 		ArrayList arg47 = GCBanz.sql.getHistory(target.getName());
 
 		if (arg47 == null)
+			return 0;
+
+		if (arg47.size() == 0)
 			return 0;
 
 		Map arg49 = (Map) arg47.stream().collect(Collectors.groupingBy(Violation::getType));
