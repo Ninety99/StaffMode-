@@ -135,10 +135,16 @@ public class StaffCommands implements Listener, CommandExecutor {
 					}
 
 					if (args[0].equalsIgnoreCase("chatrules")) {
-						addRules(StaffChatRulesInventory.getChatrule());
-						player.openInventory(StaffChatRulesInventory.getChatrule());
-						player.sendMessage(StaffUtils.format("&9Opening chat rule inventory.."));
-						return true;
+						if (player.hasPermission(StaffConfig.getString("permchatrules"))) {
+							addRules(StaffChatRulesInventory.getChatrule());
+							player.openInventory(StaffChatRulesInventory.getChatrule());
+							player.sendMessage(StaffUtils.format("&9Opening chat rule inventory.."));
+							return true;
+						} else {
+							player.sendMessage(
+									StaffUtils.format("&cYou do not have enough permissions to execute this command."));
+							return true;
+						}
 					}
 
 					if (!(args[0].equalsIgnoreCase("quitgmsp") || args[0].equalsIgnoreCase("chatclear"))) {

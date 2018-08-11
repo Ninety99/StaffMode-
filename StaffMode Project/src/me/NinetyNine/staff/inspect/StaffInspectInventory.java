@@ -20,10 +20,12 @@ public class StaffInspectInventory implements Listener {
 
 		if (!e.getInventory().getTitle().contains("'s inventory"))
 			return;
+
+		Player player = (Player) e.getWhoClicked();
 		
-		if (((Player) e.getWhoClicked()).getGameMode() != GameMode.CREATIVE) {
-			e.setCancelled(true);
-		} else
+		if (player.getGameMode() != GameMode.CREATIVE)
 			return;
+		else
+			e.setCancelled(true);
 	}
 }

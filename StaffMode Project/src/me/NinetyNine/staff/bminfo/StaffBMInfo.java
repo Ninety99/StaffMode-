@@ -13,19 +13,19 @@ public class StaffBMInfo implements Listener {
 	public void onPlayerInteractAtEntity(PlayerInteractAtEntityEvent e) {
 		if (!(StaffUtils.isInStaffMode(e.getPlayer())))
 			return;
-		
+
 		if (!(e.getRightClicked() instanceof Player))
 			return;
 
 		if (e.getRightClicked() == null)
 			return;
 
-		if (e.getPlayer().getItemInHand() == null) {
-			Player player = e.getPlayer();
-			Player clicked = (Player) e.getRightClicked();
-			player.performCommand("bminfo " + clicked.getName());
+		if (e.getPlayer().getItemInHand() != null)
 			return;
-		} else
-			return;
+
+		Player player = e.getPlayer();
+		Player clicked = (Player) e.getRightClicked();
+		player.performCommand("bminfo " + clicked.getName());
+		return;
 	}
 }

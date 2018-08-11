@@ -12,7 +12,6 @@ public class StaffConfig implements Listener {
 			return;
 
 		getConfig().options().copyDefaults(true);
-		
 	}
 
 	public static void set(String path, Object object) {

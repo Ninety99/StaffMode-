@@ -1,6 +1,5 @@
 package me.NinetyNine.staff.chest;
 
-import org.bukkit.Material;
 import org.bukkit.block.Chest;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -19,10 +18,7 @@ public class StaffInventoryChest implements Listener {
 
 		if (e.getCurrentItem() == null)
 			return;
-
-		if (e.getCurrentItem().getType() == Material.AIR)
-			return;
-
+		
 		if (e.getInventory().getType() != InventoryType.CHEST && e.getInventory() instanceof Chest)
 			return;
 

@@ -20,18 +20,17 @@ public class StaffInventoryClick implements Listener {
 
 		if (e.getView().getBottomInventory().getType() != InventoryType.PLAYER)
 			return;
+		
+		if (e.getCurrentItem() == null)
+			return;
 
 		if (((Player) e.getWhoClicked()).getGameMode() == GameMode.CREATIVE)
 			return;
-
-		if (e.getCurrentItem() == null)
+		
+		ItemStack current = e.getCurrentItem();
+		if (StaffItems.isStaffItem(current))
+			e.setCancelled(true);
+		else
 			return;
-		else {
-			ItemStack current = e.getCurrentItem();
-			if (StaffItems.isStaffItem(current))
-				e.setCancelled(true);
-			else
-				return;
-		}
 	}
 }
