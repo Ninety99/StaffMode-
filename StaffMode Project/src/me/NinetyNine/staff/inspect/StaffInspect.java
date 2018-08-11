@@ -44,10 +44,10 @@ public class StaffInspect implements Listener {
 		Player clicked = (Player) e.getRightClicked();
 
 		Inventory clickedInventory = Bukkit.createInventory(null, clicked.getInventory().getSize() + 9,
-				clicked.getName() + "'s inventory");
+				ChatColor.DARK_GRAY + clicked.getName() + "'s inventory");
 
 		for (ItemStack item : clicked.getInventory().getContents()) {
-			for (int i = 0; i < clickedInventory.getSize(); i++)
+			for (int i = 0; i < clicked.getInventory().getSize(); i++)
 				clickedInventory.setItem(i, item);
 		}
 
@@ -58,22 +58,22 @@ public class StaffInspect implements Listener {
 
 		List<String> lore = new ArrayList<String>();
 		for (PotionEffect effect : getPotionEffects(clicked)) {
-			lore.add(ChatColor.GOLD + effect.toString().replace("potion", "").replace("effect", ""));
+			lore.add(ChatColor.GOLD + "Potion Effect type(s):" + effect.getType().getName().substring(1).toLowerCase());
 			lore.add(ChatColor.AQUA + "Duration: " + effect.getDuration());
-			lore.add(ChatColor.RED + "Amplifier(Potion Level):" + effect.getAmplifier());
+			lore.add(ChatColor.AQUA + "Amplifier(Potion Level):" + effect.getAmplifier());
 		}
 
-		StaffItems.createItem(clickedInventory, 40, Material.GLASS_BOTTLE, "Active Potion Effects", lore);
+		StaffItems.createItem(clickedInventory, 40, Material.GLASS_BOTTLE, "Active Potion Effects", lore, false);
 
 		List<String> lore2 = new ArrayList<String>();
 		double health = clicked.getHealth() - 10.0;
 		lore2.add(ChatColor.RED + "Health: " + health + ChatColor.RED + "❤️");
 		lore2.add(ChatColor.RED + "Food Level: " + clicked.getFoodLevel());
 
-		StaffItems.createItem(clickedInventory, 42, Material.SPECKLED_MELON, ChatColor.GRAY + "Player Info", lore2);
+		StaffItems.createItem(clickedInventory, 42, Material.SPECKLED_MELON, ChatColor.GRAY + "Player Info", lore2,
+				false);
 
-		StaffItems.createItemWithBMInfo(clicked, clickedInventory, 44, Material.EMERALD,
-				ChatColor.RED + "BMInfo Status");
+		StaffItems.createItemWithBMInfo(clicked, clickedInventory, 44, Material.EMERALD, ChatColor.RED + "BMInfo");
 
 		player.openInventory(clickedInventory);
 		player.sendMessage(StaffUtils.format("&9Opening " + clicked.getName() + "'s inventory"));

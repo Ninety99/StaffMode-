@@ -48,10 +48,10 @@ public class StaffGMChanger implements Listener {
 
 		Inventory gmInventory = Bukkit.createInventory(null, 9, ChatColor.RED + "Gamemode Changer");
 
-		StaffItems.createItem(gmInventory, 1, Material.GRASS, ChatColor.GOLD + "Survival", null);
-		StaffItems.createItem(gmInventory, 3, Material.WOOL, ChatColor.WHITE + "Creative", null);
-		StaffItems.createItem(gmInventory, 5, Material.GLASS, ChatColor.DARK_BLUE + "Adventure", null);
-		StaffItems.createItem(gmInventory, 7, Material.EYE_OF_ENDER, ChatColor.DARK_RED + "Spectator", null);
+		StaffItems.createItem(gmInventory, 1, Material.GRASS, ChatColor.GOLD + "Survival", null, false);
+		StaffItems.createItem(gmInventory, 3, Material.WOOL, ChatColor.WHITE + "Creative", null, false);
+		StaffItems.createItem(gmInventory, 5, Material.GLASS, ChatColor.DARK_BLUE + "Adventure", null, false);
+		StaffItems.createItem(gmInventory, 7, Material.EYE_OF_ENDER, ChatColor.DARK_RED + "Spectator", null, false);
 
 		player.openInventory(gmInventory);
 	}

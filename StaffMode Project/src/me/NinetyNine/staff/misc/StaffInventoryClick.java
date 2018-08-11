@@ -6,7 +6,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.ItemStack;
 
+import me.NinetyNine.staff.utils.StaffItems;
 import me.NinetyNine.staff.utils.StaffUtils;
 
 public class StaffInventoryClick implements Listener {
@@ -25,8 +27,11 @@ public class StaffInventoryClick implements Listener {
 		if (e.getCurrentItem() == null)
 			return;
 		else {
-			e.setCancelled(true);
-			return;
+			ItemStack current = e.getCurrentItem();
+			if (StaffItems.isStaffItem(current))
+				e.setCancelled(true);
+			else
+				return;
 		}
 	}
 }

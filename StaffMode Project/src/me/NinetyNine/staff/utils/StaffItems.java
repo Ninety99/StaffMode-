@@ -13,10 +13,14 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
+import lombok.Getter;
 import me.NinetyNine.staff.bminfo.StaffBMInfoHook;
 import me.NinetyNine.staff.bminfo.StaffBMInfoInterface;
 
 public class StaffItems {
+
+	@Getter
+	private static List<ItemStack> staffItems = new ArrayList<ItemStack>();
 
 	public static void addStaffItems(Player player) {
 		addInspect(player);
@@ -28,17 +32,17 @@ public class StaffItems {
 	}
 
 	private static ItemStack addInspect(Player player) {
-		return createItem(player.getInventory(), 0, Material.STICK, ChatColor.GREEN + "Inspect", null);
+		return createItem(player.getInventory(), 0, Material.STICK, ChatColor.GREEN + "Inspect", null, true);
 	}
 
 	private static ItemStack addRandomTP(Player player) {
 		return createItem(player.getInventory(), 1, Material.BLAZE_ROD, ChatColor.AQUA + "Random TP",
-				Arrays.asList(" ", "Teleportation I"));
+				Arrays.asList(" ", "Teleportation I"), true);
 	}
 
 	private static ItemStack addBeacon(Player player) {
 		return createItem(player.getInventory(), 3, Material.BEACON,
-				ChatColor.RED + "Players " + ChatColor.GRAY + "(Right Click)", null);
+				ChatColor.RED + "Players " + ChatColor.GRAY + "(Right Click)", null, true);
 	}
 
 	private static ItemStack addVanishItem(Player player) {
@@ -53,11 +57,22 @@ public class StaffItems {
 
 	private static ItemStack addGMChanger(Player player) {
 		return createItem(player.getInventory(), 8, Material.WATCH,
-				ChatColor.DARK_BLUE + "Gamemode Changer " + ChatColor.GRAY + "(Right Click)", null);
+				ChatColor.DARK_BLUE + "Gamemode Changer " + ChatColor.GRAY + "(Right Click)", null, true);
+	}
+
+	public static boolean isStaffItem(ItemStack item) {
+		if (item.hasItemMeta()) {
+			for (ItemStack i : getStaffItems()) {
+				if (i == item)
+					return true;
+			}
+		} else
+			return false;
+		return false;
 	}
 
 	public static ItemStack createItem(Inventory inventory, int slot, Material item, String displayName,
-			List<String> lore) {
+			List<String> lore, boolean isStaff) {
 
 		ItemStack item2 = new ItemStack(item);
 		ItemMeta meta = item2.getItemMeta();
@@ -66,6 +81,11 @@ public class StaffItems {
 		item2.setItemMeta(meta);
 
 		inventory.setItem(slot, item2);
+
+		if (isStaff) {
+			if (!getStaffItems().contains(item2))
+				getStaffItems().add(item2);
+		}
 
 		return item2;
 	}
@@ -93,7 +113,7 @@ public class StaffItems {
 
 		StaffBMInfoInterface bminfo = new StaffBMInfoHook();
 
-		lore.add(ChatColor.AQUA + "BMInfo:");
+		lore.add(ChatColor.AQUA + target.getName());
 		lore.add(" ");
 		lore.add(ChatColor.RED + "Bans: " + ChatColor.GOLD + bminfo.getBans(target));
 		lore.add(ChatColor.RED + "Mutes: " + ChatColor.GOLD + bminfo.getMutes(target));
@@ -135,7 +155,7 @@ public class StaffItems {
 
 		meta.setLore(lore);
 		skull.setItemMeta(meta);
-		
+
 		if (!inventory.contains(skull))
 			inventory.addItem(skull);
 		else

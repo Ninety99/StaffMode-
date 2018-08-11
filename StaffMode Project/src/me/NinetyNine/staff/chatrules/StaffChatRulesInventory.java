@@ -92,52 +92,52 @@ public class StaffChatRulesInventory implements Listener {
 
 			if (displayName.equals(ChatColor.RED + "Flood")) {
 				System.out.println("is flood name");
-				StaffItems.createItem(flood, 2, Material.ARROW, ChatColor.GREEN + "Information", null);
-				StaffItems.createItem(flood, 5, Material.BOOK, ChatColor.RED + "Example", null);
+				StaffItems.createItem(flood, 2, Material.ARROW, ChatColor.GREEN + "Information", null, false);
+				StaffItems.createItem(flood, 5, Material.BOOK, ChatColor.RED + "Example", null, false);
 				openInventory(player, flood);
 				System.out.println("openinventory");
 			}
-			
+
 			if (displayName.equals(ChatColor.RED + "Spam")) {
 				System.out.println("is spam name");
-				StaffItems.createItem(spam, 2, Material.ARROW, ChatColor.GREEN + "Information", null);
-				StaffItems.createItem(spam, 5, Material.BOOK, ChatColor.RED + "Example", null);
+				StaffItems.createItem(spam, 2, Material.ARROW, ChatColor.GREEN + "Information", null, false);
+				StaffItems.createItem(spam, 5, Material.BOOK, ChatColor.RED + "Example", null, false);
 				openInventory(player, spam);
 			}
 			if (displayName.equals(ChatColor.RED + "Caps")) {
 				System.out.println("is caps name");
-				StaffItems.createItem(caps, 2, Material.ARROW, ChatColor.GREEN + "Information", null);
-				StaffItems.createItem(caps, 5, Material.BOOK, ChatColor.RED + "Example", null);
+				StaffItems.createItem(caps, 2, Material.ARROW, ChatColor.GREEN + "Information", null, false);
+				StaffItems.createItem(caps, 5, Material.BOOK, ChatColor.RED + "Example", null, false);
 				openInventory(player, caps);
 			}
 			if (displayName.equals(ChatColor.RED + "Hackusating")) {
 				System.out.println("is hackusating name");
-				StaffItems.createItem(hackusating, 2, Material.ARROW, ChatColor.GREEN + "Information", null);
-				StaffItems.createItem(hackusating, 5, Material.BOOK, ChatColor.RED + "Example", null);
+				StaffItems.createItem(hackusating, 2, Material.ARROW, ChatColor.GREEN + "Information", null, false);
+				StaffItems.createItem(hackusating, 5, Material.BOOK, ChatColor.RED + "Example", null, false);
 				openInventory(player, hackusating);
 			}
 			if (displayName.equals(ChatColor.RED + "Arguing")) {
 				System.out.println("is arguing name");
-				StaffItems.createItem(arguing, 2, Material.ARROW, ChatColor.GREEN + "Information", null);
-				StaffItems.createItem(arguing, 5, Material.BOOK, ChatColor.RED + "Example", null);
+				StaffItems.createItem(arguing, 2, Material.ARROW, ChatColor.GREEN + "Information", null, false);
+				StaffItems.createItem(arguing, 5, Material.BOOK, ChatColor.RED + "Example", null, false);
 				openInventory(player, arguing);
 			}
 			if (displayName.equals(ChatColor.RED + "ChatTrolling")) {
 				System.out.println("is chattrolling name");
-				StaffItems.createItem(chatTrolling, 2, Material.ARROW, ChatColor.GREEN + "Information", null);
-				StaffItems.createItem(chatTrolling, 5, Material.BOOK, ChatColor.RED + "Example", null);
+				StaffItems.createItem(chatTrolling, 2, Material.ARROW, ChatColor.GREEN + "Information", null, false);
+				StaffItems.createItem(chatTrolling, 5, Material.BOOK, ChatColor.RED + "Example", null, false);
 				openInventory(player, chatTrolling);
 			}
 			if (displayName.equals(ChatColor.RED + "Asking Staff for Items")) {
 				System.out.println("is askstaff name");
-				StaffItems.createItem(askStaff, 2, Material.ARROW, ChatColor.GREEN + "Information", null);
-				StaffItems.createItem(askStaff, 5, Material.BOOK, ChatColor.RED + "Example", null);
+				StaffItems.createItem(askStaff, 2, Material.ARROW, ChatColor.GREEN + "Information", null, false);
+				StaffItems.createItem(askStaff, 5, Material.BOOK, ChatColor.RED + "Example", null, false);
 				openInventory(player, askStaff);
 			}
 			if (displayName.equals(ChatColor.RED + "Advertisement")) {
 				System.out.println("is adv name");
-				StaffItems.createItem(adv, 2, Material.ARROW, ChatColor.GREEN + "Information", null);
-				StaffItems.createItem(adv, 5, Material.BOOK, ChatColor.RED + "Example", null);
+				StaffItems.createItem(adv, 2, Material.ARROW, ChatColor.GREEN + "Information", null, false);
+				StaffItems.createItem(adv, 5, Material.BOOK, ChatColor.RED + "Example", null, false);
 				openInventory(player, adv);
 			}
 			if (displayName.equals(ChatColor.RED + "Swearing")) {
@@ -145,46 +145,46 @@ public class StaffChatRulesInventory implements Listener {
 				StaffItems.createItemWithColor(swearing, Material.WOOL, 2, ChatColor.RED + "Swearing (Sev. 1)", 14);
 				StaffItems.createItemWithColor(swearing, Material.WOOL, 5, ChatColor.RED + "Swearing (Sev. 2)", 12);
 				StaffItems.createItemWithColor(swearing, Material.WOOL, 7, ChatColor.RED + "Swearing (Sev. 3)", 10);
-				StaffItems.createItem(swearing2, 2, Material.ARROW, ChatColor.GREEN + "Information", null);
-				StaffItems.createItem(swearing2, 5, Material.BOOK, ChatColor.RED + "Example", null);
-				StaffItems.createItem(swearing3, 2, Material.ARROW, ChatColor.GREEN + "Information", null);
-				StaffItems.createItem(swearing3, 5, Material.BOOK, ChatColor.RED + "Example", null);
+				StaffItems.createItem(swearing2, 2, Material.ARROW, ChatColor.GREEN + "Information", null, false);
+				StaffItems.createItem(swearing2, 5, Material.BOOK, ChatColor.RED + "Example", null, false);
+				StaffItems.createItem(swearing3, 2, Material.ARROW, ChatColor.GREEN + "Information", null, false);
+				StaffItems.createItem(swearing3, 5, Material.BOOK, ChatColor.RED + "Example", null, false);
 				openInventory(player, swearing);
 			}
 			if (displayName.equals(ChatColor.RED + "Server Disrespect")) {
 				System.out.println("is serverdis name");
-				StaffItems.createItem(serverdis, 2, Material.ARROW, ChatColor.GREEN + "Information", null);
-				StaffItems.createItem(serverdis, 5, Material.BOOK, ChatColor.RED + "Example", null);
+				StaffItems.createItem(serverdis, 2, Material.ARROW, ChatColor.GREEN + "Information", null, false);
+				StaffItems.createItem(serverdis, 5, Material.BOOK, ChatColor.RED + "Example", null, false);
 				openInventory(player, serverdis);
 			}
 			if (displayName.equals(ChatColor.RED + "Staff Disrespect")) {
 				System.out.println("is staffdis name");
-				StaffItems.createItem(staffdis, 2, Material.ARROW, ChatColor.GREEN + "Information", null);
-				StaffItems.createItem(staffdis, 5, Material.BOOK, ChatColor.RED + "Example", null);
+				StaffItems.createItem(staffdis, 2, Material.ARROW, ChatColor.GREEN + "Information", null, false);
+				StaffItems.createItem(staffdis, 5, Material.BOOK, ChatColor.RED + "Example", null, false);
 				openInventory(player, staffdis);
 			}
 			if (displayName.equals(ChatColor.RED + "Bypassing Chat Filter")) {
 				System.out.println("is bypasschat name");
-				StaffItems.createItem(bypassChat, 2, Material.ARROW, ChatColor.GREEN + "Information", null);
-				StaffItems.createItem(bypassChat, 5, Material.BOOK, ChatColor.RED + "Example", null);
+				StaffItems.createItem(bypassChat, 2, Material.ARROW, ChatColor.GREEN + "Information", null, false);
+				StaffItems.createItem(bypassChat, 5, Material.BOOK, ChatColor.RED + "Example", null, false);
 				openInventory(player, bypassChat);
 			}
 			if (displayName.equals(ChatColor.RED + "DDoS Threat")) {
 				System.out.println("is ddos name");
-				StaffItems.createItem(ddos, 2, Material.ARROW, ChatColor.GREEN + "Information", null);
-				StaffItems.createItem(ddos, 5, Material.BOOK, ChatColor.RED + "Example", null);
+				StaffItems.createItem(ddos, 2, Material.ARROW, ChatColor.GREEN + "Information", null, false);
+				StaffItems.createItem(ddos, 5, Material.BOOK, ChatColor.RED + "Example", null, false);
 				openInventory(player, ddos);
 			}
 			if (displayName.equals(ChatColor.RED + "Hack Threat")) {
 				System.out.println("is hack name");
-				StaffItems.createItem(hack, 2, Material.ARROW, ChatColor.GREEN + "Information", null);
-				StaffItems.createItem(hack, 5, Material.BOOK, ChatColor.RED + "Example", null);
+				StaffItems.createItem(hack, 2, Material.ARROW, ChatColor.GREEN + "Information", null, false);
+				StaffItems.createItem(hack, 5, Material.BOOK, ChatColor.RED + "Example", null, false);
 				openInventory(player, hack);
 			}
 			if (displayName.equals(ChatColor.RED + "Inappropriate Behavior")) {
 				System.out.println("is inapp b name");
-				StaffItems.createItem(inappb, 2, Material.ARROW, ChatColor.GREEN + "Information", null);
-				StaffItems.createItem(inappb, 5, Material.BOOK, ChatColor.RED + "Example", null);
+				StaffItems.createItem(inappb, 2, Material.ARROW, ChatColor.GREEN + "Information", null, false);
+				StaffItems.createItem(inappb, 5, Material.BOOK, ChatColor.RED + "Example", null, false);
 				openInventory(player, inappb);
 			}
 		}

@@ -140,14 +140,14 @@ public class StaffPlayers implements Listener {
 	}
 
 	private void addEmerald(Inventory inventory, List<String> lore) {
-		StaffItems.createItem(inventory, 49, Material.EMERALD, ChatColor.GOLD + "Info", lore);
+		StaffItems.createItem(inventory, 49, Material.EMERALD, ChatColor.GOLD + "Info", lore, false);
 	}
 
 	private void addPrevious(Inventory inventory) {
-		StaffItems.createItem(inventory, 45, Material.BARRIER, ChatColor.RED + "Previous", null);
+		StaffItems.createItem(inventory, 45, Material.BARRIER, ChatColor.RED + "Previous", null, false);
 	}
 
 	private void addNext(Inventory inventory) {
-		StaffItems.createItem(inventory, 53, Material.BARRIER, ChatColor.GREEN + "Next", null);
+		StaffItems.createItem(inventory, 53, Material.BARRIER, ChatColor.GREEN + "Next", null, false);
 	}
 }
