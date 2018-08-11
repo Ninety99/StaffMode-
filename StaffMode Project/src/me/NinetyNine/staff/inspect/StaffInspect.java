@@ -47,7 +47,7 @@ public class StaffInspect implements Listener {
 				ChatColor.DARK_GRAY + clicked.getName() + "'s inventory");
 
 		for (ItemStack item : clicked.getInventory().getContents()) {
-			for (int i = 0; i < clicked.getInventory().getSize(); i++)
+			for (int i = 0; i < clickedInventory.getSize(); i++)
 				clickedInventory.setItem(i, item);
 		}
 
@@ -59,7 +59,7 @@ public class StaffInspect implements Listener {
 		List<String> lore = new ArrayList<String>();
 		for (PotionEffect effect : getPotionEffects(clicked)) {
 			lore.add(ChatColor.GOLD + "Active Potion Effect(s):"
-					+ effect.getType().getName().substring(1).toLowerCase());
+					+ effect.getType().getName().substring(0, 1).toUpperCase());
 			lore.add(ChatColor.AQUA + "Duration: " + effect.getDuration());
 			lore.add(ChatColor.AQUA + "Amplifier(Potion Level):" + effect.getAmplifier());
 		}

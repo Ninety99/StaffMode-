@@ -67,52 +67,74 @@ public class Staff extends JavaPlugin {
 	private void registerListeners() {
 		PluginManager pm = Bukkit.getServer().getPluginManager();
 
-		pm.registerEvents(new StaffCommands(), this);
-
-		pm.registerEvents(new StaffJoin(), this);
-		pm.registerEvents(new StaffQuit(), this);
-		pm.registerEvents(new StaffDrop(), this);
-		pm.registerEvents(new StaffAntiEat(), this);
-		pm.registerEvents(new StaffPickupItem(), this);
-		pm.registerEvents(new StaffHitEvent(), this);
-		pm.registerEvents(new StaffBlockPlace(), this);
-		pm.registerEvents(new StaffChest(), this);
-		pm.registerEvents(new StaffInventoryClick(), this);
-		pm.registerEvents(new StaffBlockBreak(), this);
-		pm.registerEvents(new StaffDamage(), this);
-
-		pm.registerEvents(new StaffRandomTP(), this);
-		pm.registerEvents(new PlayerRandomTPJoin(), this);
-		pm.registerEvents(new PlayerRandomTPQuit(), this);
-
-		pm.registerEvents(new StaffVanish(), this);
 		pm.registerEvents(new PlayerVanishJoin(), this);
 		pm.registerEvents(new PlayerVanishQuit(), this);
+		pm.registerEvents(new PlayerRandomTPJoin(), this);
+		pm.registerEvents(new PlayerRandomTPQuit(), this);
+		pm.registerEvents(new DetailUtils(), this);
 
+		pm.registerEvents(new StaffActionBar(), this);
+		pm.registerEvents(new StaffAntiEat(), this);
 		pm.registerEvents(new StaffAntiNexus(), this);
-
+		pm.registerEvents(new StaffBlockBreak(), this);
+		pm.registerEvents(new StaffBlockPlace(), this);
 		pm.registerEvents(new StaffBMInfo(), this);
-
-		pm.registerEvents(new StaffInventoryGM(), this);
-		pm.registerEvents(new StaffGMChanger(), this);
-
+		pm.registerEvents(new StaffCommands(), this);
+		pm.registerEvents(new StaffConfig(), this);
+		pm.registerEvents(new StaffChatRulesInventory(), this);
+		pm.registerEvents(new StaffChest(), this);
+		pm.registerEvents(new StaffDamage(), this);
+		pm.registerEvents(new StaffDrop(), this);
 		pm.registerEvents(new StaffFly(), this);
-
+		pm.registerEvents(new StaffGMChanger(), this);
+		pm.registerEvents(new StaffHitEvent(), this);
 		pm.registerEvents(new StaffInspect(), this);
 		pm.registerEvents(new StaffInspectInventory(), this);
-
-		pm.registerEvents(new StaffPlayers(), this);
-		pm.registerEvents(new StaffInventoryPlayers(), this);
-
-		pm.registerEvents(new StaffPLChest(), this);
 		pm.registerEvents(new StaffInventoryChest(), this);
+		pm.registerEvents(new StaffInventoryClick(), this);
+		pm.registerEvents(new StaffInventoryGM(), this);
+		pm.registerEvents(new StaffInventoryPlayers(), this);
+		pm.registerEvents(new StaffJoin(), this);
+		pm.registerEvents(new StaffPlayers(), this);
+		pm.registerEvents(new StaffPickupItem(), this);
+		pm.registerEvents(new StaffPLChest(), this);
+		pm.registerEvents(new StaffQuit(), this);
+		pm.registerEvents(new StaffRandomTP(), this);
+		pm.registerEvents(new StaffVanish(), this);
 
-		pm.registerEvents(new StaffConfig(), this);
-		
-		pm.registerEvents(new StaffActionBar(), this);
-		
-		pm.registerEvents(new StaffChatRulesInventory(), this);
-		pm.registerEvents(new DetailUtils(), this);
+		// pm.registerEvents(new StaffCommands(), this);
+		// pm.registerEvents(new StaffJoin(), this);
+		// pm.registerEvents(new StaffQuit(), this);
+		// pm.registerEvents(new StaffDrop(), this);
+		// pm.registerEvents(new StaffAntiEat(), this);
+		// pm.registerEvents(new StaffPickupItem(), this);
+		// pm.registerEvents(new StaffHitEvent(), this);
+		// pm.registerEvents(new StaffBlockPlace(), this);
+		// pm.registerEvents(new StaffChest(), this);
+		// pm.registerEvents(new StaffInventoryClick(), this);
+		// pm.registerEvents(new StaffBlockBreak(), this);
+		// pm.registerEvents(new StaffDamage(), this);
+		// pm.registerEvents(new StaffRandomTP(), this);
+		// pm.registerEvents(new PlayerRandomTPJoin(), this);
+		// pm.registerEvents(new PlayerRandomTPQuit(), this);
+		// pm.registerEvents(new StaffVanish(), this);
+		// pm.registerEvents(new PlayerVanishJoin(), this);
+		// pm.registerEvents(new PlayerVanishQuit(), this);
+		// pm.registerEvents(new StaffAntiNexus(), this);
+		// pm.registerEvents(new StaffBMInfo(), this);
+		// pm.registerEvents(new StaffInventoryGM(), this);
+		// pm.registerEvents(new StaffGMChanger(), this);
+		// pm.registerEvents(new StaffFly(), this);
+		// pm.registerEvents(new StaffInspect(), this);
+		// pm.registerEvents(new StaffInspectInventory(), this);
+		// pm.registerEvents(new StaffPlayers(), this);
+		// pm.registerEvents(new StaffInventoryPlayers(), this);
+		// pm.registerEvents(new StaffPLChest(), this);
+		// pm.registerEvents(new StaffInventoryChest(), this);
+		// pm.registerEvents(new StaffConfig(), this);
+		// pm.registerEvents(new StaffActionBar(), this);
+		// pm.registerEvents(new StaffChatRulesInventory(), this);
+		// pm.registerEvents(new DetailUtils(), this);
 	}
 
 	private void clearAll() {
@@ -137,5 +159,6 @@ public class Staff extends JavaPlugin {
 	private void registerCommands() {
 		StaffCommands cmd = new StaffCommands();
 		getCommand("staff").setExecutor(cmd);
+		getCommand("unstaff").setExecutor(cmd);
 	}
 }

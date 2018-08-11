@@ -40,6 +40,9 @@ public class StaffBMInfoHook implements StaffBMInfoInterface {
 
 		if (arg49 == null)
 			return 0;
+		
+		if (arg49.size() == 0)
+			return 0;
 
 		int arg52 = ((ArrayList) arg49.get(Type.BAN)).size();
 		
@@ -60,6 +63,9 @@ public class StaffBMInfoHook implements StaffBMInfoInterface {
 		Map arg49 = (Map) arg47.stream().collect(Collectors.groupingBy(Violation::getType));
 
 		if (arg49 == null)
+			return 0;
+		
+		if (arg49.size() == 0)
 			return 0;
 
 		int arg52 = ((ArrayList) arg49.get(Type.MUTE)).size();
@@ -82,6 +88,9 @@ public class StaffBMInfoHook implements StaffBMInfoInterface {
 
 		if (arg49 == null)
 			return 0;
+		
+		if (arg49.size() == 0)
+			return 0;
 
 		int arg52 = ((ArrayList) arg49.get(Type.KICK)).size();
 		
@@ -102,6 +111,9 @@ public class StaffBMInfoHook implements StaffBMInfoInterface {
 		Map arg49 = (Map) arg47.stream().collect(Collectors.groupingBy(Violation::getType));
 
 		if (arg49 == null)
+			return 0;
+		
+		if (arg49.size() == 0)
 			return 0;
 
 		int arg52 = ((ArrayList) arg49.get(Type.WARN)).size();

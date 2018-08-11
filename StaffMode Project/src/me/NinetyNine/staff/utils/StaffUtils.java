@@ -60,6 +60,22 @@ public class StaffUtils {
 			return;
 	}
 
+	public static void unStaff(Player player) {
+		if (staff == null)
+			return;
+
+		if (!isInStaffMode(player))
+			return;
+
+		player.getInventory().clear();
+		player.getInventory().setContents(getStaff().get(player));
+		Flyer.removeFly(player);
+		StaffFly.getFly().remove(player);
+		Vanisher.unvanish(player);
+		getStaff().remove(player);
+		player.setGameMode(GameMode.SURVIVAL);
+	}
+
 	public static boolean isInStaffMode(Player player) {
 		if (getStaff().containsKey(player))
 			return true;
@@ -69,7 +85,7 @@ public class StaffUtils {
 
 	public static int getNumberOfContents(Inventory inventory) {
 		int itemNumber = 0;
-		
+
 		for (ItemStack items : inventory.getContents()) {
 			if (items != null)
 				itemNumber++;

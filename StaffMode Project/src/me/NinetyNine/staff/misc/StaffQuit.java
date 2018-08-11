@@ -21,7 +21,7 @@ public class StaffQuit implements Listener {
 			else {
 				for (Player all : Bukkit.getServer().getOnlinePlayers()) {
 					if (all.hasPermission("staffmode.toggle"))
-						all.sendMessage(StaffUtils
+						e.setQuitMessage(StaffUtils
 								.format("&98[&5Staff&8] &a" + e.getPlayer().getName() + " has left the server."));
 					else
 						return;

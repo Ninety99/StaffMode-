@@ -12,6 +12,10 @@ public class Vanisher {
 			if (!isInVanish(player)) {
 				for (Player all : Bukkit.getServer().getOnlinePlayers()) {
 					all.hidePlayer(player);
+					
+					if (all.hasPermission("staffmode.vanishbypass"))
+						all.showPlayer(player);
+					
 					StaffVanish.getVanishedPlayers().add(player);
 					if (!(StaffVanish.getAllPlayers().contains(all)))
 						StaffVanish.getAllPlayers().add(all);

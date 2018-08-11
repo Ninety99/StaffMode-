@@ -16,6 +16,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import lombok.Getter;
 import me.NinetyNine.staff.utils.Flyer;
+import me.NinetyNine.staff.utils.StaffItems;
 import me.NinetyNine.staff.utils.StaffUtils;
 
 public class StaffFly implements Listener {
@@ -39,7 +40,7 @@ public class StaffFly implements Listener {
 		if (e.getItem().getType() == Material.AIR)
 			return;
 
-		if (e.getItem().getType() != Material.COOKIE)
+		if (!(StaffItems.getStaffItems().contains(e.getItem())))
 			return;
 
 		if (!(e.getItem().getItemMeta().getDisplayName().equals(ChatColor.RED + "Fly")

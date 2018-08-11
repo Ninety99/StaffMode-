@@ -27,14 +27,14 @@ public class StaffCommands implements Listener, CommandExecutor {
 		if (!(sender instanceof Player)) {
 			if (cmd.getName().equalsIgnoreCase("staff")) {
 				if (args.length == 0) {
-					sender.sendMessage("The only command you can execute is staff chatclear!");
+					sender.sendMessage("The only /staff command you can execute is /staff chatclear!");
 					return true;
 				}
 
 				if (args.length == 1) {
 					if (args[0].equalsIgnoreCase("chatclear")) {
-						for (int i = 0; i < 100; i++) {
-							for (Player all : Bukkit.getServer().getOnlinePlayers()) {
+						for (Player all : Bukkit.getServer().getOnlinePlayers()) {
+							for (int i = 0; i < 100; i++) {
 								if (!all.hasPermission(StaffConfig.getString("permchatclear")))
 									all.sendMessage("\n");
 							}
@@ -45,7 +45,7 @@ public class StaffCommands implements Listener, CommandExecutor {
 						for (Player all : Bukkit.getServer().getOnlinePlayers()) {
 							if (all.hasPermission(StaffConfig.getString("permchatclear")))
 								all.sendMessage(ChatColor.GREEN
-										+ "You did not get the chat cleared because of your permissions!");
+										+ "You did not get your chat cleared because of your permissions!");
 						}
 						return true;
 					}
@@ -59,6 +59,27 @@ public class StaffCommands implements Listener, CommandExecutor {
 				if (!(args[0].equalsIgnoreCase("chatclear") || args[0].equalsIgnoreCase("chatrules"))) {
 					sender.sendMessage(ChatColor.RED + "Invalid command.");
 					return true;
+				}
+			}
+
+			if (cmd.getName().equalsIgnoreCase("unstaff")) {
+				if (args.length == 0) {
+					sender.sendMessage(ChatColor.RED + "Usage: /unstaff <player>");
+					return true;
+				}
+
+				@SuppressWarnings("deprecation")
+				Player target = Bukkit.getPlayer(args[0]);
+				if (target == null)
+					sender.sendMessage(ChatColor.RED + "Player cannot be found!");
+				else {
+					if (StaffUtils.isInStaffMode(target)) {
+						StaffUtils.unStaff(target);
+						return true;
+					} else {
+						sender.sendMessage(ChatColor.RED + target.getName() + " is not in Staff mode!");
+						return true;
+					}
 				}
 			}
 		} else {
@@ -78,12 +99,14 @@ public class StaffCommands implements Listener, CommandExecutor {
 				if (args.length == 1) {
 					if (args[0].equalsIgnoreCase("quitgmsp")) {
 						if (player.hasPermission(StaffConfig.getString("gmchangerpermgm0"))) {
-							if (player.getGameMode() != GameMode.SURVIVAL) {
+							if (player.getGameMode() != GameMode.SURVIVAL
+									&& player.getGameMode() == GameMode.SPECTATOR) {
 								player.setGameMode(GameMode.SURVIVAL);
 								player.sendMessage(StaffUtils.format("&9Changed gamemode to SURVIVAL"));
 								return true;
 							} else {
-								player.sendMessage(StaffUtils.format("&cYou are already in SURVIVAL!"));
+								player.sendMessage(StaffUtils
+										.format("&cYou are already in SURVIVAL || You are not on &bSPECTATOR &cmode!"));
 								return true;
 							}
 						} else {
@@ -121,6 +144,28 @@ public class StaffCommands implements Listener, CommandExecutor {
 					if (!(args[0].equalsIgnoreCase("quitgmsp") || args[0].equalsIgnoreCase("chatclear"))) {
 						player.sendMessage(StaffUtils.format("&cInvalid command."));
 						return true;
+					}
+
+					if (cmd.getName().equalsIgnoreCase("unstaff")) {
+						if (args.length == 0) {
+							player.sendMessage(StaffUtils.format("&cUsage: /unstaff <player>"));
+							return true;
+						}
+
+						@SuppressWarnings("deprecation")
+						Player target = Bukkit.getPlayer(args[0]);
+						if (target == null)
+							player.sendMessage(StaffUtils.format("&cPlayer cannot be found!"));
+						else {
+							if (StaffUtils.isInStaffMode(target)) {
+								StaffUtils.unStaff(target);
+								return true;
+							} else {
+								sender.sendMessage(
+										StaffUtils.format("&c " + target.getName() + " is not in Staff mode!"));
+								return true;
+							}
+						}
 					}
 				}
 			}

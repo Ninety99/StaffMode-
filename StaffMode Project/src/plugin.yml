@@ -9,8 +9,20 @@ commands:
     usage: /<command>
     description: Toggles staff mode.
     permissions: staffmode.toggle
+  unstaff:
+    usage: /<command>
+    description: Unstaffs a player.
+    permissions: staffmode.unstaff
 permissions:
   staffmode.toggle:
     default: op
   staffmode.gmsp:
+    default: op
+  staffmode.unstaff:
+    default: op
+  staffmode.joinbypass:
+    default: op
+  staffmode.quitbypass:
+    default: op
+  staffmode.vanishbypass:
     default: op

@@ -21,7 +21,7 @@ public class StaffJoin implements Listener {
 			else {
 				for (Player all : Bukkit.getServer().getOnlinePlayers()) {
 					if (all.hasPermission("staffmode.toggle"))
-						all.sendMessage(StaffUtils
+						e.setJoinMessage(StaffUtils
 								.format("&98[&5Staff&8] &a" + e.getPlayer().getName() + " has joined the server."));
 					else
 						return;
