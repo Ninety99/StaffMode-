@@ -97,6 +97,7 @@ public class StaffChatRulesInventory implements Listener {
 				openInventory(player, flood);
 				System.out.println("openinventory");
 			}
+			
 			if (displayName.equals(ChatColor.RED + "Spam")) {
 				System.out.println("is spam name");
 				StaffItems.createItem(spam, 2, Material.ARROW, ChatColor.GREEN + "Information", null);
