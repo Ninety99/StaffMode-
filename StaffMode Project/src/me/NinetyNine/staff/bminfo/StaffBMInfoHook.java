@@ -29,7 +29,7 @@ public class StaffBMInfoHook implements StaffBMInfoInterface {
 	@Override
 	public int getBans(OfflinePlayer target) {
 		ArrayList arg47 = GCBanz.sql.getHistory(target.getName());
-
+		
 		if (arg47 == null)
 			return 0;
 

@@ -12,6 +12,8 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.guildcraft.gcbanz.GCBanz;
+import org.guildcraft.gcbanz.data.Type;
 
 import lombok.Getter;
 import me.NinetyNine.staff.bminfo.StaffBMInfoHook;
@@ -115,6 +117,9 @@ public class StaffItems {
 
 		lore.add(ChatColor.AQUA + target.getName());
 		lore.add(" ");
+		lore.add(ChatColor.RED + "Active: ");
+		lore.add(ChatColor.RED + "Ban: " + GCBanz.sql.getVl(Type.BAN, target.getName()));
+		lore.add(ChatColor.RED + "Mute: " + GCBanz.sql.getVl(Type.MUTE, target.getName()));
 		lore.add(ChatColor.RED + "Bans: " + ChatColor.GOLD + bminfo.getBans(target));
 		lore.add(ChatColor.RED + "Mutes: " + ChatColor.GOLD + bminfo.getMutes(target));
 		lore.add(ChatColor.RED + "Kicks: " + ChatColor.GOLD + bminfo.getKicks(target));

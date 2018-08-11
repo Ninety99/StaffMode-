@@ -58,7 +58,8 @@ public class StaffInspect implements Listener {
 
 		List<String> lore = new ArrayList<String>();
 		for (PotionEffect effect : getPotionEffects(clicked)) {
-			lore.add(ChatColor.GOLD + "Potion Effect type(s):" + effect.getType().getName().substring(1).toLowerCase());
+			lore.add(ChatColor.GOLD + "Active Potion Effect(s):"
+					+ effect.getType().getName().substring(1).toLowerCase());
 			lore.add(ChatColor.AQUA + "Duration: " + effect.getDuration());
 			lore.add(ChatColor.AQUA + "Amplifier(Potion Level):" + effect.getAmplifier());
 		}
@@ -67,7 +68,7 @@ public class StaffInspect implements Listener {
 
 		List<String> lore2 = new ArrayList<String>();
 		double health = clicked.getHealth() - 10.0;
-		lore2.add(ChatColor.RED + "Health: " + health + ChatColor.RED + "❤️");
+		lore2.add(ChatColor.RED + "Health: " + health);
 		lore2.add(ChatColor.RED + "Food Level: " + clicked.getFoodLevel());
 
 		StaffItems.createItem(clickedInventory, 42, Material.SPECKLED_MELON, ChatColor.GRAY + "Player Info", lore2,
