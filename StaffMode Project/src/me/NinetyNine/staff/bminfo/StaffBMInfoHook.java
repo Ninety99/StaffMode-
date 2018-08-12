@@ -28,6 +28,9 @@ public class StaffBMInfoHook implements StaffBMInfoInterface {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public int getBans(OfflinePlayer target) {
+		if (target == null)
+			return 0;
+		
 		ArrayList arg47 = GCBanz.sql.getHistory(target.getName());
 		
 		if (arg47 == null)
@@ -52,6 +55,9 @@ public class StaffBMInfoHook implements StaffBMInfoInterface {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public int getMutes(OfflinePlayer target) {
+		if (target == null)
+			return 0;
+		
 		ArrayList arg47 = GCBanz.sql.getHistory(target.getName());
 
 		if (arg47 == null)
@@ -76,6 +82,9 @@ public class StaffBMInfoHook implements StaffBMInfoInterface {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public int getKicks(OfflinePlayer target) {
+		if (target == null)
+			return 0;
+		
 		ArrayList arg47 = GCBanz.sql.getHistory(target.getName());
 
 		if (arg47 == null)
@@ -100,6 +109,9 @@ public class StaffBMInfoHook implements StaffBMInfoInterface {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public int getWarns(OfflinePlayer target) {
+		if (target == null)
+			return 0;
+		
 		ArrayList arg47 = GCBanz.sql.getHistory(target.getName());
 
 		if (arg47 == null)

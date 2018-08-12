@@ -105,7 +105,8 @@ public class ExampleUtils {
 			+ "Any dirty boys wanna skype and be naughty?" + a + example + "I want to rub your humps!!";
 
 	public static void sendExample(Player player, ExampleType type) {
-		String prefixe = GRAY + "[" + GREEN + "ChatRules" + GRAY + "]" + DARK_GRAY + " Example of " + type.name();
+		String prefixe = GRAY + "[" + GREEN + "ChatRules" + GRAY + "]" + DARK_GRAY + " Example of "
+				+ type.name().replace("_", " ");
 		if (type == ExampleType.FLOOD)
 			player.sendMessage(prefixe + ":" + a + getExampleflood());
 		else if (type == ExampleType.SPAM)

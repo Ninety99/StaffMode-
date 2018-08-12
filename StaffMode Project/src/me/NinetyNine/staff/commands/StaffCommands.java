@@ -151,27 +151,31 @@ public class StaffCommands implements Listener, CommandExecutor {
 						player.sendMessage(StaffUtils.format("&cInvalid command."));
 						return true;
 					}
+				}
+			}
 
-					if (cmd.getName().equalsIgnoreCase("unstaff")) {
-						if (args.length == 0) {
-							player.sendMessage(StaffUtils.format("&cUsage: /unstaff <player>"));
-							return true;
-						}
+			if (cmd.getName().equalsIgnoreCase("unstaff")) {
+				if (!player.hasPermission("staffmode.unstaff")) {
+					player.sendMessage(StaffUtils.format("&cYou cannot execute this command!"));
+					return true;
+				}
 
-						@SuppressWarnings("deprecation")
-						Player target = Bukkit.getPlayer(args[0]);
-						if (target == null)
-							player.sendMessage(StaffUtils.format("&cPlayer cannot be found!"));
-						else {
-							if (StaffUtils.isInStaffMode(target)) {
-								StaffUtils.unStaff(target);
-								return true;
-							} else {
-								sender.sendMessage(
-										StaffUtils.format("&c " + target.getName() + " is not in Staff mode!"));
-								return true;
-							}
-						}
+				if (args.length == 0) {
+					player.sendMessage(StaffUtils.format("&cUsage: /unstaff <player>"));
+					return true;
+				}
+
+				@SuppressWarnings("deprecation")
+				Player target = Bukkit.getPlayer(args[0]);
+				if (target == null)
+					player.sendMessage(StaffUtils.format("&cPlayer cannot be found!"));
+				else {
+					if (StaffUtils.isInStaffMode(target)) {
+						StaffUtils.unStaff(target);
+						return true;
+					} else {
+						sender.sendMessage(StaffUtils.format("&c " + target.getName() + " is not in Staff mode!"));
+						return true;
 					}
 				}
 			}
@@ -209,21 +213,41 @@ public class StaffCommands implements Listener, CommandExecutor {
 	}
 
 	private void addRules(Inventory inventory) {
-		StaffItems.createItem(inventory, 0, Material.PAPER, ChatColor.RED + "Flood", null, false);
+		StaffItems.createItem(inventory, 0, Material.PAPER, ChatColor.RED + "Flood", null);
 		StaffItems.createGlassWithColor(inventory, 1, " ", (short) 5);
-		StaffItems.createItem(inventory, 2, Material.PAPER, ChatColor.RED + "Spam", null, false);
-		StaffItems.createItem(inventory, 4, Material.PAPER, ChatColor.RED + "Caps", null, false);
-		StaffItems.createItem(inventory, 6, Material.PAPER, ChatColor.RED + "Hackusating", null, false);
-		StaffItems.createItem(inventory, 8, Material.PAPER, ChatColor.RED + "Arguing", null, false);
-		StaffItems.createItem(inventory, 10, Material.PAPER, ChatColor.RED + "ChatTrolling", null, false);
-		StaffItems.createItem(inventory, 12, Material.PAPER, ChatColor.RED + "Asking Staff for Items", null, false);
-		StaffItems.createItem(inventory, 14, Material.PAPER, ChatColor.RED + "Advertisement", null, false);
-		StaffItems.createItem(inventory, 16, Material.PAPER, ChatColor.RED + "Swearing", null, false);
-		StaffItems.createItem(inventory, 18, Material.PAPER, ChatColor.RED + "Server Disrespect", null, false);
-		StaffItems.createItem(inventory, 20, Material.PAPER, ChatColor.RED + "Staff Disrespect", null, false);
-		StaffItems.createItem(inventory, 22, Material.PAPER, ChatColor.RED + "Bypassing Chat Filter", null, false);
-		StaffItems.createItem(inventory, 24, Material.PAPER, ChatColor.RED + "DDoS Threat", null, false);
-		StaffItems.createItem(inventory, 26, Material.PAPER, ChatColor.RED + "Hack Threat", null, false);
-		StaffItems.createItem(inventory, 27, Material.PAPER, ChatColor.RED + "Inappropriate Behavior", null, false);
+		StaffItems.createItem(inventory, 2, Material.PAPER, ChatColor.RED + "Spam", null);
+		StaffItems.createGlassWithColor(inventory, 3, " ", (short) 5);
+		StaffItems.createItem(inventory, 4, Material.PAPER, ChatColor.RED + "Caps", null);
+		StaffItems.createGlassWithColor(inventory, 5, " ", (short) 5);
+		StaffItems.createItem(inventory, 6, Material.PAPER, ChatColor.RED + "Hackusating", null);
+		StaffItems.createGlassWithColor(inventory, 7, " ", (short) 5);
+		StaffItems.createItem(inventory, 8, Material.PAPER, ChatColor.RED + "Arguing", null);
+		StaffItems.createGlassWithColor(inventory, 9, " ", (short) 5);
+		StaffItems.createItem(inventory, 10, Material.PAPER, ChatColor.RED + "ChatTrolling", null);
+		StaffItems.createGlassWithColor(inventory, 11, " ", (short) 5);
+		StaffItems.createItem(inventory, 12, Material.PAPER, ChatColor.RED + "Asking Staff for Items", null);
+		StaffItems.createGlassWithColor(inventory, 13, " ", (short) 5);
+		StaffItems.createItem(inventory, 14, Material.PAPER, ChatColor.RED + "Advertisement", null);
+		StaffItems.createGlassWithColor(inventory, 15, " ", (short) 5);
+		StaffItems.createItem(inventory, 16, Material.PAPER, ChatColor.RED + "Swearing", null);
+		StaffItems.createGlassWithColor(inventory, 17, " ", (short) 5);
+		StaffItems.createItem(inventory, 18, Material.PAPER, ChatColor.RED + "Server Disrespect", null);
+		StaffItems.createGlassWithColor(inventory, 19, " ", (short) 5);
+		StaffItems.createItem(inventory, 20, Material.PAPER, ChatColor.RED + "Staff Disrespect", null);
+		StaffItems.createGlassWithColor(inventory, 21, " ", (short) 5);
+		StaffItems.createItem(inventory, 22, Material.PAPER, ChatColor.RED + "Bypassing Chat Filter", null);
+		StaffItems.createGlassWithColor(inventory, 23, " ", (short) 5);
+		StaffItems.createItem(inventory, 24, Material.PAPER, ChatColor.RED + "DDoS Threat", null);
+		StaffItems.createGlassWithColor(inventory, 25, " ", (short) 5);
+		StaffItems.createItem(inventory, 26, Material.PAPER, ChatColor.RED + "Hack Threat", null);
+		StaffItems.createGlassWithColor(inventory, 27, " ", (short) 0);
+		StaffItems.createGlassWithColor(inventory, 28, " ", (short) 8);
+		StaffItems.createGlassWithColor(inventory, 29, " ", (short) 7);
+		StaffItems.createGlassWithColor(inventory, 30, " ", (short) 15);
+		StaffItems.createItem(inventory, 31, Material.PAPER, ChatColor.RED + "Inappropriate Behavior", null);
+		StaffItems.createGlassWithColor(inventory, 32, " ", (short) 15);
+		StaffItems.createGlassWithColor(inventory, 33, " ", (short) 7);
+		StaffItems.createGlassWithColor(inventory, 34, " ", (short) 8);
+		StaffItems.createGlassWithColor(inventory, 35, " ", (short) 0);
 	}
 }

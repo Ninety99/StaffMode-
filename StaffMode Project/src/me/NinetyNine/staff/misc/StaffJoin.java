@@ -1,6 +1,5 @@
 package me.NinetyNine.staff.misc;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -19,7 +18,7 @@ public class StaffJoin implements Listener {
 			if (e.getPlayer().hasPermission("staffmode.joinbypass"))
 				return;
 			else {
-				for (Player all : Bukkit.getServer().getOnlinePlayers()) {
+				for (Player all : StaffUtils.getOnlinePlayers()) {
 					if (all.hasPermission("staffmode.toggle"))
 						e.setJoinMessage(StaffUtils
 								.format("&98[&5Staff&8] &a" + e.getPlayer().getName() + " has joined the server."));

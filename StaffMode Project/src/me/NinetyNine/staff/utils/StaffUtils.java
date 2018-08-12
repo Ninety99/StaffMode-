@@ -1,7 +1,10 @@
 package me.NinetyNine.staff.utils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
@@ -76,11 +79,21 @@ public class StaffUtils {
 		player.setGameMode(GameMode.SURVIVAL);
 	}
 
+	public static List<Player> getOnlinePlayers() {
+		List<Player> all = new ArrayList<Player>();
+		
+		for (Player players : Bukkit.getServer().getOnlinePlayers()){
+			if (all.contains(players))
+				return null;
+			else
+				all.add(players);
+		}
+		
+		return all;
+	}
+
 	public static boolean isInStaffMode(Player player) {
-		if (getStaff().containsKey(player))
-			return true;
-		else
-			return false;
+		return getStaff().containsKey(player);
 	}
 
 	public static int getNumberOfContents(Inventory inventory) {

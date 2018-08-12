@@ -57,22 +57,20 @@ public class StaffPlayers implements Listener {
 	}
 
 	public void addStuff(Player player) {
-		for (Player all : Bukkit.getServer().getOnlinePlayers()) {
-			if (StaffUtils.getNumberOfContents(i) <= 54)
-				StaffItems.createSkullsWithBMInfo(i, all);
+		if (StaffUtils.getNumberOfContents(i) <= 54)
+			StaffItems.addSkullsWithBMInfo(i);
+		else {
+			if (StaffUtils.getNumberOfContents(i2) <= 54)
+				StaffItems.addSkullsWithBMInfo(i2);
 			else {
-				if (StaffUtils.getNumberOfContents(i2) <= 54)
-					StaffItems.createSkullsWithBMInfo(i2, all);
+				if (StaffUtils.getNumberOfContents(i3) <= 54)
+					StaffItems.addSkullsWithBMInfo(i3);
 				else {
-					if (StaffUtils.getNumberOfContents(i3) <= 54)
-						StaffItems.createSkullsWithBMInfo(i3, all);
+					if (StaffUtils.getNumberOfContents(i4) <= 54)
+						StaffItems.addSkullsWithBMInfo(i4);
 					else {
-						if (StaffUtils.getNumberOfContents(i4) <= 54)
-							StaffItems.createSkullsWithBMInfo(i4, all);
-						else {
-							if (StaffUtils.getNumberOfContents(i5) <= 54)
-								StaffItems.createSkullsWithBMInfo(i5, all);
-						}
+						if (StaffUtils.getNumberOfContents(i5) <= 54)
+							StaffItems.addSkullsWithBMInfo(i5);
 					}
 				}
 			}
@@ -140,14 +138,14 @@ public class StaffPlayers implements Listener {
 	}
 
 	private void addEmerald(Inventory inventory, List<String> lore) {
-		StaffItems.createItem(inventory, 49, Material.EMERALD, ChatColor.GOLD + "Info", lore, false);
+		StaffItems.createItem(inventory, 49, Material.EMERALD, ChatColor.GOLD + "Info", lore);
 	}
 
 	private void addPrevious(Inventory inventory) {
-		StaffItems.createItem(inventory, 45, Material.BARRIER, ChatColor.RED + "Previous", null, false);
+		StaffItems.createItem(inventory, 45, Material.BARRIER, ChatColor.RED + "Previous", null);
 	}
 
 	private void addNext(Inventory inventory) {
-		StaffItems.createItem(inventory, 53, Material.BARRIER, ChatColor.GREEN + "Next", null, false);
+		StaffItems.createItem(inventory, 53, Material.BARRIER, ChatColor.GREEN + "Next", null);
 	}
 }

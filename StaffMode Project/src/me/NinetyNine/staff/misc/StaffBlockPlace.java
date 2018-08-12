@@ -1,6 +1,5 @@
 package me.NinetyNine.staff.misc;
 
-import org.bukkit.GameMode;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
@@ -16,12 +15,8 @@ public class StaffBlockPlace implements Listener {
 			return;
 
 		if (StaffItems.isStaffItem(e.getItemInHand())) {
-			if (e.getPlayer().getGameMode() != GameMode.CREATIVE) {
-				e.setCancelled(true);
-				return;
-			} else
-				return;
-		} else
+			e.setCancelled(true);
 			return;
+		}
 	}
 }

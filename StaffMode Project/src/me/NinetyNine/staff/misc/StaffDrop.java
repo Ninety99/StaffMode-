@@ -16,17 +16,15 @@ public class StaffDrop implements Listener {
 		if (!StaffUtils.isInStaffMode(e.getPlayer()))
 			return;
 		else {
+			ItemStack item = e.getItemDrop().getItemStack();
+
 			if (e.getPlayer().getGameMode() != GameMode.CREATIVE) {
 				e.setCancelled(true);
 				e.getPlayer().sendMessage(StaffUtils.format("&cYou cannot drop items whilst in Staff mode!"));
-				return;
 			} else {
-				ItemStack item = e.getItemDrop().getItemStack();
-
 				if (StaffItems.isStaffItem(item)) {
 					e.setCancelled(true);
 					e.getPlayer().sendMessage(StaffUtils.format("&cYou cannot drop that item!"));
-					return;
 				}
 			}
 		}

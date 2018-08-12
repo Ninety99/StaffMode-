@@ -8,36 +8,18 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
-import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 
 import lombok.Getter;
 import me.NinetyNine.staff.utils.StaffUtils;
+import me.NinetyNine.staff.utils.interfaces.StaffInteractAbility;
 
-public class StaffRandomTP implements Listener {
+public class StaffRandomTP implements StaffInteractAbility {
 	@Getter
 	private static List<Player> all = new ArrayList<Player>();
 
-	@EventHandler
-	public void onPlayerInteract(PlayerInteractEvent e) {
-		if (e.getAction() != Action.RIGHT_CLICK_AIR && e.getAction() != Action.RIGHT_CLICK_BLOCK)
-			return;
-		if (e.getItem() == null)
-			return;
-
-		if (e.getItem().getType() != Material.BLAZE_ROD)
-			return;
-
-		if (!e.getItem().hasItemMeta())
-			return;
-
-		if (e.getItem().getItemMeta().getDisplayName() == ChatColor.AQUA + "Random TP")
-			return;
-
-		Player player = e.getPlayer();
-
+	@Override
+	public void performAbility(Player player, ItemStack item) {
 		for (Player p : Bukkit.getServer().getOnlinePlayers())
 			getAll().add(p);
 
@@ -54,12 +36,23 @@ public class StaffRandomTP implements Listener {
 				player.teleport(target);
 				player.sendMessage(StaffUtils.format("&7Randomly teleported to " + target.getName()));
 				return;
-			}
-			return;
+			} else
+				return;
 		}
+	}
+
+	@Override
+	public ItemStack getAbilityItem() {
+		return new ItemStack(Material.BLAZE_ROD);
+	}
+
+	@Override
+	public String getAbilityName() {
+		return ChatColor.AQUA + "Random TP";
 	}
 
 	public static void clear() {
 		getAll().clear();
 	}
+
 }

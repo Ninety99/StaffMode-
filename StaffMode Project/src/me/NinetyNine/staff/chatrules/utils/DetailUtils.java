@@ -47,8 +47,8 @@ public class DetailUtils implements Listener {
 	}
 
 	private static String getDetails(String type) {
-		return ChatColor.translateAlternateColorCodes('&', "&9Details of: " + type + "\n"
-				+ StaffConfig.getString("chatrules." + type.replace("_", "").toLowerCase()));
+		return ChatColor.translateAlternateColorCodes('&', "&9Details of: " + ("" + type.charAt(0)).toUpperCase()
+				+ type.substring(1) + "\n" + StaffConfig.getString("chatrules." + type.replace("_", "").toLowerCase()));
 
 	}
 
