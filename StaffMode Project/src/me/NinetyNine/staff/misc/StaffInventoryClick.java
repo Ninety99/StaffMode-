@@ -1,6 +1,5 @@
 package me.NinetyNine.staff.misc;
 
-import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -22,9 +21,6 @@ public class StaffInventoryClick implements Listener {
 			return;
 		
 		if (e.getCurrentItem() == null)
-			return;
-
-		if (((Player) e.getWhoClicked()).getGameMode() == GameMode.CREATIVE)
 			return;
 		
 		ItemStack current = e.getCurrentItem();

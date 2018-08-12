@@ -318,9 +318,7 @@ public class StaffChatRulesInventory implements Listener {
 		}
 
 		if (e.getInventory().getTitle().equals(ChatColor.RED + "Swearing")) {
-			System.out.println("is swearing name");
-			if (item.getType() == Material.WOOL) {
-				System.out.println("is wool");
+			if (item.getType().equals(Material.WOOL)) {
 				switch (item.getData().getData()) {
 				default:
 					break;
@@ -342,7 +340,6 @@ public class StaffChatRulesInventory implements Listener {
 	}
 
 	private void openInventory(Player player, Inventory inventory) {
-		player.closeInventory();
 		player.openInventory(inventory);
 	}
 }
