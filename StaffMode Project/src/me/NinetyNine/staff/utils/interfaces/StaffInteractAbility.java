@@ -11,12 +11,6 @@ import me.NinetyNine.staff.utils.StaffItems;
 import me.NinetyNine.staff.utils.StaffUtils;
 
 public interface StaffInteractAbility extends Listener {
-
-	/*
-	 * Added this. I need to fix bugs first before trying to implement this.
-	 * (28-7-2018)
-	 */
-
 	public void performAbility(Player player, ItemStack item);
 
 	public ItemStack getAbilityItem();

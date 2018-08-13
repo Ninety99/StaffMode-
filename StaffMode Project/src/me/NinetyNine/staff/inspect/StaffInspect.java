@@ -18,6 +18,7 @@ import me.NinetyNine.staff.utils.interfaces.StaffEntityInteractAbility;;
 public class StaffInspect implements StaffEntityInteractAbility {
 	@Override
 	public void performAbility(Player player, ItemStack item, Player clicked) {
+		System.out.println("performing Ability");
 		Inventory clickedInventory = Bukkit.createInventory(null, clicked.getInventory().getSize() + 9,
 				ChatColor.DARK_GRAY + clicked.getName() + "'s inventory");
 

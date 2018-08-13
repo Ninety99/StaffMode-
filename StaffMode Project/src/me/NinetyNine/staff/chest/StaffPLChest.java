@@ -24,9 +24,9 @@ import me.NinetyNine.staff.utils.StaffUtils;
 public class StaffPLChest implements Listener {
 
 	/*
-	 * Props to a guy on bukkit.org site, helped me a lot! 
+	 * Props to a guy on bukkit.org site, helped me a lot!
 	 */
-	
+
 	public static void setupAnimationListener() {
 		ProtocolLibrary.getProtocolManager().addPacketListener(
 				new PacketAdapter(Staff.getInstance(), ListenerPriority.HIGH, PacketType.Play.Server.BLOCK_ACTION) {
@@ -68,10 +68,14 @@ public class StaffPLChest implements Listener {
 			@Override
 			public void onPacketSending(PacketEvent e) {
 				if (e.getPacketType() == PacketType.Play.Server.NAMED_SOUND_EFFECT) {
-					Player listener = e.getPlayer();
 					if (!(e.getPacket().getStrings().read(0).equalsIgnoreCase("random.chestopen")
 							|| e.getPacket().getStrings().read(0).equalsIgnoreCase("random.chestclosed")))
 						return;
+					Player listener = e.getPlayer();
+
+					if (!(StaffUtils.isInStaffMode(listener)))
+						return;
+
 					Location loc = new Location(listener.getWorld(), e.getPacket().getIntegers().read(0) / 8,
 							e.getPacket().getIntegers().read(1) / 8, e.getPacket().getIntegers().read(2) / 8);
 					Block b = listener.getWorld().getBlockAt(loc);
@@ -87,13 +91,20 @@ public class StaffPLChest implements Listener {
 						}
 						return;
 					}
-					if (e.getPacket().getStrings().read(0).equalsIgnoreCase("random.chestclosed")) {
-						for (Player p : listener.getWorld().getPlayers()) {
-							if (StaffUtils.isInStaffMode(p) && p.getLocation().distance(loc) < 6)
-								e.setCancelled(true);
-						}
-						return;
+
+					if (e.getPacket().getStrings().read(0).equalsIgnoreCase("random.chestopen")) {
+						if (StaffUtils.isInStaffMode(listener))
+							e.setCancelled(true);
+						else
+							return;
 					}
+					if (e.getPacket().getStrings().read(0).equalsIgnoreCase("random.chestclosed")) {
+						if (StaffUtils.isInStaffMode(listener))
+							e.setCancelled(true);
+						else
+							return;
+					}
+
 					Chest chest = (Chest) b.getState();
 					Inventory inv = chest.getBlockInventory();
 					List<HumanEntity> humanViewers = inv.getViewers();
@@ -103,6 +114,7 @@ public class StaffPLChest implements Listener {
 								e.setCancelled(true);
 						}
 					}
+
 				}
 			}
 		});
@@ -124,4 +136,5 @@ public class StaffPLChest implements Listener {
 		adjacentBlockLocations.add(add(loc, -1, 1));
 		return adjacentBlockLocations;
 	}
+
 }

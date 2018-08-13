@@ -7,53 +7,46 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
-import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 
 import me.NinetyNine.staff.utils.StaffItems;
 import me.NinetyNine.staff.utils.StaffUtils;
+import me.NinetyNine.staff.utils.interfaces.StaffInteractAbility;
 
-public class StaffPlayers implements Listener {
+public class StaffPlayers implements StaffInteractAbility {
 
-	/*
-	 * Not completed yet
-	 */
+	public static Inventory i = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players " + ChatColor.DARK_GRAY
+			+ "(PlayerCount: " + StaffUtils.getOnlinePlayers().size() + ")");
+	public static Inventory i2 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players (Page 2) "
+			+ ChatColor.DARK_GRAY + "(PlayerCount: " + StaffUtils.getOnlinePlayers().size() + ")");
+	public static Inventory i3 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players (Page 3) "
+			+ ChatColor.DARK_GRAY + "(PlayerCount: " + StaffUtils.getOnlinePlayers().size() + ")");
+	public static Inventory i4 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players (Page 4) "
+			+ ChatColor.DARK_GRAY + "(PlayerCount: " + StaffUtils.getOnlinePlayers().size() + ")");
+	public static Inventory i5 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players (Page 5) "
+			+ ChatColor.DARK_GRAY + "(PlayerCount: " + StaffUtils.getOnlinePlayers().size() + ")");
 
-	public static Inventory i = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players");
-	public static Inventory i2 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players (Page 2)");
-	public static Inventory i3 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players (Page 3)");
-	public static Inventory i4 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players (Page 4)");
-	public static Inventory i5 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players (Page 5)");
-
-	@EventHandler
-	public void onPlayerInteract(PlayerInteractEvent e) {
-		if (!(StaffUtils.isInStaffMode(e.getPlayer())))
-			return;
-
-		if (e.getAction() != Action.RIGHT_CLICK_AIR && e.getAction() != Action.RIGHT_CLICK_BLOCK)
-			return;
-
-		if (e.getItem() == null)
-			return;
-
-		if (e.getItem().getType() != Material.BEACON)
-			return;
-
-		if (!(e.getItem().getItemMeta().getDisplayName()
-				.equals(ChatColor.RED + "Players " + ChatColor.GRAY + "(Right Click)")))
-			return;
-
-		addStuff(e.getPlayer());
+	@Override
+	public void performAbility(Player player, ItemStack item) {
+		addStuff(player);
 		addMisc(1);
 		addMisc(2);
 		addMisc(3);
 		addMisc(4);
 		addMisc(5);
 
-		e.getPlayer().openInventory(i);
+		player.openInventory(i);
+	}
+
+	@Override
+	public ItemStack getAbilityItem() {
+		return new ItemStack(Material.BEACON);
+	}
+
+	@Override
+	public String getAbilityName() {
+		return ChatColor.RED + "Players " + ChatColor.GRAY + "(Right Click)";
 	}
 
 	public void addStuff(Player player) {
@@ -80,14 +73,17 @@ public class StaffPlayers implements Listener {
 	public void addMisc(int invNumber) {
 		List<String> lore = new ArrayList<String>();
 
-		lore.add(ChatColor.GOLD + "Left Click:");
-		lore.add("Left click to check ban information");
-		lore.add("about the specified player.");
-		lore.add(ChatColor.GOLD + "Right Click:");
-		lore.add("Right click to check mute information");
-		lore.add("about the specified player.");
-		lore.add(ChatColor.GOLD + "Middle Click:");
-		lore.add("Middle click to teleport to the specified player!");
+		lore.add(ChatColor.RED + "Left Click:");
+		lore.add(ChatColor.GRAY + "Left click to check the");
+		lore.add(ChatColor.GRAY + "ban history of");
+		lore.add(ChatColor.GRAY + "the specified player.");
+		lore.add(ChatColor.RED + "Right Click:");
+		lore.add(ChatColor.GRAY + "Right click to check the");
+		lore.add(ChatColor.GRAY + "mute history of");
+		lore.add(ChatColor.GRAY + "the specified player.");
+		lore.add(ChatColor.RED + "Middle Click:");
+		lore.add(ChatColor.GRAY + "Middle click to teleport");
+		lore.add(ChatColor.GRAY + "to the specified player!");
 
 		if (invNumber == 1) {
 			addEmerald(i, lore);
@@ -138,7 +134,7 @@ public class StaffPlayers implements Listener {
 	}
 
 	private void addEmerald(Inventory inventory, List<String> lore) {
-		StaffItems.createItem(inventory, 49, Material.EMERALD, ChatColor.GOLD + "Info", lore);
+		StaffItems.createItem(inventory, 49, Material.EMERALD, ChatColor.AQUA + "Info", lore);
 	}
 
 	private void addPrevious(Inventory inventory) {

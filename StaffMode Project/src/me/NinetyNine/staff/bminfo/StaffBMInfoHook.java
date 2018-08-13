@@ -48,6 +48,9 @@ public class StaffBMInfoHook implements StaffBMInfoInterface {
 			return 0;
 
 		int arg52 = ((ArrayList) arg49.get(Type.BAN)).size();
+
+		if (arg52 == 0)
+			return 0;
 		
 		return arg52;
 	}
@@ -76,6 +79,9 @@ public class StaffBMInfoHook implements StaffBMInfoInterface {
 
 		int arg52 = ((ArrayList) arg49.get(Type.MUTE)).size();
 		
+		if (arg52 == 0)
+			return 0;
+		
 		return arg52;
 	}
 
@@ -102,6 +108,9 @@ public class StaffBMInfoHook implements StaffBMInfoInterface {
 			return 0;
 
 		int arg52 = ((ArrayList) arg49.get(Type.KICK)).size();
+
+		if (arg52 == 0)
+			return 0;
 		
 		return arg52;
 	}
@@ -129,6 +138,9 @@ public class StaffBMInfoHook implements StaffBMInfoInterface {
 			return 0;
 
 		int arg52 = ((ArrayList) arg49.get(Type.WARN)).size();
+
+		if (arg52 == 0)
+			return 0;
 		
 		return arg52;
 	}

@@ -142,7 +142,6 @@ public class Staff extends JavaPlugin {
 	private void clearAll() {
 		StaffFly.clear();
 		StaffVanish.clear();
-		StaffChest.clear();
 		StaffItems.clear();
 	}
 
