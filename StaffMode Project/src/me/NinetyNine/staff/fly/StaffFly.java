@@ -1,4 +1,4 @@
-package me.NinetyNine.staff;
+package me.NinetyNine.staff.fly;
 
 import java.util.ArrayList;
 import java.util.List;

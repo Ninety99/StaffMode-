@@ -1,5 +1,9 @@
 package me.NinetyNine.staff.chatrules;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -15,6 +19,7 @@ import me.NinetyNine.staff.chatrules.utils.DetailUtils;
 import me.NinetyNine.staff.chatrules.utils.ExampleType;
 import me.NinetyNine.staff.chatrules.utils.ExampleUtils;
 import me.NinetyNine.staff.utils.StaffItems;
+import me.NinetyNine.staff.utils.StaffUtils;
 
 public class StaffChatRulesInventory implements Listener {
 
@@ -75,18 +80,26 @@ public class StaffChatRulesInventory implements Listener {
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onInventoryClick(InventoryClickEvent e) {
+		if (!(StaffUtils.isInStaffMode((Player) e.getWhoClicked())))
+			return;
+
+		List<Inventory> invs = new ArrayList<Inventory>(
+				Arrays.asList(getChatrule(), getAdv(), getFlood(), getArguing(), getAskStaff(), getBypassChat(),
+						getCaps(), getChatTrolling(), getDdos(), getHack(), getHackusating(), getInappb()));
+		for (Inventory inv : invs) {
+			if (!(e.getInventory().getType().equals(inv.getType())))
+				return;
+			break;
+		}
 		if (e.getCurrentItem() == null)
 			return;
 
 		Player player = (Player) e.getWhoClicked();
-		e.setCancelled(true);
 
 		ItemStack item = e.getCurrentItem();
 
-		if (!item.hasItemMeta())
-			return;
-
 		if (e.getInventory().getTitle().equals(ChatColor.DARK_BLUE + "Chat Rules")) {
+			e.setCancelled(true);
 			String displayName = item.getItemMeta().getDisplayName();
 
 			if (displayName.equals(ChatColor.RED + "Flood")) {
@@ -175,6 +188,7 @@ public class StaffChatRulesInventory implements Listener {
 
 		if (item.getType() == Material.ARROW) {
 			if (e.getInventory().getTitle().equals(ChatColor.RED + "Flood")) {
+				e.setCancelled(true);
 				player.closeInventory();
 				DetailUtils.sendDetails(player, ExampleType.FLOOD);
 				return;
@@ -247,6 +261,7 @@ public class StaffChatRulesInventory implements Listener {
 
 		if (item.getType() == Material.BOOK) {
 			if (e.getInventory().getTitle().equals(ChatColor.RED + "Flood")) {
+				e.setCancelled(true);
 				player.closeInventory();
 				ExampleUtils.sendExample(player, ExampleType.FLOOD);
 				return;
@@ -318,6 +333,7 @@ public class StaffChatRulesInventory implements Listener {
 		}
 
 		if (e.getInventory().getTitle().equals(ChatColor.RED + "Swearing")) {
+			e.setCancelled(true);
 			if (item.getType() == Material.WOOL) {
 				switch (item.getData().getData()) {
 				default:

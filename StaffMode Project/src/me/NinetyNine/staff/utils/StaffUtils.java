@@ -12,8 +12,8 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import lombok.Getter;
-import me.NinetyNine.staff.StaffFly;
 import me.NinetyNine.staff.actionbar.StaffActionBar;
+import me.NinetyNine.staff.fly.StaffFly;
 
 public class StaffUtils {
 

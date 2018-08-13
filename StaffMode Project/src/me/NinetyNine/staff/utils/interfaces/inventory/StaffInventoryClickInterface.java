@@ -17,6 +17,8 @@ public interface StaffInventoryClickInterface extends Listener {
 
 	public String getInventoryTitle();
 
+	public Inventory getInventory();
+
 	public List<ItemStack> getInventoryItems();
 
 	@EventHandler
@@ -25,6 +27,9 @@ public interface StaffInventoryClickInterface extends Listener {
 			return;
 
 		if (!(StaffUtils.isInStaffMode(((Player) e.getWhoClicked()))))
+			return;
+
+		if (!(e.getInventory().getType().equals(getInventory().getType())))
 			return;
 
 		if (!e.getInventory().getTitle().equals(getInventoryTitle()))

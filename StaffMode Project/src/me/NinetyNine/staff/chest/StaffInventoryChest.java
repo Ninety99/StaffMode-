@@ -1,6 +1,6 @@
 package me.NinetyNine.staff.chest;
 
-import org.bukkit.block.Chest;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,14 +15,16 @@ public class StaffInventoryChest implements Listener {
 	public void onInventoryClick(InventoryClickEvent e) {
 		if (!(StaffUtils.isInStaffMode((Player) e.getWhoClicked())))
 			return;
-
-		if (e.getCurrentItem() == null)
+		
+		if (!(e.getInventory().getType().equals(InventoryType.CHEST)))
 			return;
 		
-		if (e.getInventory().getType() != InventoryType.CHEST && e.getInventory() instanceof Chest)
+		if (e.getCurrentItem() == null)
 			return;
 
-		e.setCancelled(true);
-		return;
+		if (((Player) e.getWhoClicked()).getGameMode().equals(GameMode.CREATIVE))
+			return;
+		else
+			e.setCancelled(true);
 	}
 }

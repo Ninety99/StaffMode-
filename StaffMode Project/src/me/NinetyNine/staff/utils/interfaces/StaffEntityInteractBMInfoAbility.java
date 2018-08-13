@@ -12,15 +12,19 @@ public interface StaffEntityInteractBMInfoAbility extends Listener {
 
 	@EventHandler
 	public default void abilityUse(final PlayerInteractAtEntityEvent e) {
-		if (!(StaffUtils.isInStaffMode(e.getPlayer())))
-			return;
-
 		if (!(e.getRightClicked() instanceof Player))
 			return;
 
-		if (e.getPlayer().getItemInHand() != null)
+		if (!(StaffUtils.isInStaffMode(e.getPlayer())))
 			return;
+		
+		System.out.println("is in staff mode");
 
-		performAbility(e.getPlayer(), (Player) e.getRightClicked());
+		if (e.getPlayer().getItemInHand() == null) {
+			System.out.println("is null");
+			performAbility(e.getPlayer(), (Player) e.getRightClicked());
+			System.out.println("perform ability");
+		} else
+			return;
 	}
 }

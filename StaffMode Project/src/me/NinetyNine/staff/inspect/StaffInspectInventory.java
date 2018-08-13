@@ -23,7 +23,7 @@ public class StaffInspectInventory implements Listener {
 
 		Player player = (Player) e.getWhoClicked();
 		
-		if (player.getGameMode() != GameMode.CREATIVE)
+		if (player.getGameMode().equals(GameMode.CREATIVE))
 			return;
 		else
 			e.setCancelled(true);

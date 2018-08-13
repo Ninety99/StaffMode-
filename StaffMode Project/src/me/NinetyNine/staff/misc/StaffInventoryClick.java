@@ -1,5 +1,6 @@
 package me.NinetyNine.staff.misc;
 
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,18 +17,20 @@ public class StaffInventoryClick implements Listener {
 	public void onInventoryClick(InventoryClickEvent e) {
 		if (!(StaffUtils.isInStaffMode((Player) e.getWhoClicked())))
 			return;
-
-		if (e.getView().getBottomInventory().getType() != InventoryType.PLAYER)
+		
+		if (((Player) e.getWhoClicked()).getGameMode() != GameMode.CREATIVE)
 			return;
 
 		if (e.getCurrentItem() == null)
 			return;
 
 		ItemStack current = e.getCurrentItem();
-		
-		if (StaffItems.isStaffItem(current))
-			e.setCancelled(true);
-		else
-			return;
+
+		if (e.getView().getBottomInventory().getType().equals(InventoryType.PLAYER)) {
+			if (StaffItems.isStaffItem(current))
+				e.setCancelled(true);
+			else
+				return;
+		}
 	}
 }

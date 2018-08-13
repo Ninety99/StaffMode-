@@ -13,6 +13,7 @@ import me.NinetyNine.staff.chest.StaffChest;
 import me.NinetyNine.staff.chest.StaffInventoryChest;
 import me.NinetyNine.staff.chest.StaffPLChest;
 import me.NinetyNine.staff.commands.StaffCommands;
+import me.NinetyNine.staff.fly.StaffFly;
 import me.NinetyNine.staff.gmchanger.StaffGMChanger;
 import me.NinetyNine.staff.gmchanger.StaffInventoryGM;
 import me.NinetyNine.staff.inspect.StaffInspect;
@@ -25,15 +26,16 @@ import me.NinetyNine.staff.misc.StaffDamage;
 import me.NinetyNine.staff.misc.StaffDrop;
 import me.NinetyNine.staff.misc.StaffHitEvent;
 import me.NinetyNine.staff.misc.StaffInventoryClick;
-import me.NinetyNine.staff.misc.StaffJoin;
 import me.NinetyNine.staff.misc.StaffPickupItem;
-import me.NinetyNine.staff.misc.StaffQuit;
+import me.NinetyNine.staff.misc.joinquit.PlayerJoin;
+import me.NinetyNine.staff.misc.joinquit.PlayerQuit;
+import me.NinetyNine.staff.misc.joinquit.StaffJoin;
+import me.NinetyNine.staff.misc.joinquit.StaffQuit;
 import me.NinetyNine.staff.players.StaffInventoryPlayers;
 import me.NinetyNine.staff.players.StaffPlayers;
-import me.NinetyNine.staff.randomtp.PlayerRandomTPJoin;
-import me.NinetyNine.staff.randomtp.PlayerRandomTPQuit;
 import me.NinetyNine.staff.randomtp.StaffRandomTP;
 import me.NinetyNine.staff.utils.StaffConfig;
+import me.NinetyNine.staff.utils.StaffItems;
 import me.NinetyNine.staff.vanish.PlayerVanishJoin;
 import me.NinetyNine.staff.vanish.PlayerVanishQuit;
 import me.NinetyNine.staff.vanish.StaffVanish;
@@ -69,8 +71,8 @@ public class Staff extends JavaPlugin {
 
 		pm.registerEvents(new PlayerVanishJoin(), this);
 		pm.registerEvents(new PlayerVanishQuit(), this);
-		pm.registerEvents(new PlayerRandomTPJoin(), this);
-		pm.registerEvents(new PlayerRandomTPQuit(), this);
+		pm.registerEvents(new PlayerJoin(), this);
+		pm.registerEvents(new PlayerQuit(), this);
 		pm.registerEvents(new DetailUtils(), this);
 
 		pm.registerEvents(new StaffActionBar(), this);
@@ -140,8 +142,8 @@ public class Staff extends JavaPlugin {
 	private void clearAll() {
 		StaffFly.clear();
 		StaffVanish.clear();
-		StaffRandomTP.clear();
 		StaffChest.clear();
+		StaffItems.clear();
 	}
 
 	private void registerActionBar() {

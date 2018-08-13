@@ -2,7 +2,7 @@ package me.NinetyNine.staff.utils;
 
 import org.bukkit.entity.Player;
 
-import me.NinetyNine.staff.StaffFly;
+import me.NinetyNine.staff.fly.StaffFly;
 
 public class Flyer {
 

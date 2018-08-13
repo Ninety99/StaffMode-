@@ -23,49 +23,24 @@ public class StaffItems {
 	private static List<ItemStack> staffItems = new ArrayList<ItemStack>();
 
 	public static void addStaffItems(Player player) {
-		addInspect(player);
-		addRandomTP(player);
-		addBeacon(player);
-		addVanishItem(player);
-		addFlyItem(player);
-		addGMChanger(player);
-	}
-
-	private static ItemStack addInspect(Player player) {
-		return createItem(player.getInventory(), 0, Material.BOOK, ChatColor.GREEN + "Inspect", null);
-	}
-
-	private static ItemStack addRandomTP(Player player) {
-		return createItem(player.getInventory(), 1, Material.BLAZE_ROD, ChatColor.AQUA + "Random TP",
+		createItem(player.getInventory(), 0, Material.BOOK, ChatColor.GREEN + "Inspect", null);
+		createItem(player.getInventory(), 1, Material.BLAZE_ROD, ChatColor.AQUA + "Random TP",
 				Arrays.asList(ChatColor.GRAY + "Teleportation I"));
-	}
-
-	private static ItemStack addBeacon(Player player) {
-		return createItem(player.getInventory(), 3, Material.BEACON,
+		createItem(player.getInventory(), 3, Material.BEACON,
 				ChatColor.RED + "Players " + ChatColor.GRAY + "(Right Click)", null);
-	}
-
-	private static ItemStack addVanishItem(Player player) {
-		return createItemWithEnch(player.getInventory(), 5, Material.REDSTONE_TORCH_ON, ChatColor.GREEN + "Vanish",
-				null, Enchantment.DURABILITY, 1);
-	}
-
-	private static ItemStack addFlyItem(Player player) {
-		return createItemWithEnch(player.getInventory(), 6, Material.FEATHER, ChatColor.GREEN + "Fly", null,
+		createItemWithEnch(player.getInventory(), 5, Material.REDSTONE_TORCH_ON, ChatColor.GREEN + "Vanish", null,
 				Enchantment.DURABILITY, 1);
-	}
-
-	private static ItemStack addGMChanger(Player player) {
-		return createItem(player.getInventory(), 8, Material.WATCH,
-				ChatColor.DARK_BLUE + "Gamemode Changer " + ChatColor.GRAY + "(Right Click)", null);
+		createItemWithEnch(player.getInventory(), 6, Material.FEATHER, ChatColor.GREEN + "Fly", null,
+				Enchantment.DURABILITY, 1);
+		createItem(player.getInventory(), 8, Material.WATCH,
+				ChatColor.DARK_BLUE + "Gamemode Changer" + ChatColor.GRAY + "(Right Click)", null);
 	}
 
 	public static boolean isStaffItem(ItemStack item) {
-		return staffItems.contains(item);
+		return getStaffItems().contains(item);
 	}
 
-	public static ItemStack createItem(Inventory inventory, int slot, Material item, String displayName,
-			List<String> lore) {
+	public static void createItem(Inventory inventory, int slot, Material item, String displayName, List<String> lore) {
 
 		ItemStack item2 = new ItemStack(item);
 		ItemMeta meta = item2.getItemMeta();
@@ -75,13 +50,11 @@ public class StaffItems {
 
 		inventory.setItem(slot, item2);
 
-		if (!staffItems.contains(item2))
-			staffItems.add(item2);
-
-		return item2;
+		while (!getStaffItems().contains(item2))
+			getStaffItems().add(item2);
 	}
 
-	public static ItemStack createItemWithEnch(Inventory inventory, int slot, Material item, String displayName,
+	public static void createItemWithEnch(Inventory inventory, int slot, Material item, String displayName,
 			List<String> lore, Enchantment enchantment, int level) {
 		ItemStack item2 = new ItemStack(item);
 		ItemMeta meta = item2.getItemMeta();
@@ -92,7 +65,9 @@ public class StaffItems {
 
 		inventory.setItem(slot, item2);
 
-		return item2;
+		while (!getStaffItems().contains(item2))
+			getStaffItems().add(item2);
+
 	}
 
 	public static void createItemWithBMInfo(Player target, Inventory inventory, int slot, Material item,
@@ -114,6 +89,9 @@ public class StaffItems {
 		meta.setLore(lore);
 		item2.setItemMeta(meta);
 
+		while (!getStaffItems().contains(item2))
+			getStaffItems().add(item2);
+
 		inventory.setItem(slot, item2);
 	}
 
@@ -125,6 +103,10 @@ public class StaffItems {
 		glass.setItemMeta(meta);
 
 		inventory.setItem(slot, glass);
+
+		while (!getStaffItems().contains(glass))
+			getStaffItems().add(glass);
+
 	}
 
 	public static void addSkullsWithBMInfo(Inventory inventory) {
@@ -162,5 +144,9 @@ public class StaffItems {
 		meta.setDisplayName(displayName);
 		it.setItemMeta(meta);
 		inventory.setItem(slot, it);
+	}
+
+	public static void clear() {
+		getStaffItems().clear();
 	}
 }

@@ -7,12 +7,16 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import lombok.Getter;
 import me.NinetyNine.staff.utils.StaffConfig;
 import me.NinetyNine.staff.utils.StaffItems;
 import me.NinetyNine.staff.utils.StaffUtils;
 import me.NinetyNine.staff.utils.interfaces.StaffInteractAbility;
 
 public class StaffGMChanger implements StaffInteractAbility {
+	
+	@Getter
+	private static Inventory gmInventory = Bukkit.createInventory(null, 9, ChatColor.RED + "Gamemode Changer");
 	
 	@Override
 	public void performAbility(Player player, ItemStack item) {
@@ -23,8 +27,6 @@ public class StaffGMChanger implements StaffInteractAbility {
 			player.sendMessage(StaffUtils.format("&cYou do not have permissions to use this feature!"));
 			return;
 		}
-
-		Inventory gmInventory = Bukkit.createInventory(null, 9, ChatColor.RED + "Gamemode Changer");
 
 		StaffItems.createItem(gmInventory, 1, Material.GRASS, ChatColor.GOLD + "Survival", null);
 		StaffItems.createItem(gmInventory, 3, Material.WOOL, ChatColor.WHITE + "Creative", null);

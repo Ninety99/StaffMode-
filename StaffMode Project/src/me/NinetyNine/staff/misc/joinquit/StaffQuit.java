@@ -1,4 +1,4 @@
-package me.NinetyNine.staff.misc;
+package me.NinetyNine.staff.misc.joinquit;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

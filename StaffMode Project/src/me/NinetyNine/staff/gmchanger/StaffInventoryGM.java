@@ -116,4 +116,9 @@ public class StaffInventoryGM implements StaffInventoryClickInterface {
 		items.add(new ItemStack(Material.EYE_OF_ENDER));
 		return items;
 	}
+
+	@Override
+	public Inventory getInventory() {
+		return StaffGMChanger.getGmInventory();
+	}
 }

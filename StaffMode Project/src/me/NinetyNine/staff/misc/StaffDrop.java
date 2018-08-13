@@ -13,19 +13,23 @@ public class StaffDrop implements Listener {
 
 	@EventHandler
 	public void onPlayerDropItem(PlayerDropItemEvent e) {
-		if (!StaffUtils.isInStaffMode(e.getPlayer()))
+		if (!(StaffUtils.isInStaffMode(e.getPlayer())))
 			return;
-		else {
-			ItemStack item = e.getItemDrop().getItemStack();
 
-			if (e.getPlayer().getGameMode() != GameMode.CREATIVE) {
+		ItemStack item = e.getItemDrop().getItemStack();
+
+		if (e.getPlayer().getGameMode() != GameMode.CREATIVE) {
+			e.setCancelled(true);
+			e.getPlayer().sendMessage(StaffUtils.format("&cYou cannot drop items while in Staff mode!"));
+		} else {
+			if (StaffItems.isStaffItem(item)) {
 				e.setCancelled(true);
-				e.getPlayer().sendMessage(StaffUtils.format("&cYou cannot drop items whilst in Staff mode!"));
+				e.getPlayer().sendMessage(StaffUtils.format("&cYou cannot drop that item!"));
 			} else {
-				if (StaffItems.isStaffItem(item)) {
-					e.setCancelled(true);
-					e.getPlayer().sendMessage(StaffUtils.format("&cYou cannot drop that item!"));
-				}
+				System.out.println(item.getType().toString());
+				if (item.getType().toString().startsWith("DIAMOND"))
+					System.out.println(e.getPlayer().getName()
+							+ " dropped diamond item(s) while in creative mode (Amount: " + item.getAmount() + ")");
 			}
 		}
 	}

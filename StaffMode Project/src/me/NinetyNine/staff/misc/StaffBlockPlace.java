@@ -14,9 +14,7 @@ public class StaffBlockPlace implements Listener {
 		if (!(StaffUtils.isInStaffMode(e.getPlayer())))
 			return;
 
-		if (StaffItems.isStaffItem(e.getItemInHand())) {
+		if (StaffItems.isStaffItem(e.getItemInHand()))
 			e.setCancelled(true);
-			return;
-		}
 	}
 }
