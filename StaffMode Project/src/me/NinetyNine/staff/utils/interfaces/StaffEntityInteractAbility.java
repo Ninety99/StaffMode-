@@ -47,12 +47,12 @@ public interface StaffEntityInteractAbility extends Listener {
 		if (e.getPlayer().getItemInHand() == null)
 			return;
 		
-		System.out.println("is not null");
+		System.out.println("is not null (normal)");
 		
 		if (e.getPlayer().getItemInHand().getType().equals(getAbilityItem().getType()))
 			performAbility(e.getPlayer(), e.getPlayer().getItemInHand(), (Player) e.getRightClicked());
 
-		System.out.println("everything went through (PlayerInteractAtEntityEvent) [normal]");
+		System.out.println("done [normal]");
 
 	}
 }

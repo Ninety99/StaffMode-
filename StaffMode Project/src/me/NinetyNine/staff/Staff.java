@@ -1,6 +1,7 @@
 package me.NinetyNine.staff;
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -8,6 +9,7 @@ import lombok.Getter;
 import me.NinetyNine.staff.actionbar.StaffActionBar;
 import me.NinetyNine.staff.bminfo.StaffBMInfo;
 import me.NinetyNine.staff.chatrules.StaffChatRulesInventory;
+import me.NinetyNine.staff.chatrules.StaffChatRulesSet;
 import me.NinetyNine.staff.chatrules.utils.DetailUtils;
 import me.NinetyNine.staff.chest.StaffChest;
 import me.NinetyNine.staff.chest.StaffInventoryChest;
@@ -36,6 +38,7 @@ import me.NinetyNine.staff.players.StaffPlayers;
 import me.NinetyNine.staff.randomtp.StaffRandomTP;
 import me.NinetyNine.staff.utils.StaffConfig;
 import me.NinetyNine.staff.utils.StaffItems;
+import me.NinetyNine.staff.utils.StaffUtils;
 import me.NinetyNine.staff.vanish.PlayerVanishJoin;
 import me.NinetyNine.staff.vanish.PlayerVanishQuit;
 import me.NinetyNine.staff.vanish.StaffVanish;
@@ -63,6 +66,8 @@ public class Staff extends JavaPlugin {
 	public void onDisable() {
 		StaffConfig.save();
 		clearAll();
+		for (Player staff : StaffUtils.getStaff().keySet())
+			StaffUtils.unStaff(staff);
 		Bukkit.getServer().getLogger().info("StaffMode has been disabled");
 	}
 
@@ -84,6 +89,7 @@ public class Staff extends JavaPlugin {
 		pm.registerEvents(new StaffCommands(), this);
 		pm.registerEvents(new StaffConfig(), this);
 		pm.registerEvents(new StaffChatRulesInventory(), this);
+		pm.registerEvents(new StaffChatRulesSet(), this);
 		pm.registerEvents(new StaffChest(), this);
 		pm.registerEvents(new StaffDamage(), this);
 		pm.registerEvents(new StaffDrop(), this);

@@ -27,9 +27,11 @@ public class StaffDrop implements Listener {
 				e.getPlayer().sendMessage(StaffUtils.format("&cYou cannot drop that item!"));
 			} else {
 				System.out.println(item.getType().toString());
-				if (item.getType().toString().startsWith("DIAMOND"))
+				if (item.getType().toString().startsWith("DIAMOND") && item.getType().toString().startsWith("GOLD")
+						&& item.getType().toString().startsWith("IRON"))
 					System.out.println(e.getPlayer().getName()
-							+ " dropped diamond item(s) while in creative mode (Amount: " + item.getAmount() + ")");
+							+ " dropped diamond/gold/iron item(s) while in creative mode (Amount: " + item.getAmount()
+							+ ")");
 			}
 		}
 	}

@@ -16,5 +16,7 @@ public class StaffBlockPlace implements Listener {
 
 		if (StaffItems.isStaffItem(e.getItemInHand()))
 			e.setCancelled(true);
+		else
+			return;
 	}
 }

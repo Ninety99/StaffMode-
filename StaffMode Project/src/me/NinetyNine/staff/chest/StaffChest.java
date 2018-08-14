@@ -11,11 +11,11 @@ import me.NinetyNine.staff.utils.StaffUtils;
 import me.NinetyNine.staff.utils.interfaces.StaffInteractChestAbility;
 
 public class StaffChest implements StaffInteractChestAbility {
-	@Override
+
 	public void performAbility(Player player, Block block) {
 		if (!(block.getState() instanceof Chest))
 			return;
-		
+
 		Inventory inventory = Bukkit.createInventory(null, InventoryType.CHEST);
 		Chest chest = (Chest) block.getState();
 		inventory.setContents(chest.getInventory().getContents());

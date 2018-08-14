@@ -26,3 +26,5 @@ permissions:
     default: op
   staffmode.vanishbypass:
     default: op
+  staffmode.chatrules.set:
+    default: op

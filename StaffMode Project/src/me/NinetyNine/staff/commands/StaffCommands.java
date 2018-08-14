@@ -11,16 +11,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
 
-import lombok.Getter;
 import me.NinetyNine.staff.chatrules.StaffChatRulesInventory;
 import me.NinetyNine.staff.utils.StaffConfig;
 import me.NinetyNine.staff.utils.StaffItems;
 import me.NinetyNine.staff.utils.StaffUtils;
 
 public class StaffCommands implements Listener, CommandExecutor {
-
-	@Getter
-	private static String path = "";
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -56,6 +52,11 @@ public class StaffCommands implements Listener, CommandExecutor {
 					}
 				}
 
+				if (args.length > 1) {
+					sender.sendMessage("&cINvalid command.");
+					return true;
+				}
+
 				if (!(args[0].equalsIgnoreCase("chatclear") || args[0].equalsIgnoreCase("chatrules"))) {
 					sender.sendMessage(ChatColor.RED + "Invalid command.");
 					return true;
@@ -65,6 +66,11 @@ public class StaffCommands implements Listener, CommandExecutor {
 			if (cmd.getName().equalsIgnoreCase("unstaff")) {
 				if (args.length == 0) {
 					sender.sendMessage(ChatColor.RED + "Usage: /unstaff <player>");
+					return true;
+				}
+
+				if (args.length > 1) {
+					sender.sendMessage("Invalid command.");
 					return true;
 				}
 
@@ -147,10 +153,16 @@ public class StaffCommands implements Listener, CommandExecutor {
 						}
 					}
 
-					if (!(args[0].equalsIgnoreCase("quitgmsp") || args[0].equalsIgnoreCase("chatclear"))) {
+					if (!(args[0].equalsIgnoreCase("quitgmsp") || args[0].equalsIgnoreCase("chatclear")
+							|| args[0].equalsIgnoreCase("chatrules"))) {
 						player.sendMessage(StaffUtils.format("&cInvalid command."));
 						return true;
 					}
+				}
+
+				if (args.length > 1) {
+					player.sendMessage(StaffUtils.format("&cINvalid command."));
+					return true;
 				}
 			}
 
@@ -165,6 +177,11 @@ public class StaffCommands implements Listener, CommandExecutor {
 					return true;
 				}
 
+				if (args.length > 1) {
+					player.sendMessage(StaffUtils.format("&cInvalid command."));
+					return true;
+				}
+
 				@SuppressWarnings("deprecation")
 				Player target = Bukkit.getPlayer(args[0]);
 				if (target == null)
@@ -174,7 +191,7 @@ public class StaffCommands implements Listener, CommandExecutor {
 						StaffUtils.unStaff(target);
 						return true;
 					} else {
-						sender.sendMessage(StaffUtils.format("&c " + target.getName() + " is not in Staff mode!"));
+						sender.sendMessage(StaffUtils.format("&c" + target.getName() + " is not in Staff mode!"));
 						return true;
 					}
 				}

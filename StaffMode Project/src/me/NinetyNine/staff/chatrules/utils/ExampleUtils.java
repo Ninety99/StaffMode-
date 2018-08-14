@@ -73,12 +73,11 @@ public class ExampleUtils {
 	private static String exampleswear2 = example + "Retard idiot! You're a fucking piece of shit!";
 
 	@Getter
-	private static String exampleharassment = example + "You're fucking gay. You suck!";
-
-	@Getter
 	private static String exampleswear3 = example + "I hope you fucking die of cancer!" + a + example
 			+ "Do you have autism or something jeez." + a + example + "Fuck you nigger!" + a + example
 			+ "Burn all the jews!!";
+	@Getter
+	private static String exampleharassment = example + "You're fucking gay. You suck!";
 
 	@Getter
 	private static String examplestaff = example + "Guys, the staff member " + RED + "(Staff)" + WHITE
@@ -104,42 +103,46 @@ public class ExampleUtils {
 	private static String exampleinapp = example + "B=====D" + a + example + "( . Y . )" + a + example
 			+ "Any dirty boys wanna skype and be naughty?" + a + example + "I want to rub your humps!!";
 
-	public static void sendExample(Player player, ExampleType type) {
+	public static void sendExample(Player player, RuleType type) {
 		String prefixe = GRAY + "[" + GREEN + "ChatRules" + GRAY + "]" + DARK_GRAY + " Example of "
 				+ type.name().replace("_", " ");
-		if (type == ExampleType.FLOOD)
+		if (type == RuleType.FLOOD)
 			player.sendMessage(prefixe + ":" + a + getExampleflood());
-		else if (type == ExampleType.SPAM)
+		else if (type == RuleType.SPAM)
 			player.sendMessage(prefixe + ":" + a + getExamplespam());
-		else if (type == ExampleType.CAPS)
+		else if (type == RuleType.CAPS)
 			player.sendMessage(prefixe + ":" + a + getExamplecaps());
-		else if (type == ExampleType.HACKUSATING)
+		else if (type == RuleType.HACKUSATING)
 			player.sendMessage(prefixe + ":" + a + getExampleaccuse());
-		else if (type == ExampleType.ARGUING)
+		else if (type == RuleType.ARGUING)
 			player.sendMessage(prefixe + ":" + a + getExampleargue());
-		else if (type == ExampleType.CHAT_TROLLING)
+		else if (type == RuleType.CHAT_TROLLING)
 			player.sendMessage(prefixe + ":" + a + getExamplechatt());
-		else if (type == ExampleType.ASKING_STAFF_FOR_ITEMS)
+		else if (type == RuleType.ASKING_STAFF_FOR_ITEMS)
 			player.sendMessage(prefixe + ":" + a + getExampleaskstaff());
-		else if (type == ExampleType.ADVERTISEMENT)
+		else if (type == RuleType.ADVERTISEMENT)
 			player.sendMessage(prefixe + ":" + a + getExampleadv());
-		else if (type == ExampleType.YOUTUBE_ADVERTISEMENT)
+		else if (type == RuleType.YOUTUBE_ADVERTISEMENT)
 			player.sendMessage(prefixe + ":" + a + getExampleytadv());
-		else if (type == ExampleType.SWEARING)
+		else if (type == RuleType.SWEARING)
 			player.sendMessage(prefixe + ":" + a + getExampleswear());
-		else if (type == ExampleType.HARASSMENT)
+		else if (type == RuleType.SWEARING_2)
+			player.sendMessage(prefixe + ":" + a + getExampleswear2());
+		else if (type == RuleType.SWEARING_3)
+			player.sendMessage(prefixe + ":" + a + getExampleswear3());
+		else if (type == RuleType.HARASSMENT)
 			player.sendMessage(prefixe + ":" + a + getExampleharassment());
-		else if (type == ExampleType.SERVERDIS)
+		else if (type == RuleType.SERVERDIS)
 			player.sendMessage(prefixe + ":" + a + getExampleserver());
-		else if (type == ExampleType.STAFFDIS)
+		else if (type == RuleType.STAFFDIS)
 			player.sendMessage(prefixe + ":" + a + getExamplestaff());
-		else if (type == ExampleType.BYPASSING_FILTER)
+		else if (type == RuleType.BYPASSING_FILTER)
 			player.sendMessage(prefixe + ":" + a + getExamplebypass());
-		else if (type == ExampleType.DDOS)
+		else if (type == RuleType.DDOS)
 			player.sendMessage(prefixe + ":" + a + getExampleddos());
-		else if (type == ExampleType.THREATHACK)
+		else if (type == RuleType.THREATHACK)
 			player.sendMessage(prefixe + ":" + a + getExamplehack());
-		else if (type == ExampleType.INAPPB)
+		else if (type == RuleType.INAPPB)
 			player.sendMessage(prefixe + ":" + a + getExampleinapp());
 	}
 }

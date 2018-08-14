@@ -2,7 +2,9 @@ package me.NinetyNine.staff.utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -12,8 +14,11 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import lombok.Getter;
+import me.NinetyNine.staff.Staff;
 import me.NinetyNine.staff.bminfo.StaffBMInfoHook;
 import me.NinetyNine.staff.bminfo.StaffBMInfoInterface;
 
@@ -144,6 +149,59 @@ public class StaffItems {
 		meta.setDisplayName(displayName);
 		it.setItemMeta(meta);
 		inventory.setItem(slot, it);
+	}
+
+	public static void createArmor(Inventory inventory, int helmetSlot, int chestplateSlot, int leggingsSlot,
+			int bootsSlot, Player owner) {
+		ItemStack helmet = owner.getInventory().getHelmet();
+		ItemStack chestplate = owner.getInventory().getChestplate();
+		ItemStack leggings = owner.getInventory().getChestplate();
+		ItemStack boots = owner.getInventory().getBoots();
+
+		inventory.setItem(helmetSlot, helmet);
+		inventory.setItem(chestplateSlot, chestplate);
+		inventory.setItem(leggingsSlot, leggings);
+		inventory.setItem(bootsSlot, boots);
+	}
+
+	public static void createPotionEffectWithUpdate(Inventory inventory, Player player, Material mat, List<String> lore) {
+		for (PotionEffect effect : getPotionEffects(player)) {
+			ItemStack potion = new ItemStack(mat);
+			ItemMeta meta = potion.getItemMeta();
+
+			lore.add("Active Potion Effect(s): " + ("" + effect.getType().getName().charAt(0)).toUpperCase()
+					+ effect.getType().getName().substring(1));
+
+			Map<List<String>, Integer> t = new HashMap<List<String>, Integer>();
+			t.put(lore, effect.getDuration());
+			int duration = t.get(lore);
+			new BukkitRunnable() {
+				@Override
+				public void run() {
+					if (duration != 0) {
+						int i = t.get(lore);
+						t.put(lore, i--);
+					} else
+						cancel();
+				}
+			}.runTaskTimer(Staff.getInstance(), 20L, 20L);
+			lore.add(ChatColor.AQUA + "Duration: " + t.get(lore));
+
+			lore.add(ChatColor.AQUA + "Amplifier(Potion Level): " + effect.getAmplifier());
+			meta.setLore(lore);
+		}
+	}
+
+	private static List<PotionEffect> getPotionEffects(Player player) {
+		List<PotionEffect> pots = new ArrayList<PotionEffect>();
+
+		for (PotionEffect effect : player.getActivePotionEffects())
+			if (effect != null)
+				pots.add(effect);
+			else
+				return null;
+
+		return pots;
 	}
 
 	public static void clear() {

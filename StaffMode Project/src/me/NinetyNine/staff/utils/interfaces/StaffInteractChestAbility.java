@@ -1,6 +1,7 @@
 package me.NinetyNine.staff.utils.interfaces;
 
 import org.bukkit.block.Block;
+import org.bukkit.block.Chest;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -19,6 +20,9 @@ public interface StaffInteractChestAbility extends Listener {
 			return;
 		
 		if (e.getAction() != Action.RIGHT_CLICK_BLOCK)
+			return;
+		
+		if (!(e.getClickedBlock().getState() instanceof Chest))
 			return;
 		
 		e.setCancelled(true);
