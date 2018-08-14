@@ -29,7 +29,7 @@ public class StaffVanish implements StaffInteractOnOrOffAbility {
 			Vanisher.unvanish(player);
 			StaffActionBar.sendActionBar(player, ChatColor.RED + "You are now unvanished", 1);
 			off(item);
-			player.sendMessage(StaffUtils.format("&9Vanish &7has been &cdisabled!"));
+			player.sendMessage(StaffUtils.format("&9Vanish &7has been &cdisabled"));
 			return;
 		} else {
 			Vanisher.vanish(player);

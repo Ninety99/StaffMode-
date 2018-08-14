@@ -8,7 +8,6 @@ public class StaffBMInfo implements StaffEntityInteractBMInfoAbility {
 
 	@Override
 	public void performAbility(Player player, Player clicked) {
-		System.out.println("Performing bminfo command...");
 		player.performCommand("bminfo " + clicked.getName());
 	}
 }

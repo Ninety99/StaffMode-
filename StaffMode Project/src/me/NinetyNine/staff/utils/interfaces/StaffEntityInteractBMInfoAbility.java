@@ -1,5 +1,6 @@
 package me.NinetyNine.staff.utils.interfaces;
 
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,21 +16,12 @@ public interface StaffEntityInteractBMInfoAbility extends Listener {
 		if (!(e.getRightClicked() instanceof Player))
 			return;
 
-		System.out.println("right clicked is player (bminfo)");
-
 		if (!(StaffUtils.isInStaffMode(e.getPlayer())))
 			return;
 
-		System.out.println("is in staff mode (bminfo)");
-
-		if (e.getPlayer().getItemInHand() != null)
+		if (!(e.getPlayer().getItemInHand().getType().equals(Material.AIR)))
 			return;
-
-		System.out.println("is null in hand (bminfo)");
 		
 		performAbility(e.getPlayer(), (Player) e.getRightClicked());
-		System.out.println("perform ability");
-
-		System.out.println("done [normal]");
 	}
 }

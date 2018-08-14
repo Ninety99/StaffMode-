@@ -15,8 +15,16 @@ commands:
     permissions: staffmode.unstaff
 permissions:
   staffmode.toggle:
-    default: op
+    default: false
+    admin: true
   staffmode.gmsp:
+    default: false
+    admin: true
+  staffmode.chatrules:
+    default: false
+    admin: true
+    mod: true
+  staffmode.chatrules.set:
     default: op
   staffmode.unstaff:
     default: op
@@ -25,6 +33,4 @@ permissions:
   staffmode.quitbypass:
     default: op
   staffmode.vanishbypass:
-    default: op
-  staffmode.chatrules.set:
     default: op

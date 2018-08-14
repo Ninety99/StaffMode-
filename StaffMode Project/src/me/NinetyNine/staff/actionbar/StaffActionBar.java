@@ -12,7 +12,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class StaffActionBar implements Listener {
 
 	/*
-	 * From a guy at bukkit.org
+	 * From a guy at bukkit.org :D
 	 */
 
 	public static String nmsver;
@@ -21,19 +21,18 @@ public class StaffActionBar implements Listener {
 	public static Plugin plugin;
 
 	public static void sendActionBar(Player player, String message) {
-		if (!player.isOnline()) {
+		if (!player.isOnline())
 			return;
-		}
+
 		ActionBarMessageEvent actionBarMessageEvent = new ActionBarMessageEvent(player, message);
 		Bukkit.getPluginManager().callEvent(actionBarMessageEvent);
 		if (actionBarMessageEvent.isCancelled())
 			return;
 
-		if (nmsver.startsWith("v1_12_")) {
+		if (nmsver.startsWith("v1_12_"))
 			sendActionBarPost112(player, message);
-		} else {
+		else
 			sendActionBarPre112(player, message);
-		}
 	}
 
 	private static void sendActionBarPost112(Player player, String message) {
@@ -52,11 +51,12 @@ public class StaffActionBar implements Listener {
 			Class<?> chatMessageTypeClass = Class.forName("net.minecraft.server." + nmsver + ".ChatMessageType");
 			Object[] chatMessageTypes = chatMessageTypeClass.getEnumConstants();
 			Object chatMessageType = null;
+
 			for (Object obj : chatMessageTypes) {
-				if (obj.toString().equals("GAME_INFO")) {
+				if (obj.toString().equals("GAME_INFO"))
 					chatMessageType = obj;
-				}
 			}
+
 			Object o = c2.getConstructor(new Class<?>[] { String.class }).newInstance(message);
 			ppoc = c4.getConstructor(new Class<?>[] { c3, chatMessageTypeClass }).newInstance(o, chatMessageType);
 			Method m1 = craftPlayerClass.getDeclaredMethod("getHandle");
@@ -72,9 +72,8 @@ public class StaffActionBar implements Listener {
 	}
 
 	private static void sendActionBarPre112(Player player, String message) {
-		if (!player.isOnline()) {
+		if (!player.isOnline())
 			return;
-		}
 
 		try {
 			Class<?> craftPlayerClass = Class.forName("org.bukkit.craftbukkit." + nmsver + ".entity.CraftPlayer");
@@ -118,6 +117,12 @@ public class StaffActionBar implements Listener {
 					cancel();
 			}
 		}.runTaskTimer(plugin, 20L, (long) duration);
+		
+		new BukkitRunnable() {
+			public void run() {
+				
+			}
+		}.runTaskTimer(plugin, 20L, 20L);
 	}
 
 	public static void sendActionBarToAllPlayers(String message) {
@@ -125,9 +130,7 @@ public class StaffActionBar implements Listener {
 	}
 
 	public static void sendActionBarToAllPlayers(String message, int duration) {
-		for (Player p : Bukkit.getOnlinePlayers()) {
+		for (Player p : Bukkit.getOnlinePlayers())
 			sendActionBar(p, message, duration);
-		}
 	}
-
 }

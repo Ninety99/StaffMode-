@@ -29,17 +29,17 @@ public class StaffCommands implements Listener, CommandExecutor {
 
 				if (args.length == 1) {
 					if (args[0].equalsIgnoreCase("chatclear")) {
-						for (Player all : Bukkit.getServer().getOnlinePlayers()) {
+						for (Player all : StaffUtils.getOnlinePlayers()) {
 							for (int i = 0; i < 100; i++) {
-								if (!all.hasPermission(StaffConfig.getString("permchatclear")))
+								if (!all.hasPermission("staffmode.chatclear"))
 									all.sendMessage("\n");
 							}
 						}
 
 						send(sender);
 
-						for (Player all : Bukkit.getServer().getOnlinePlayers()) {
-							if (all.hasPermission(StaffConfig.getString("permchatclear")))
+						for (Player all : StaffUtils.getOnlinePlayers()) {
+							if (all.hasPermission("staffmode.chatclear"))
 								all.sendMessage(ChatColor.GREEN
 										+ "You did not get your chat cleared because of your permissions!");
 						}
@@ -104,7 +104,7 @@ public class StaffCommands implements Listener, CommandExecutor {
 
 				if (args.length == 1) {
 					if (args[0].equalsIgnoreCase("quitgmsp")) {
-						if (player.hasPermission(StaffConfig.getString("gmchangerpermgm0"))) {
+						if (player.hasPermission("staffmode.gm0")) {
 							if (player.getGameMode() != GameMode.SURVIVAL
 									&& player.getGameMode() == GameMode.SPECTATOR) {
 								player.setGameMode(GameMode.SURVIVAL);
@@ -123,7 +123,7 @@ public class StaffCommands implements Listener, CommandExecutor {
 					}
 
 					if (args[0].equalsIgnoreCase("chatclear")) {
-						if (player.hasPermission(StaffConfig.getString("permchatclear"))) {
+						if (player.hasPermission("staffmode.chatclear")) {
 							for (int i = 0; i < 100; i++) {
 								for (Player all : Bukkit.getServer().getOnlinePlayers()) {
 									if (!all.hasPermission(StaffConfig.getString("permchatclear")))
@@ -141,7 +141,7 @@ public class StaffCommands implements Listener, CommandExecutor {
 					}
 
 					if (args[0].equalsIgnoreCase("chatrules")) {
-						if (player.hasPermission(StaffConfig.getString("permchatrules"))) {
+						if (player.hasPermission("staffmode.chatrules")) {
 							addRules(StaffChatRulesInventory.getChatrule());
 							player.openInventory(StaffChatRulesInventory.getChatrule());
 							player.sendMessage(StaffUtils.format("&9Opening chat rule inventory.."));
@@ -161,7 +161,7 @@ public class StaffCommands implements Listener, CommandExecutor {
 				}
 
 				if (args.length > 1) {
-					player.sendMessage(StaffUtils.format("&cINvalid command."));
+					player.sendMessage(StaffUtils.format("&cInvalid command."));
 					return true;
 				}
 			}
@@ -203,7 +203,7 @@ public class StaffCommands implements Listener, CommandExecutor {
 
 	public void send(CommandSender sender) {
 		if (sender instanceof Player) {
-			if (!(sender.hasPermission(StaffConfig.getString("permchatclear")))) {
+			if (!(sender.hasPermission("staffmode.chatclear"))) {
 				Bukkit.getServer()
 						.broadcastMessage(ChatColor.GRAY + "           -=[+]----===================----[+]=-\n"
 								+ ChatColor.GOLD + "            Chat has been cleared by " + ChatColor.RED

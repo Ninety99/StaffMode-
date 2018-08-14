@@ -30,20 +30,20 @@ public class StaffBMInfoHook implements StaffBMInfoInterface {
 	public int getBans(OfflinePlayer target) {
 		if (target == null)
 			return 0;
-		
+
 		ArrayList arg47 = GCBanz.sql.getHistory(target.getName());
-		
+
 		if (arg47 == null)
 			return 0;
 
 		if (arg47.size() == 0)
 			return 0;
-		
+
 		Map arg49 = (Map) arg47.stream().collect(Collectors.groupingBy(Violation::getType));
 
 		if (arg49 == null)
 			return 0;
-		
+
 		if (arg49.size() == 0)
 			return 0;
 
@@ -51,7 +51,7 @@ public class StaffBMInfoHook implements StaffBMInfoInterface {
 
 		if (arg52 == 0)
 			return 0;
-		
+
 		return arg52;
 	}
 
@@ -60,7 +60,7 @@ public class StaffBMInfoHook implements StaffBMInfoInterface {
 	public int getMutes(OfflinePlayer target) {
 		if (target == null)
 			return 0;
-		
+
 		ArrayList arg47 = GCBanz.sql.getHistory(target.getName());
 
 		if (arg47 == null)
@@ -73,15 +73,18 @@ public class StaffBMInfoHook implements StaffBMInfoInterface {
 
 		if (arg49 == null)
 			return 0;
-		
+
 		if (arg49.size() == 0)
 			return 0;
 
+		if ((ArrayList) arg49.get(Type.WARN) == null)
+			return 0;
+
 		int arg52 = ((ArrayList) arg49.get(Type.MUTE)).size();
-		
+
 		if (arg52 == 0)
 			return 0;
-		
+
 		return arg52;
 	}
 
@@ -90,7 +93,7 @@ public class StaffBMInfoHook implements StaffBMInfoInterface {
 	public int getKicks(OfflinePlayer target) {
 		if (target == null)
 			return 0;
-		
+
 		ArrayList arg47 = GCBanz.sql.getHistory(target.getName());
 
 		if (arg47 == null)
@@ -103,15 +106,18 @@ public class StaffBMInfoHook implements StaffBMInfoInterface {
 
 		if (arg49 == null)
 			return 0;
-		
+
 		if (arg49.size() == 0)
 			return 0;
 
-		int arg52 = ((ArrayList) arg49.get(Type.KICK)).size();
+		if ((ArrayList) arg49.get(Type.WARN) == null)
+			return 0;
 
+		int arg52 = ((ArrayList) arg49.get(Type.KICK)).size();
+		
 		if (arg52 == 0)
 			return 0;
-		
+
 		return arg52;
 	}
 
@@ -120,7 +126,7 @@ public class StaffBMInfoHook implements StaffBMInfoInterface {
 	public int getWarns(OfflinePlayer target) {
 		if (target == null)
 			return 0;
-		
+
 		ArrayList arg47 = GCBanz.sql.getHistory(target.getName());
 
 		if (arg47 == null)
@@ -133,15 +139,18 @@ public class StaffBMInfoHook implements StaffBMInfoInterface {
 
 		if (arg49 == null)
 			return 0;
-		
+
 		if (arg49.size() == 0)
+			return 0;
+
+		if ((ArrayList) arg49.get(Type.WARN) == null)
 			return 0;
 
 		int arg52 = ((ArrayList) arg49.get(Type.WARN)).size();
 
 		if (arg52 == 0)
 			return 0;
-		
+
 		return arg52;
 	}
 }

@@ -1,6 +1,7 @@
 package me.NinetyNine.staff.utils.interfaces;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -37,22 +38,21 @@ public interface StaffEntityInteractAbility extends Listener {
 		if (!(e.getRightClicked() instanceof Player))
 			return;
 
-		System.out.println("right clicked is player (normal)");
-		
 		if (!(StaffUtils.isInStaffMode(e.getPlayer())))
 			return;
-		
-		System.out.println("is in staff mode (normal)");
 
 		if (e.getPlayer().getItemInHand() == null)
 			return;
+
+		if (e.getPlayer().getItemInHand().getType().equals(Material.AIR))
+			return;
 		
-		System.out.println("is not null (normal)");
-		
+		if (!(e.getPlayer().getItemInHand().hasItemMeta()))
+			return;
+
 		if (e.getPlayer().getItemInHand().getType().equals(getAbilityItem().getType()))
 			performAbility(e.getPlayer(), e.getPlayer().getItemInHand(), (Player) e.getRightClicked());
-
-		System.out.println("done [normal]");
-
+		else
+			return;
 	}
 }

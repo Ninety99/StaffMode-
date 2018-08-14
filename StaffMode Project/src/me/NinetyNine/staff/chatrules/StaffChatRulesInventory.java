@@ -93,6 +93,9 @@ public class StaffChatRulesInventory implements Listener {
 		if (e.getCurrentItem() == null)
 			return;
 
+		if (!(((Player) e.getWhoClicked()).hasPermission("staffmoe.chatrules")))
+			return;
+
 		List<Inventory> invs = new ArrayList<Inventory>(
 				Arrays.asList(getChatrule(), getAdv(), getFlood(), getArguing(), getAskStaff(), getBypassChat(),
 						getCaps(), getChatTrolling(), getDdos(), getHack(), getHackusating(), getInappb()));

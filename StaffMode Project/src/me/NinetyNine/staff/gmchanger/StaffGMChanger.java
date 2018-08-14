@@ -8,22 +8,19 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import lombok.Getter;
-import me.NinetyNine.staff.utils.StaffConfig;
 import me.NinetyNine.staff.utils.StaffItems;
 import me.NinetyNine.staff.utils.StaffUtils;
 import me.NinetyNine.staff.utils.interfaces.StaffInteractAbility;
 
 public class StaffGMChanger implements StaffInteractAbility {
-	
+
 	@Getter
 	private static Inventory gmInventory = Bukkit.createInventory(null, 9, ChatColor.RED + "Gamemode Changer");
-	
+
 	@Override
 	public void performAbility(Player player, ItemStack item) {
-		if (!(player.hasPermission(StaffConfig.getString("gmchangerpermgm0"))
-				|| player.hasPermission(StaffConfig.getString("gmchangerpermgm1"))
-				|| player.hasPermission(StaffConfig.getString("gmchangerpermgm2"))
-				|| player.hasPermission(StaffConfig.getString("gmchangerpermgm3")))) {
+		if (!(player.hasPermission("staffmode.gm0") || player.hasPermission("staffmode.gm1")
+				|| player.hasPermission("staffmode.gm2") || player.hasPermission("staffmode.gm3"))) {
 			player.sendMessage(StaffUtils.format("&cYou do not have permissions to use this feature!"));
 			return;
 		}

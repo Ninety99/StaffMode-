@@ -29,7 +29,7 @@ public class StaffPlayers implements StaffInteractAbility {
 
 	@Override
 	public void performAbility(Player player, ItemStack item) {
-		addStuff(player);
+		addSkulls(player);
 		addMisc(1);
 		addMisc(2);
 		addMisc(3);
@@ -49,20 +49,20 @@ public class StaffPlayers implements StaffInteractAbility {
 		return ChatColor.RED + "Players " + ChatColor.GRAY + "(Right Click)";
 	}
 
-	public void addStuff(Player player) {
-		if (StaffUtils.getNumberOfContents(i) <= 54)
+	public void addSkulls(Player player) {
+		if (StaffUtils.getNumberOfContents(i) <= 53)
 			StaffItems.addSkullsWithBMInfo(i);
 		else {
-			if (StaffUtils.getNumberOfContents(i2) <= 54)
+			if (StaffUtils.getNumberOfContents(i2) <= 53)
 				StaffItems.addSkullsWithBMInfo(i2);
 			else {
-				if (StaffUtils.getNumberOfContents(i3) <= 54)
+				if (StaffUtils.getNumberOfContents(i3) <= 53)
 					StaffItems.addSkullsWithBMInfo(i3);
 				else {
-					if (StaffUtils.getNumberOfContents(i4) <= 54)
+					if (StaffUtils.getNumberOfContents(i4) <= 53)
 						StaffItems.addSkullsWithBMInfo(i4);
 					else {
-						if (StaffUtils.getNumberOfContents(i5) <= 54)
+						if (StaffUtils.getNumberOfContents(i5) <= 53)
 							StaffItems.addSkullsWithBMInfo(i5);
 					}
 				}

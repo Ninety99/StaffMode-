@@ -22,7 +22,7 @@ public class StaffInspectInventory implements Listener {
 			return;
 
 		Player player = (Player) e.getWhoClicked();
-		
+
 		if (player.getGameMode().equals(GameMode.CREATIVE))
 			return;
 		else

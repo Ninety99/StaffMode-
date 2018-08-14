@@ -12,7 +12,6 @@ import org.bukkit.inventory.ItemStack;
 
 import me.NinetyNine.staff.actionbar.StaffActionBar;
 import me.NinetyNine.staff.utils.Flyer;
-import me.NinetyNine.staff.utils.StaffConfig;
 import me.NinetyNine.staff.utils.StaffUtils;
 import me.NinetyNine.staff.utils.interfaces.inventory.StaffInventoryClickInterface;
 
@@ -21,7 +20,7 @@ public class StaffInventoryGM implements StaffInventoryClickInterface {
 	@Override
 	public void performAbility(Player player, Inventory inventory, ItemStack item) {
 		if (item.getType().equals(Material.GRASS)) {
-			if (player.hasPermission(StaffConfig.getString("gmchangerpermgm0"))) {
+			if (player.hasPermission("staffmode.gm0")) {
 				player.closeInventory();
 				player.setGameMode(GameMode.SURVIVAL);
 				if (Flyer.isInFly(player))
@@ -42,7 +41,7 @@ public class StaffInventoryGM implements StaffInventoryClickInterface {
 		}
 
 		if (item.getType().equals(Material.WOOL)) {
-			if (player.hasPermission(StaffConfig.getString("gmchangerpermgm1"))) {
+			if (player.hasPermission("staffmode.gm1")) {
 				player.closeInventory();
 				player.setGameMode(GameMode.CREATIVE);
 				StaffActionBar.sendActionBar(player,
@@ -61,7 +60,7 @@ public class StaffInventoryGM implements StaffInventoryClickInterface {
 		}
 
 		if (item.getType().equals(Material.GLASS)) {
-			if (player.hasPermission(StaffConfig.getString("gmchangerpermgm2"))) {
+			if (player.hasPermission("staffmode.gm2")) {
 				player.closeInventory();
 				player.setGameMode(GameMode.ADVENTURE);
 				if (Flyer.isInFly(player))
@@ -82,7 +81,7 @@ public class StaffInventoryGM implements StaffInventoryClickInterface {
 		}
 
 		if (item.getType().equals(Material.EYE_OF_ENDER)) {
-			if (player.hasPermission(StaffConfig.getString("gmchangerpermgm3"))) {
+			if (player.hasPermission("staffmode.gm3")) {
 				player.closeInventory();
 				player.setGameMode(GameMode.SPECTATOR);
 				StaffActionBar.sendActionBar(player,

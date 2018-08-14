@@ -3,41 +3,75 @@ package me.NinetyNine.staff.inspect;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
 
-import me.NinetyNine.staff.utils.StaffItems;
 import me.NinetyNine.staff.utils.StaffUtils;
 import me.NinetyNine.staff.utils.interfaces.StaffEntityInteractAbility;;
 
 public class StaffInspect implements StaffEntityInteractAbility {
+
 	@Override
 	public void performAbility(Player player, ItemStack item, Player clicked) {
-		System.out.println("performing Ability");
-		Inventory clickedInventory = Bukkit.createInventory(null, clicked.getInventory().getSize() + 9,
-				ChatColor.DARK_GRAY + clicked.getName() + "'s inventory");
 
-		clickedInventory.setContents(clicked.getInventory().getContents());
-		StaffItems.createArmor(clickedInventory, 36, 37, 38, 39, clicked);
+		String helmet = "";
+		String chestplate = "";
+		String leggings = "";
+		String boots = "";
 
-		List<String> lore = new ArrayList<String>();
-		StaffItems.createPotionEffectWithUpdate(clickedInventory, player, Material.GLASS_BOTTLE, lore);
-		StaffItems.createItem(clickedInventory, 40, Material.GLASS_BOTTLE, "Active Potion Effects", lore);
+		if (clicked.getInventory().getHelmet() != null)
+			helmet = clicked.getInventory().getHelmet().toString();
 
-		List<String> lore2 = new ArrayList<String>();
-		double health = clicked.getHealth() - 10.0;
-		lore2.add(ChatColor.RED + "Health: " + health);
-		lore2.add(ChatColor.RED + "Food Level: " + clicked.getFoodLevel());
+		if (clicked.getInventory().getChestplate() != null)
+			chestplate = clicked.getInventory().getChestplate().toString();
 
-		StaffItems.createItem(clickedInventory, 42, Material.SPECKLED_MELON, ChatColor.GRAY + "Player Info", lore2);
+		if (clicked.getInventory().getLeggings() != null)
+			leggings = clicked.getInventory().getLeggings().toString();
 
-		StaffItems.createItemWithBMInfo(clicked, clickedInventory, 44, Material.EMERALD, ChatColor.RED + "BMInfo");
+		if (clicked.getInventory().getBoots() != null)
+			boots = clicked.getInventory().getBoots().toString();
 
-		player.openInventory(clickedInventory);
+		player.sendMessage(StaffUtils.format("&cPlayer Information:"));
+		player.sendMessage(StaffUtils.format("&aArmor: "));
+
+		if (helmet == "")
+			player.sendMessage(StaffUtils.format(" &0- &cHelmet: &bNone"));
+
+		player.sendMessage(StaffUtils.format(
+				" &0- &cHelmet: &b" + ("" + helmet.charAt(0)).toUpperCase() + helmet.substring(1).toLowerCase()));
+
+		if (chestplate == "")
+			player.sendMessage(StaffUtils.format(" &0- &cChestplate: &bNone"));
+
+		player.sendMessage(StaffUtils.format(" &0- &cChestplate: &b" + ("" + chestplate.charAt(0)).toUpperCase()
+				+ chestplate.substring(1).toLowerCase()));
+
+		if (leggings == "")
+			player.sendMessage(StaffUtils.format("&0- &cLeggings: &bNone"));
+
+		player.sendMessage(StaffUtils.format(
+				"&0- &cLeggings: &b" + ("" + leggings.charAt(0)).toUpperCase() + leggings.substring(1).toLowerCase()));
+
+		if (boots == "")
+			player.sendMessage(StaffUtils.format("&0- &cBoots: &bNone"));
+
+		player.sendMessage(StaffUtils
+				.format(" &0- &cBoots: &b" + ("" + boots.charAt(0)).toUpperCase() + boots.substring(1).toLowerCase()));
+
+		player.sendMessage(StaffUtils.format("&aPotion Effect(s): "));
+
+		for (PotionEffect effects : getPotionEffects(player)) {
+			player.sendMessage(" &0- " + StaffUtils.format(("" + effects.getType().getName().charAt(0)).toUpperCase()
+					+ effects.getType().getName().substring(1).toLowerCase() + " &aDuration: &b" + effects.getDuration()
+					+ " &aAmplifier: &b" + effects.getAmplifier()));
+		}
+
+		player.sendMessage(StaffUtils.format("&cBMInfo: "));
+		player.performCommand("bminfo " + clicked.getName());
+		player.openInventory(clicked.getInventory());
 		player.sendMessage(StaffUtils.format("&9Opening " + clicked.getName() + "'s inventory"));
 		return;
 	}
@@ -50,5 +84,18 @@ public class StaffInspect implements StaffEntityInteractAbility {
 	@Override
 	public String getAbilityName() {
 		return ChatColor.LIGHT_PURPLE + "Inspect";
+	}
+
+	private static List<PotionEffect> getPotionEffects(Player player) {
+		List<PotionEffect> pots = new ArrayList<PotionEffect>();
+
+		for (PotionEffect effect : player.getActivePotionEffects()) {
+			if (effect != null)
+				pots.add(effect);
+			else
+				return null;
+		}
+
+		return pots;
 	}
 }

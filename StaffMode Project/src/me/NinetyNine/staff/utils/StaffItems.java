@@ -14,11 +14,8 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import lombok.Getter;
-import me.NinetyNine.staff.Staff;
 import me.NinetyNine.staff.bminfo.StaffBMInfoHook;
 import me.NinetyNine.staff.bminfo.StaffBMInfoInterface;
 
@@ -114,19 +111,26 @@ public class StaffItems {
 
 	}
 
+	@Getter
+	private static Map<Player, Inventory> In = new HashMap<Player, Inventory>();
+	
+	@Getter
+	private static Map<Player, ItemStack> InWithSkull = new HashMap<Player, ItemStack>();
+
 	public static void addSkullsWithBMInfo(Inventory inventory) {
-		ItemStack skull = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
-		SkullMeta meta = (SkullMeta) skull.getItemMeta();
-
-		List<String> lore = null;
-
 		for (Player all : StaffUtils.getOnlinePlayers()) {
+			if (!getIn().containsKey(all))
+				getIn().put(all, inventory);
+
+			ItemStack skull = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
+			SkullMeta meta = (SkullMeta) skull.getItemMeta();
+
 			meta.setDisplayName(all.getName());
 			meta.setOwner(all.getName());
 
 			StaffBMInfoInterface bminfo = new StaffBMInfoHook();
 
-			lore = new ArrayList<String>();
+			List<String> lore = new ArrayList<String>();
 
 			lore.add(ChatColor.AQUA + "BMInfo:");
 			lore.add(" ");
@@ -134,13 +138,18 @@ public class StaffItems {
 			lore.add(ChatColor.RED + "Mutes: " + ChatColor.GOLD + bminfo.getMutes(all));
 			lore.add(ChatColor.RED + "Kicks: " + ChatColor.GOLD + bminfo.getKicks(all));
 			lore.add(ChatColor.RED + "Warns: " + ChatColor.GOLD + bminfo.getWarns(all));
+
+			meta.setLore(lore);
+			skull.setItemMeta(meta);
+
+			if (!getInWithSkull().containsKey(all))
+				getInWithSkull().put(all, skull);
+
+			if (getIn().containsKey(all)) {
+				if (!(getIn().get(all).contains(skull)))
+					getIn().get(all).addItem(skull);
+			}
 		}
-
-		meta.setLore(lore);
-		skull.setItemMeta(meta);
-
-		if (!inventory.contains(skull))
-			inventory.addItem(skull);
 	}
 
 	public static void createItemWithColor(Inventory inventory, Material item, int slot, String displayName, int data) {
@@ -151,8 +160,8 @@ public class StaffItems {
 		inventory.setItem(slot, it);
 	}
 
-	public static void createArmor(Inventory inventory, int helmetSlot, int chestplateSlot, int leggingsSlot,
-			int bootsSlot, Player owner) {
+	public static void createArmor(Player owner, Inventory inventory, int helmetSlot, int chestplateSlot,
+			int leggingsSlot, int bootsSlot) {
 		ItemStack helmet = owner.getInventory().getHelmet();
 		ItemStack chestplate = owner.getInventory().getChestplate();
 		ItemStack leggings = owner.getInventory().getChestplate();
@@ -164,47 +173,9 @@ public class StaffItems {
 		inventory.setItem(bootsSlot, boots);
 	}
 
-	public static void createPotionEffectWithUpdate(Inventory inventory, Player player, Material mat, List<String> lore) {
-		for (PotionEffect effect : getPotionEffects(player)) {
-			ItemStack potion = new ItemStack(mat);
-			ItemMeta meta = potion.getItemMeta();
-
-			lore.add("Active Potion Effect(s): " + ("" + effect.getType().getName().charAt(0)).toUpperCase()
-					+ effect.getType().getName().substring(1));
-
-			Map<List<String>, Integer> t = new HashMap<List<String>, Integer>();
-			t.put(lore, effect.getDuration());
-			int duration = t.get(lore);
-			new BukkitRunnable() {
-				@Override
-				public void run() {
-					if (duration != 0) {
-						int i = t.get(lore);
-						t.put(lore, i--);
-					} else
-						cancel();
-				}
-			}.runTaskTimer(Staff.getInstance(), 20L, 20L);
-			lore.add(ChatColor.AQUA + "Duration: " + t.get(lore));
-
-			lore.add(ChatColor.AQUA + "Amplifier(Potion Level): " + effect.getAmplifier());
-			meta.setLore(lore);
-		}
-	}
-
-	private static List<PotionEffect> getPotionEffects(Player player) {
-		List<PotionEffect> pots = new ArrayList<PotionEffect>();
-
-		for (PotionEffect effect : player.getActivePotionEffects())
-			if (effect != null)
-				pots.add(effect);
-			else
-				return null;
-
-		return pots;
-	}
-
 	public static void clear() {
 		getStaffItems().clear();
+		getIn().clear();
+		getInWithSkull().clear();
 	}
 }
