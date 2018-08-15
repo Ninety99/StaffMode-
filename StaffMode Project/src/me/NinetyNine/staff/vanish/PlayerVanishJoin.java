@@ -11,7 +11,7 @@ public class PlayerVanishJoin implements Listener {
 
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent e) {
-		if (StaffVanish.getAllPlayers().contains(e.getPlayer()))
+		if (StaffUtils.getOnlinePlayers().contains(e.getPlayer()))
 			return;
 		else {
 			if (!e.getPlayer().hasPermission("staffmode.vanishbypass")) {

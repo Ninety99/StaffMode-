@@ -3,12 +3,16 @@ package me.NinetyNine.staff.inspect;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.craftbukkit.libs.joptsimple.internal.Strings;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 
+import me.NinetyNine.staff.utils.StaffItems;
 import me.NinetyNine.staff.utils.StaffUtils;
 import me.NinetyNine.staff.utils.interfaces.StaffEntityInteractAbility;;
 
@@ -16,62 +20,44 @@ public class StaffInspect implements StaffEntityInteractAbility {
 
 	@Override
 	public void performAbility(Player player, ItemStack item, Player clicked) {
+		Inventory clickedInventory = Bukkit.createInventory(null, clicked.getInventory().getSize() + 9,
+				ChatColor.BLUE + clicked.getName() + "'s inventory");
 
-		String helmet = "";
-		String chestplate = "";
-		String leggings = "";
-		String boots = "";
-
-		if (clicked.getInventory().getHelmet() != null)
-			helmet = clicked.getInventory().getHelmet().toString();
-
-		if (clicked.getInventory().getChestplate() != null)
-			chestplate = clicked.getInventory().getChestplate().toString();
-
-		if (clicked.getInventory().getLeggings() != null)
-			leggings = clicked.getInventory().getLeggings().toString();
-
-		if (clicked.getInventory().getBoots() != null)
-			boots = clicked.getInventory().getBoots().toString();
-
-		player.sendMessage(StaffUtils.format("&cPlayer Information:"));
-		player.sendMessage(StaffUtils.format("&aArmor: "));
-
-		if (helmet == "")
-			player.sendMessage(StaffUtils.format(" &0- &cHelmet: &bNone"));
-
-		player.sendMessage(StaffUtils.format(
-				" &0- &cHelmet: &b" + ("" + helmet.charAt(0)).toUpperCase() + helmet.substring(1).toLowerCase()));
-
-		if (chestplate == "")
-			player.sendMessage(StaffUtils.format(" &0- &cChestplate: &bNone"));
-
-		player.sendMessage(StaffUtils.format(" &0- &cChestplate: &b" + ("" + chestplate.charAt(0)).toUpperCase()
-				+ chestplate.substring(1).toLowerCase()));
-
-		if (leggings == "")
-			player.sendMessage(StaffUtils.format("&0- &cLeggings: &bNone"));
-
-		player.sendMessage(StaffUtils.format(
-				"&0- &cLeggings: &b" + ("" + leggings.charAt(0)).toUpperCase() + leggings.substring(1).toLowerCase()));
-
-		if (boots == "")
-			player.sendMessage(StaffUtils.format("&0- &cBoots: &bNone"));
-
-		player.sendMessage(StaffUtils
-				.format(" &0- &cBoots: &b" + ("" + boots.charAt(0)).toUpperCase() + boots.substring(1).toLowerCase()));
-
-		player.sendMessage(StaffUtils.format("&aPotion Effect(s): "));
-
-		for (PotionEffect effects : getPotionEffects(player)) {
-			player.sendMessage(" &0- " + StaffUtils.format(("" + effects.getType().getName().charAt(0)).toUpperCase()
-					+ effects.getType().getName().substring(1).toLowerCase() + " &aDuration: &b" + effects.getDuration()
-					+ " &aAmplifier: &b" + effects.getAmplifier()));
+		for (ItemStack items : clicked.getInventory().getContents()) {
+			for (int i = 0; i < clicked.getInventory().getSize(); i++) {
+				clickedInventory.setItem(i, items);
+				System.out.println("clickedInventory.setItem(" + i + ", " + items.toString() + ")");
+			}
 		}
 
-		player.sendMessage(StaffUtils.format("&cBMInfo: "));
-		player.performCommand("bminfo " + clicked.getName());
-		player.openInventory(clicked.getInventory());
+		StaffItems.createArmor(clicked, clickedInventory, 36, 37, 38, 39);
+
+		List<String> lore = new ArrayList<>();
+
+		lore.add(ChatColor.GOLD + "Potion Effect(s): ");
+		List<String> effectstring = null;
+
+		for (PotionEffect effects : getPotionEffects(player)) {
+			effectstring = new ArrayList<>();
+			effectstring.add(("" + effects.getType().getName().charAt(0)).toUpperCase()
+					+ effects.getType().getName().substring(1) + ChatColor.RED + " Duration: " + ChatColor.GOLD
+					+ effects.getDuration() + ChatColor.RED + " Amplifier: " + ChatColor.GOLD + effects.getAmplifier());
+			System.out.println("adding potion effects..");
+		}
+		Strings.join(effectstring, ",");
+		System.out.println("Strings.join");
+
+		for (String effects : effectstring)
+			lore.add(ChatColor.GOLD + effects);
+		System.out.println("added potions");
+
+		StaffItems.createItem(clickedInventory, 41, Material.GLASS_BOTTLE, ChatColor.GREEN + "Potion Information",
+				lore);
+
+		StaffItems.createItemWithBMInfo(clicked, clickedInventory, 43, Material.EMERALD,
+				ChatColor.LIGHT_PURPLE + "BMInfo Information");
+		
+		player.openInventory(clickedInventory);
 		player.sendMessage(StaffUtils.format("&9Opening " + clicked.getName() + "'s inventory"));
 		return;
 	}

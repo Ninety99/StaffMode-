@@ -52,7 +52,7 @@ public class StaffItems {
 
 		inventory.setItem(slot, item2);
 
-		while (!getStaffItems().contains(item2))
+		if (!getStaffItems().contains(item2))
 			getStaffItems().add(item2);
 	}
 
@@ -69,7 +69,6 @@ public class StaffItems {
 
 		while (!getStaffItems().contains(item2))
 			getStaffItems().add(item2);
-
 	}
 
 	public static void createItemWithBMInfo(Player target, Inventory inventory, int slot, Material item,
@@ -91,7 +90,7 @@ public class StaffItems {
 		meta.setLore(lore);
 		item2.setItemMeta(meta);
 
-		while (!getStaffItems().contains(item2))
+		if (!getStaffItems().contains(item2))
 			getStaffItems().add(item2);
 
 		inventory.setItem(slot, item2);
@@ -106,14 +105,14 @@ public class StaffItems {
 
 		inventory.setItem(slot, glass);
 
-		while (!getStaffItems().contains(glass))
+		if (!getStaffItems().contains(glass))
 			getStaffItems().add(glass);
 
 	}
 
 	@Getter
 	private static Map<Player, Inventory> In = new HashMap<Player, Inventory>();
-	
+
 	@Getter
 	private static Map<Player, ItemStack> InWithSkull = new HashMap<Player, ItemStack>();
 
@@ -149,6 +148,9 @@ public class StaffItems {
 				if (!(getIn().get(all).contains(skull)))
 					getIn().get(all).addItem(skull);
 			}
+
+			if (!getStaffItems().contains(skull))
+				getStaffItems().add(skull);
 		}
 	}
 
@@ -158,15 +160,27 @@ public class StaffItems {
 		meta.setDisplayName(displayName);
 		it.setItemMeta(meta);
 		inventory.setItem(slot, it);
+
+		if (!getStaffItems().contains(it))
+			getStaffItems().add(it);
 	}
 
 	public static void createArmor(Player owner, Inventory inventory, int helmetSlot, int chestplateSlot,
 			int leggingsSlot, int bootsSlot) {
-		ItemStack helmet = owner.getInventory().getHelmet();
-		ItemStack chestplate = owner.getInventory().getChestplate();
-		ItemStack leggings = owner.getInventory().getChestplate();
-		ItemStack boots = owner.getInventory().getBoots();
+		ItemStack helmet = owner.getInventory().getHelmet().clone();
+		ItemStack chestplate = owner.getInventory().getChestplate().clone();
+		ItemStack leggings = owner.getInventory().getChestplate().clone();
+		ItemStack boots = owner.getInventory().getBoots().clone();
 
+		if (!getStaffItems().contains(helmet))
+			getStaffItems().add(helmet);
+		if (!getStaffItems().contains(chestplate))
+			getStaffItems().add(chestplate);
+		if (!getStaffItems().contains(leggings))
+			getStaffItems().add(leggings);
+		if (!getStaffItems().contains(boots))
+			getStaffItems().add(boots);
+		
 		inventory.setItem(helmetSlot, helmet);
 		inventory.setItem(chestplateSlot, chestplate);
 		inventory.setItem(leggingsSlot, leggings);

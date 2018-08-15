@@ -36,21 +36,15 @@ public class StaffBMInfoHook implements StaffBMInfoInterface {
 		if (arg47 == null)
 			return 0;
 
-		if (arg47.size() == 0)
-			return 0;
-
 		Map arg49 = (Map) arg47.stream().collect(Collectors.groupingBy(Violation::getType));
 
 		if (arg49 == null)
 			return 0;
 
-		if (arg49.size() == 0)
+		if ((ArrayList) arg49.get(Type.BAN) == null)
 			return 0;
 
 		int arg52 = ((ArrayList) arg49.get(Type.BAN)).size();
-
-		if (arg52 == 0)
-			return 0;
 
 		return arg52;
 	}
@@ -66,24 +60,15 @@ public class StaffBMInfoHook implements StaffBMInfoInterface {
 		if (arg47 == null)
 			return 0;
 
-		if (arg47.size() == 0)
-			return 0;
-
 		Map arg49 = (Map) arg47.stream().collect(Collectors.groupingBy(Violation::getType));
 
 		if (arg49 == null)
 			return 0;
 
-		if (arg49.size() == 0)
-			return 0;
-
-		if ((ArrayList) arg49.get(Type.WARN) == null)
+		if ((ArrayList) arg49.get(Type.MUTE) == null)
 			return 0;
 
 		int arg52 = ((ArrayList) arg49.get(Type.MUTE)).size();
-
-		if (arg52 == 0)
-			return 0;
 
 		return arg52;
 	}
@@ -99,24 +84,15 @@ public class StaffBMInfoHook implements StaffBMInfoInterface {
 		if (arg47 == null)
 			return 0;
 
-		if (arg47.size() == 0)
-			return 0;
-
 		Map arg49 = (Map) arg47.stream().collect(Collectors.groupingBy(Violation::getType));
 
 		if (arg49 == null)
 			return 0;
 
-		if (arg49.size() == 0)
-			return 0;
-
-		if ((ArrayList) arg49.get(Type.WARN) == null)
+		if ((ArrayList) arg49.get(Type.KICK) == null)
 			return 0;
 
 		int arg52 = ((ArrayList) arg49.get(Type.KICK)).size();
-		
-		if (arg52 == 0)
-			return 0;
 
 		return arg52;
 	}
@@ -132,24 +108,15 @@ public class StaffBMInfoHook implements StaffBMInfoInterface {
 		if (arg47 == null)
 			return 0;
 
-		if (arg47.size() == 0)
-			return 0;
-
 		Map arg49 = (Map) arg47.stream().collect(Collectors.groupingBy(Violation::getType));
 
 		if (arg49 == null)
-			return 0;
-
-		if (arg49.size() == 0)
 			return 0;
 
 		if ((ArrayList) arg49.get(Type.WARN) == null)
 			return 0;
 
 		int arg52 = ((ArrayList) arg49.get(Type.WARN)).size();
-
-		if (arg52 == 0)
-			return 0;
 
 		return arg52;
 	}

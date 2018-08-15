@@ -10,6 +10,7 @@ public class Flyer {
 		if (!StaffUtils.isInStaffMode(player))
 			return;
 
+		StaffFly.getFly().add(player);
 		player.setAllowFlight(true);
 		return;
 	}
@@ -18,6 +19,7 @@ public class Flyer {
 		if (!StaffUtils.isInStaffMode(player))
 			return;
 
+		StaffFly.getFly().remove(player);
 		player.setAllowFlight(false);
 		return;
 	}

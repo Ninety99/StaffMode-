@@ -36,7 +36,6 @@ public class StaffUtils {
 			player.getInventory().setArmorContents(null);
 			Vanisher.vanish(player);
 			Flyer.setFly(player);
-			StaffFly.getFly().add(player);
 			StaffItems.addStaffItems(player);
 			player.setFoodLevel(20);
 			player.setHealth(20);
@@ -53,7 +52,6 @@ public class StaffUtils {
 			player.getInventory().setContents(getStaff().get(player));
 			player.getInventory().setArmorContents(getStaffArmor().get(player));
 			Flyer.removeFly(player);
-			StaffFly.getFly().remove(player);
 			Vanisher.unvanish(player);
 			getStaff().remove(player);
 			getStaffArmor().remove(player);

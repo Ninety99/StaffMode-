@@ -24,6 +24,7 @@ permissions:
     default: false
     admin: true
     mod: true
+    helper: true
   staffmode.chatrules.set:
     default: op
   staffmode.unstaff:

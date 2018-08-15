@@ -12,6 +12,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import lombok.Getter;
 import me.NinetyNine.staff.utils.Flyer;
+import me.NinetyNine.staff.utils.StaffItems;
 import me.NinetyNine.staff.utils.StaffUtils;
 import me.NinetyNine.staff.utils.interfaces.StaffInteractOnOrOffAbility;
 
@@ -24,14 +25,14 @@ public class StaffFly implements StaffInteractOnOrOffAbility {
 	public void performAbility(Player player, ItemStack item) {
 		if (Flyer.isInFly(player)) {
 			getFly().remove(player);
-			remove(item);
+			off(item);
 			Flyer.removeFly(player);
 			player.sendMessage(StaffUtils.format("&9Fly &7mode has been &cdisabled!"));
 			return;
 		} else {
 			getFly().add(player);
 			Flyer.setFly(player);
-			add(item);
+			on(item);
 			player.sendMessage(StaffUtils.format("&9Fly &7mode has been &aenabled!"));
 			return;
 		}
@@ -57,18 +58,26 @@ public class StaffFly implements StaffInteractOnOrOffAbility {
 		return ChatColor.RED + "Fly";
 	}
 
-	private void add(ItemStack item) {
+	@Override
+	public void on(ItemStack item) {
 		ItemMeta meta = item.getItemMeta();
 		meta.addEnchant(Enchantment.DURABILITY, 1, true);
 		meta.setDisplayName(ChatColor.GREEN + "Fly");
 		item.setItemMeta(meta);
+		
+		if (!(StaffItems.getStaffItems().contains(item)))
+			StaffItems.getStaffItems().add(item);
 	}
 
-	private void remove(ItemStack item) {
+	@Override
+	public void off(ItemStack item) {
 		ItemMeta meta = item.getItemMeta();
 		meta.removeEnchant(Enchantment.DURABILITY);
 		meta.setDisplayName(ChatColor.RED + "Fly");
 		item.setItemMeta(meta);
+		
+		if (!(StaffItems.getStaffItems().contains(item)))
+			StaffItems.getStaffItems().add(item);
 	}
 
 	public static void clear() {

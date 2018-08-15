@@ -112,6 +112,8 @@ public class StaffPLChest implements Listener {
 						if (ent instanceof Player) {
 							if (StaffUtils.isInStaffMode((Player) ent))
 								e.setCancelled(true);
+							else
+								return;
 						}
 					}
 

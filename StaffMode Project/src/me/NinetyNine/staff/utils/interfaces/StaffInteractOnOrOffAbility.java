@@ -35,6 +35,9 @@ public interface StaffInteractOnOrOffAbility extends Listener {
 						&& meta.getDisplayName().equals(getAbilityNameWhenOn())
 				|| meta.getDisplayName().equals(getAbilityNameWhenOff());
 	}
+	
+	public void on(ItemStack item);
+	public void off(ItemStack item);
 
 	@EventHandler
 	public default void abilityUse(final PlayerInteractEvent e) {

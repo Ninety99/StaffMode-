@@ -117,12 +117,6 @@ public class StaffActionBar implements Listener {
 					cancel();
 			}
 		}.runTaskTimer(plugin, 20L, (long) duration);
-		
-		new BukkitRunnable() {
-			public void run() {
-				
-			}
-		}.runTaskTimer(plugin, 20L, 20L);
 	}
 
 	public static void sendActionBarToAllPlayers(String message) {

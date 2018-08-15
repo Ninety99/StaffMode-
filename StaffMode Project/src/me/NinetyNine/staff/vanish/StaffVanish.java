@@ -12,6 +12,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import lombok.Getter;
 import me.NinetyNine.staff.actionbar.StaffActionBar;
+import me.NinetyNine.staff.utils.StaffItems;
 import me.NinetyNine.staff.utils.StaffUtils;
 import me.NinetyNine.staff.utils.Vanisher;
 import me.NinetyNine.staff.utils.interfaces.StaffInteractOnOrOffAbility;
@@ -21,8 +22,6 @@ public class StaffVanish implements StaffInteractOnOrOffAbility {
 	@Getter
 	private static List<Player> vanishedPlayers = new ArrayList<Player>();
 
-	@Getter
-	private static List<Player> allPlayers = new ArrayList<Player>();
 	@Override
 	public void performAbility(Player player, ItemStack item) {
 		if (Vanisher.isInVanish(player)) {
@@ -60,25 +59,28 @@ public class StaffVanish implements StaffInteractOnOrOffAbility {
 		return new ItemStack(Material.TORCH);
 	}
 
-	private void on(ItemStack a) {
-		a.setType(Material.REDSTONE_TORCH_ON);
-		ItemMeta am = a.getItemMeta();
-		am.setDisplayName(ChatColor.GREEN + "Vanish");
-		am.addEnchant(Enchantment.DURABILITY, 1, true);
-		a.setItemMeta(am);
+	@Override
+	public void on(ItemStack item) {
+		item.setType(Material.REDSTONE_TORCH_ON);
+		ItemMeta meta = item.getItemMeta();
+		meta.setDisplayName(ChatColor.GREEN + "Vanish");
+		meta.addEnchant(Enchantment.DURABILITY, 1, true);
+		item.setItemMeta(meta);
+
+		if (!(StaffItems.getStaffItems().contains(item)))
+			StaffItems.getStaffItems().add(item);
 	}
 
-	private void off(ItemStack a) {
-		a.setType(Material.TORCH);
-		ItemMeta am = a.getItemMeta();
-		am.setDisplayName(ChatColor.RED + "Vanish");
-		am.removeEnchant(Enchantment.DURABILITY);
-		a.setItemMeta(am);
+	@Override
+	public void off(ItemStack item) {
+		item.setType(Material.TORCH);
+		ItemMeta meta = item.getItemMeta();
+		meta.setDisplayName(ChatColor.RED + "Vanish");
+		meta.removeEnchant(Enchantment.DURABILITY);
+		item.setItemMeta(meta);
 	}
 
 	public static void clear() {
 		getVanishedPlayers().clear();
-		getAllPlayers().clear();
 	}
-
 }
