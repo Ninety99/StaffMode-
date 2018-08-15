@@ -27,7 +27,23 @@ public class StaffConfig implements Listener {
 	}
 
 	public static List<String> getStringList(String path){
-		return getConfig().getStringList(path);
+		List<String> list = getConfig().getStringList(path);
+		
+		return list;
+	}
+	
+	public static void removeStringFromList(String string) {
+		List<String> list = getStringList("anniWorlds");
+		list.remove(string);
+		getConfig().set("anniWorlds", list);
+		save();
+	}
+	
+	public static void addStringToList(String string) {
+		List<String> list = getStringList("anniWorlds");
+		list.add(string);
+		getConfig().set("anniWorlds", list);
+		save();
 	}
 	
 	public static String getString(String path) {

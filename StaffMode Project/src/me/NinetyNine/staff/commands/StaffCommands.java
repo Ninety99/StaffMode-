@@ -165,10 +165,7 @@ public class StaffCommands implements Listener, CommandExecutor {
 					if (args[0].equalsIgnoreCase("addworld")) {
 						if (player.hasPermission("staffmode.addworld")) {
 							if (!StaffConfig.getStringList("anniWorlds").contains(player.getWorld().getName())) {
-								System.out.println("" + StaffConfig.getStringList("anniWorlds")
-										.contains(player.getWorld().getName()));
-								StaffConfig.getStringList("anniWorlds").add(player.getWorld().getName());
-								StaffConfig.save();
+								StaffConfig.addStringToList(player.getWorld().getName());
 								player.sendMessage(StaffUtils.format("&aSuccesfully added &c"
 										+ player.getWorld().getName() + " &ato the anni world list!"));
 								return true;
@@ -191,10 +188,7 @@ public class StaffCommands implements Listener, CommandExecutor {
 										"&c" + player.getWorld().getName() + " &7is not on the anni world list!"));
 								return true;
 							} else {
-								System.out.println("" + StaffConfig.getStringList("anniWorlds")
-										.contains(player.getWorld().getName()));
-								StaffConfig.getStringList("anniWorlds").remove(player.getWorld().getName());
-								StaffConfig.save();
+								StaffConfig.removeStringFromList(player.getWorld().getName());
 								player.sendMessage(StaffUtils.format("&aSuccesfully removed &c"
 										+ player.getWorld().getName() + " &ato the anni world list."));
 								return true;
