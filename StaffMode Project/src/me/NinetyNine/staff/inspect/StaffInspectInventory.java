@@ -1,6 +1,5 @@
 package me.NinetyNine.staff.inspect;
 
-import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -21,11 +20,6 @@ public class StaffInspectInventory implements Listener {
 		if (!e.getInventory().getTitle().contains("'s inventory"))
 			return;
 
-		Player player = (Player) e.getWhoClicked();
-
-		if (player.getGameMode().equals(GameMode.CREATIVE))
-			return;
-		else
-			e.setCancelled(true);
+		e.setCancelled(true);
 	}
 }

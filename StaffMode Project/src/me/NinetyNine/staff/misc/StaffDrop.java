@@ -25,8 +25,8 @@ public class StaffDrop implements Listener {
 			if (StaffItems.isStaffItem(item)) {
 				e.setCancelled(true);
 				e.getPlayer().sendMessage(StaffUtils.format("&cYou cannot drop that item!"));
+				return;
 			} else {
-				System.out.println(item.getType().toString());
 				if (item.getType().toString().startsWith("DIAMOND") && item.getType().toString().startsWith("GOLD")
 						&& item.getType().toString().startsWith("IRON"))
 					System.out.println(e.getPlayer().getName()

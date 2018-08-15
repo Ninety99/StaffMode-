@@ -30,8 +30,16 @@ permissions:
   staffmode.unstaff:
     default: op
   staffmode.joinbypass:
-    default: op
+    default: false
+    admin: true
   staffmode.quitbypass:
-    default: op
+    default: false
+    admin: true
   staffmode.vanishbypass:
+    default: op
+  staffmode.addworld:
+    default: op
+  staffmode.removeworld:
+    default: op
+  staffmode.worldlist:
     default: op

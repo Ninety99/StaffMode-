@@ -1,5 +1,7 @@
 package me.NinetyNine.staff.utils;
 
+import java.util.List;
+
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.Listener;
 
@@ -21,8 +23,13 @@ public class StaffConfig implements Listener {
 
 	public static void save() {
 		Staff.getInstance().saveConfig();
+		Staff.getInstance().reloadConfig();
 	}
 
+	public static List<String> getStringList(String path){
+		return getConfig().getStringList(path);
+	}
+	
 	public static String getString(String path) {
 		return getConfig().getString(path);
 	}

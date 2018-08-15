@@ -31,16 +31,14 @@ import me.NinetyNine.staff.misc.StaffInventoryClick;
 import me.NinetyNine.staff.misc.StaffPickupItem;
 import me.NinetyNine.staff.misc.joinquit.PlayerJoin;
 import me.NinetyNine.staff.misc.joinquit.PlayerQuit;
-import me.NinetyNine.staff.misc.joinquit.StaffJoin;
-import me.NinetyNine.staff.misc.joinquit.StaffQuit;
 import me.NinetyNine.staff.players.StaffInventoryPlayers;
 import me.NinetyNine.staff.players.StaffPlayers;
 import me.NinetyNine.staff.randomtp.StaffRandomTP;
+import me.NinetyNine.staff.utils.Flyer;
 import me.NinetyNine.staff.utils.StaffConfig;
 import me.NinetyNine.staff.utils.StaffItems;
 import me.NinetyNine.staff.utils.StaffUtils;
-import me.NinetyNine.staff.vanish.PlayerVanishJoin;
-import me.NinetyNine.staff.vanish.PlayerVanishQuit;
+import me.NinetyNine.staff.utils.Vanisher;
 import me.NinetyNine.staff.vanish.StaffVanish;
 
 public class Staff extends JavaPlugin {
@@ -65,20 +63,19 @@ public class Staff extends JavaPlugin {
 	@Override
 	public void onDisable() {
 		StaffConfig.save();
+		giveItemsBack();
 		clearAll();
-		for (Player staff : StaffUtils.getStaff().keySet())
-			StaffUtils.unStaff(staff);
 		Bukkit.getServer().getLogger().info("StaffMode has been disabled");
 	}
 
 	private void registerListeners() {
 		PluginManager pm = Bukkit.getServer().getPluginManager();
 
-		pm.registerEvents(new PlayerVanishJoin(), this);
-		pm.registerEvents(new PlayerVanishQuit(), this);
+		pm.registerEvents(new DetailUtils(), this);
+		pm.registerEvents(new Flyer(), this);
 		pm.registerEvents(new PlayerJoin(), this);
 		pm.registerEvents(new PlayerQuit(), this);
-		pm.registerEvents(new DetailUtils(), this);
+		pm.registerEvents(new Vanisher(), this);
 
 		pm.registerEvents(new StaffActionBar(), this);
 		pm.registerEvents(new StaffAntiEat(), this);
@@ -102,53 +99,34 @@ public class Staff extends JavaPlugin {
 		pm.registerEvents(new StaffInventoryClick(), this);
 		pm.registerEvents(new StaffInventoryGM(), this);
 		pm.registerEvents(new StaffInventoryPlayers(), this);
-		pm.registerEvents(new StaffJoin(), this);
+		pm.registerEvents(new StaffItems(), this);
 		pm.registerEvents(new StaffPlayers(), this);
 		pm.registerEvents(new StaffPickupItem(), this);
 		pm.registerEvents(new StaffPLChest(), this);
-		pm.registerEvents(new StaffQuit(), this);
 		pm.registerEvents(new StaffRandomTP(), this);
+		pm.registerEvents(new StaffUtils(), this);
 		pm.registerEvents(new StaffVanish(), this);
-
-		// pm.registerEvents(new StaffCommands(), this);
-		// pm.registerEvents(new StaffJoin(), this);
-		// pm.registerEvents(new StaffQuit(), this);
-		// pm.registerEvents(new StaffDrop(), this);
-		// pm.registerEvents(new StaffAntiEat(), this);
-		// pm.registerEvents(new StaffPickupItem(), this);
-		// pm.registerEvents(new StaffHitEvent(), this);
-		// pm.registerEvents(new StaffBlockPlace(), this);
-		// pm.registerEvents(new StaffChest(), this);
-		// pm.registerEvents(new StaffInventoryClick(), this);
-		// pm.registerEvents(new StaffBlockBreak(), this);
-		// pm.registerEvents(new StaffDamage(), this);
-		// pm.registerEvents(new StaffRandomTP(), this);
-		// pm.registerEvents(new PlayerRandomTPJoin(), this);
-		// pm.registerEvents(new PlayerRandomTPQuit(), this);
-		// pm.registerEvents(new StaffVanish(), this);
-		// pm.registerEvents(new PlayerVanishJoin(), this);
-		// pm.registerEvents(new PlayerVanishQuit(), this);
-		// pm.registerEvents(new StaffAntiNexus(), this);
-		// pm.registerEvents(new StaffBMInfo(), this);
-		// pm.registerEvents(new StaffInventoryGM(), this);
-		// pm.registerEvents(new StaffGMChanger(), this);
-		// pm.registerEvents(new StaffFly(), this);
-		// pm.registerEvents(new StaffInspect(), this);
-		// pm.registerEvents(new StaffInspectInventory(), this);
-		// pm.registerEvents(new StaffPlayers(), this);
-		// pm.registerEvents(new StaffInventoryPlayers(), this);
-		// pm.registerEvents(new StaffPLChest(), this);
-		// pm.registerEvents(new StaffInventoryChest(), this);
-		// pm.registerEvents(new StaffConfig(), this);
-		// pm.registerEvents(new StaffActionBar(), this);
-		// pm.registerEvents(new StaffChatRulesInventory(), this);
-		// pm.registerEvents(new DetailUtils(), this);
 	}
 
 	private void clearAll() {
 		StaffFly.clear();
 		StaffVanish.clear();
 		StaffItems.clear();
+		StaffUtils.clear();
+	}
+
+	private void giveItemsBack() {
+		for (Player staff : StaffUtils.getStaff().keySet()) {
+			staff.getInventory().clear();
+			staff.getInventory().setContents(StaffUtils.getStaff().get(staff));
+			Vanisher.unvanish(staff);
+			Flyer.removeFly(staff);
+			staff.sendMessage(StaffUtils.format("&7(&6Vanish &7and &6Fly &cdisabled&7)"));
+			return;
+		}
+
+		for (Player staff : StaffUtils.getStaffArmor().keySet())
+			staff.getInventory().setArmorContents(StaffUtils.getStaffArmor().get(staff));
 	}
 
 	private void registerActionBar() {

@@ -4,26 +4,12 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.entity.Player;
 import org.guildcraft.gcbanz.GCBanz;
 import org.guildcraft.gcbanz.data.Type;
 import org.guildcraft.gcbanz.data.Violation;
 
-import me.NinetyNine.staff.utils.StaffUtils;
-
 public class StaffBMInfoHook implements StaffBMInfoInterface {
-
-	@Override
-	public void getHistory(Player checker, OfflinePlayer target) {
-		checker.sendMessage(StaffUtils.format("&9BMINFO: "));
-		checker.sendMessage(ChatColor.RED + "Results for " + ChatColor.GOLD + target.getName());
-		checker.sendMessage(ChatColor.RED + "Bans: " + ChatColor.GOLD + getBans(target));
-		checker.sendMessage(ChatColor.RED + "Mutes: " + ChatColor.GOLD + getMutes(target));
-		checker.sendMessage(ChatColor.RED + "Kicks: " + ChatColor.GOLD + getKicks(target));
-		checker.sendMessage(ChatColor.RED + "Warns: " + ChatColor.GOLD + getWarns(target));
-	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override

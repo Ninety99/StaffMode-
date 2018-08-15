@@ -24,6 +24,13 @@ public class StaffRandomTP implements StaffInteractAbility {
 
 			Player target = StaffUtils.getOnlinePlayers().get(r);
 			if (target != null) {
+				if (player == target) {
+					Player target2 = StaffUtils.getOnlinePlayers().get(r);
+					player.teleport(target2);
+					player.sendMessage(StaffUtils.format("&7Randomly teleported to " + target2.getName()));
+					return;
+				}
+				
 				player.teleport(target);
 				player.sendMessage(StaffUtils.format("&7Randomly teleported to " + target.getName()));
 				return;

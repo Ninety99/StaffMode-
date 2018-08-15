@@ -26,15 +26,15 @@ public class StaffVanish implements StaffInteractOnOrOffAbility {
 	public void performAbility(Player player, ItemStack item) {
 		if (Vanisher.isInVanish(player)) {
 			Vanisher.unvanish(player);
-			StaffActionBar.sendActionBar(player, ChatColor.RED + "You are now unvanished", 1);
 			off(item);
-			player.sendMessage(StaffUtils.format("&9Vanish &7has been &cdisabled"));
+			StaffActionBar.sendActionBar(player, ChatColor.RED + "You are now unvanished", 1);
+			player.sendMessage(StaffUtils.format("&3Vanish &7has been &cdisabled&7!"));
 			return;
 		} else {
 			Vanisher.vanish(player);
-			StaffActionBar.sendActionBar(player, ChatColor.GREEN + "You are currently vanished", 1);
+			StaffActionBar.sendActionBar(player, ChatColor.GREEN + "You are now vanished", 1);
+			player.sendMessage(StaffUtils.format("&3Vanish &7has been &aenabled&7!"));
 			on(item);
-			player.sendMessage(StaffUtils.format("&9Vanish &7has been &aenabled"));
 			return;
 		}
 	}
@@ -78,6 +78,9 @@ public class StaffVanish implements StaffInteractOnOrOffAbility {
 		meta.setDisplayName(ChatColor.RED + "Vanish");
 		meta.removeEnchant(Enchantment.DURABILITY);
 		item.setItemMeta(meta);
+
+		if (!(StaffItems.getStaffItems().contains(item)))
+			StaffItems.getStaffItems().add(item);
 	}
 
 	public static void clear() {

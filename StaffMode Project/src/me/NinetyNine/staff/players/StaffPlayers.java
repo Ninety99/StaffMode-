@@ -10,26 +10,43 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import lombok.Getter;
 import me.NinetyNine.staff.utils.StaffItems;
 import me.NinetyNine.staff.utils.StaffUtils;
 import me.NinetyNine.staff.utils.interfaces.StaffInteractAbility;
 
 public class StaffPlayers implements StaffInteractAbility {
 
-	public static Inventory i = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players " + ChatColor.DARK_GRAY
-			+ "(PlayerCount: " + StaffUtils.getOnlinePlayers().size() + ")");
-	public static Inventory i2 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players (Page 2) "
-			+ ChatColor.DARK_GRAY + "(PlayerCount: " + StaffUtils.getOnlinePlayers().size() + ")");
-	public static Inventory i3 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players (Page 3) "
-			+ ChatColor.DARK_GRAY + "(PlayerCount: " + StaffUtils.getOnlinePlayers().size() + ")");
-	public static Inventory i4 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players (Page 4) "
-			+ ChatColor.DARK_GRAY + "(PlayerCount: " + StaffUtils.getOnlinePlayers().size() + ")");
-	public static Inventory i5 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players (Page 5) "
-			+ ChatColor.DARK_GRAY + "(PlayerCount: " + StaffUtils.getOnlinePlayers().size() + ")");
+	@Getter
+	private static int playersOnline = 0;
+	@Getter
+	private static Inventory i = null;
+	@Getter
+	private static Inventory i2 = null;
+	@Getter
+	private static Inventory i3 = null;
+	@Getter
+	private static Inventory i4 = null;
+	@Getter
+	private static Inventory i5 = null;
+
+	public StaffPlayers() {
+		playersOnline = StaffUtils.getOnlinePlayers().size();
+		i = Bukkit.createInventory(null, 54,
+				ChatColor.BLUE + "Players " + ChatColor.DARK_GRAY + "(PlayerCount: " + playersOnline + ")");
+		i2 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players (Page 2) " + ChatColor.DARK_GRAY
+				+ "(PlayerCount: " + StaffUtils.getOnlinePlayers().size() + ")");
+		i3 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players (Page 3) " + ChatColor.DARK_GRAY
+				+ "(PlayerCount: " + StaffUtils.getOnlinePlayers().size() + ")");
+		i4 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players (Page 4) " + ChatColor.DARK_GRAY
+				+ "(PlayerCount: " + StaffUtils.getOnlinePlayers().size() + ")");
+		i5 = Bukkit.createInventory(null, 54, ChatColor.BLUE + "Players (Page 5) " + ChatColor.DARK_GRAY
+				+ "(PlayerCount: " + StaffUtils.getOnlinePlayers().size() + ")");
+	}
 
 	@Override
 	public void performAbility(Player player, ItemStack item) {
-		addSkulls(player);
+		addSkulls();
 		addMisc(1);
 		addMisc(2);
 		addMisc(3);
@@ -49,7 +66,7 @@ public class StaffPlayers implements StaffInteractAbility {
 		return ChatColor.RED + "Players " + ChatColor.GRAY + "(Right Click)";
 	}
 
-	public void addSkulls(Player player) {
+	public void addSkulls() {
 		if (StaffUtils.getNumberOfContents(i) <= 53)
 			StaffItems.addSkullsWithBMInfo(i);
 		else {

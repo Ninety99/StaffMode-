@@ -62,45 +62,45 @@ public class StaffInventoryPlayers implements Listener {
 
 		if (item.getType().equals(Material.BARRIER)) {
 			if (item.getItemMeta().getDisplayName().equals(ChatColor.GREEN + "Next")) {
-				if (e.getInventory().getTitle().equals(StaffPlayers.i.getTitle())) {
-					openInventory(StaffPlayers.i2, player);
+				if (e.getInventory().getTitle().equals(StaffPlayers.getI().getTitle())) {
+					openInventory(StaffPlayers.getI2(), player);
 					return;
 				}
 
-				if (e.getInventory().getTitle().equals(StaffPlayers.i2.getTitle())) {
-					openInventory(StaffPlayers.i3, player);
+				if (e.getInventory().getTitle().equals(StaffPlayers.getI2().getTitle())) {
+					openInventory(StaffPlayers.getI3(), player);
 					return;
 				}
 
-				if (e.getInventory().getTitle().equals(StaffPlayers.i3.getTitle())) {
-					openInventory(StaffPlayers.i4, player);
+				if (e.getInventory().getTitle().equals(StaffPlayers.getI3().getTitle())) {
+					openInventory(StaffPlayers.getI4(), player);
 					return;
 				}
 
-				if (e.getInventory().getTitle().equals(StaffPlayers.i4.getTitle())) {
-					openInventory(StaffPlayers.i5, player);
+				if (e.getInventory().getTitle().equals(StaffPlayers.getI4().getTitle())) {
+					openInventory(StaffPlayers.getI5(), player);
 					return;
 				}
 			}
 
 			if (item.getItemMeta().getDisplayName().equals(ChatColor.RED + "Previous")) {
-				if (e.getInventory().getTitle().equals(StaffPlayers.i2.getTitle())) {
-					openInventory(StaffPlayers.i, player);
+				if (e.getInventory().getTitle().equals(StaffPlayers.getI2().getTitle())) {
+					openInventory(StaffPlayers.getI(), player);
 					return;
 				}
 
-				if (e.getInventory().getTitle().equals(StaffPlayers.i3.getTitle())) {
-					openInventory(StaffPlayers.i2, player);
+				if (e.getInventory().getTitle().equals(StaffPlayers.getI3().getTitle())) {
+					openInventory(StaffPlayers.getI2(), player);
 					return;
 				}
 
-				if (e.getInventory().getTitle().equals(StaffPlayers.i4.getTitle())) {
-					openInventory(StaffPlayers.i3, player);
+				if (e.getInventory().getTitle().equals(StaffPlayers.getI4().getTitle())) {
+					openInventory(StaffPlayers.getI3(), player);
 					return;
 				}
 
-				if (e.getInventory().getTitle().equals(StaffPlayers.i5.getTitle())) {
-					openInventory(StaffPlayers.i4, player);
+				if (e.getInventory().getTitle().equals(StaffPlayers.getI5().getTitle())) {
+					openInventory(StaffPlayers.getI4(), player);
 					return;
 				}
 			}

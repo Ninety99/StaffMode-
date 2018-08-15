@@ -10,6 +10,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -19,7 +20,7 @@ import lombok.Getter;
 import me.NinetyNine.staff.bminfo.StaffBMInfoHook;
 import me.NinetyNine.staff.bminfo.StaffBMInfoInterface;
 
-public class StaffItems {
+public class StaffItems implements Listener {
 
 	@Getter
 	private static List<ItemStack> staffItems = new ArrayList<ItemStack>();
@@ -67,7 +68,7 @@ public class StaffItems {
 
 		inventory.setItem(slot, item2);
 
-		while (!getStaffItems().contains(item2))
+		if (!getStaffItems().contains(item2))
 			getStaffItems().add(item2);
 	}
 
@@ -117,11 +118,11 @@ public class StaffItems {
 	private static Map<Player, ItemStack> InWithSkull = new HashMap<Player, ItemStack>();
 
 	public static void addSkullsWithBMInfo(Inventory inventory) {
+		ItemStack skull = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
 		for (Player all : StaffUtils.getOnlinePlayers()) {
 			if (!getIn().containsKey(all))
 				getIn().put(all, inventory);
 
-			ItemStack skull = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
 			SkullMeta meta = (SkullMeta) skull.getItemMeta();
 
 			meta.setDisplayName(all.getName());
@@ -141,16 +142,15 @@ public class StaffItems {
 			meta.setLore(lore);
 			skull.setItemMeta(meta);
 
-			if (!getInWithSkull().containsKey(all))
-				getInWithSkull().put(all, skull);
-
-			if (getIn().containsKey(all)) {
-				if (!(getIn().get(all).contains(skull)))
-					getIn().get(all).addItem(skull);
-			}
-
 			if (!getStaffItems().contains(skull))
 				getStaffItems().add(skull);
+
+			if (!getIn().get(all).contains(skull)) {
+				if (!getInWithSkull().containsKey(all)) {
+					getInWithSkull().put(all, skull);
+					inventory.addItem(skull);
+				}
+			}
 		}
 	}
 
@@ -167,10 +167,22 @@ public class StaffItems {
 
 	public static void createArmor(Player owner, Inventory inventory, int helmetSlot, int chestplateSlot,
 			int leggingsSlot, int bootsSlot) {
-		ItemStack helmet = owner.getInventory().getHelmet().clone();
-		ItemStack chestplate = owner.getInventory().getChestplate().clone();
-		ItemStack leggings = owner.getInventory().getChestplate().clone();
-		ItemStack boots = owner.getInventory().getBoots().clone();
+		ItemStack helmet = null;
+		ItemStack chestplate = null;
+		ItemStack leggings = null;
+		ItemStack boots = null;
+
+		if (owner.getInventory().getHelmet() != null)
+			helmet = owner.getInventory().getHelmet().clone();
+
+		if (owner.getInventory().getChestplate() != null)
+			chestplate = owner.getInventory().getChestplate().clone();
+
+		if (owner.getInventory().getLeggings() != null)
+			leggings = owner.getInventory().getChestplate().clone();
+
+		if (owner.getInventory().getBoots() != null)
+			boots = owner.getInventory().getBoots().clone();
 
 		if (!getStaffItems().contains(helmet))
 			getStaffItems().add(helmet);
@@ -180,7 +192,7 @@ public class StaffItems {
 			getStaffItems().add(leggings);
 		if (!getStaffItems().contains(boots))
 			getStaffItems().add(boots);
-		
+
 		inventory.setItem(helmetSlot, helmet);
 		inventory.setItem(chestplateSlot, chestplate);
 		inventory.setItem(leggingsSlot, leggings);

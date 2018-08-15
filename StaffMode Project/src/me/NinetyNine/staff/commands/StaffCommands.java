@@ -23,7 +23,8 @@ public class StaffCommands implements Listener, CommandExecutor {
 		if (!(sender instanceof Player)) {
 			if (cmd.getName().equalsIgnoreCase("staff")) {
 				if (args.length == 0) {
-					sender.sendMessage("The only /staff command you can execute is /staff chatclear!");
+					sender.sendMessage(
+							"The only /staff command you can execute is /staff chatclear and /unstaff <player>!");
 					return true;
 				}
 
@@ -50,14 +51,22 @@ public class StaffCommands implements Listener, CommandExecutor {
 						sender.sendMessage("You must be a player to execute this command!");
 						return true;
 					}
+
+					if (args[0].equalsIgnoreCase("worldlist")) {
+						sender.sendMessage(ChatColor.RED + "Annihilation Worlds:");
+						sender.sendMessage(ChatColor.GRAY
+								+ StaffConfig.getStringList("anniWorlds").toString().replace("[", "").replace("]", ""));
+						return true;
+					}
 				}
 
 				if (args.length > 1) {
-					sender.sendMessage("&cINvalid command.");
+					sender.sendMessage("Invalid command.");
 					return true;
 				}
 
-				if (!(args[0].equalsIgnoreCase("chatclear") || args[0].equalsIgnoreCase("chatrules"))) {
+				if (!(args[0].equalsIgnoreCase("chatclear") || args[0].equalsIgnoreCase("chatrules")
+						|| args[0].equalsIgnoreCase("worldlist"))) {
 					sender.sendMessage(ChatColor.RED + "Invalid command.");
 					return true;
 				}
@@ -80,7 +89,7 @@ public class StaffCommands implements Listener, CommandExecutor {
 					sender.sendMessage(ChatColor.RED + "Player cannot be found!");
 				else {
 					if (StaffUtils.isInStaffMode(target)) {
-						StaffUtils.unStaff(target);
+						StaffUtils.toggleStaff(target);
 						return true;
 					} else {
 						sender.sendMessage(ChatColor.RED + target.getName() + " is not in Staff mode!");
@@ -126,7 +135,7 @@ public class StaffCommands implements Listener, CommandExecutor {
 						if (player.hasPermission("staffmode.chatclear")) {
 							for (int i = 0; i < 100; i++) {
 								for (Player all : Bukkit.getServer().getOnlinePlayers()) {
-									if (!all.hasPermission(StaffConfig.getString("permchatclear")))
+									if (!all.hasPermission("staffmode.chatclear"))
 										all.sendMessage("\n");
 								}
 							}
@@ -153,8 +162,59 @@ public class StaffCommands implements Listener, CommandExecutor {
 						}
 					}
 
+					if (args[0].equalsIgnoreCase("addworld")) {
+						if (player.hasPermission("staffmode.addworld")) {
+							if (!StaffConfig.getStringList("anniWorlds").contains(player.getWorld().getName())) {
+								System.out.println("" + StaffConfig.getStringList("anniWorlds")
+										.contains(player.getWorld().getName()));
+								StaffConfig.getStringList("anniWorlds").add(player.getWorld().getName());
+								StaffConfig.save();
+								player.sendMessage(StaffUtils.format("&aSuccesfully added &c"
+										+ player.getWorld().getName() + " &ato the anni world list!"));
+								return true;
+							} else {
+								player.sendMessage(StaffUtils.format(
+										"&c" + player.getWorld().getName() + " &7is already in the anni world list!"));
+								return true;
+							}
+						} else {
+							player.sendMessage(
+									StaffUtils.format("&cYou do not have permissions to use this commnand."));
+							return true;
+						}
+					}
+
+					if (args[0].equalsIgnoreCase("removeworld")) {
+						if (player.hasPermission("staffmode.removeworld")) {
+							if (!StaffConfig.getStringList("anniWorlds").contains(player.getWorld().getName())) {
+								player.sendMessage(StaffUtils.format(
+										"&c" + player.getWorld().getName() + " &7is not on the anni world list!"));
+								return true;
+							} else {
+								System.out.println("" + StaffConfig.getStringList("anniWorlds")
+										.contains(player.getWorld().getName()));
+								StaffConfig.getStringList("anniWorlds").remove(player.getWorld().getName());
+								StaffConfig.save();
+								player.sendMessage(StaffUtils.format("&aSuccesfully removed &c"
+										+ player.getWorld().getName() + " &ato the anni world list."));
+								return true;
+							}
+						}
+					}
+
+					if (args[0].equalsIgnoreCase("worldlist")) {
+						if (player.hasPermission("staffmode.worldlist")) {
+							player.sendMessage(ChatColor.RED + "Annihilation Worlds:\n");
+
+							player.sendMessage(ChatColor.GRAY + StaffConfig.getStringList("anniWorlds").toString()
+									.replace("[", "").replace("]", ""));
+							return true;
+						}
+					}
+
 					if (!(args[0].equalsIgnoreCase("quitgmsp") || args[0].equalsIgnoreCase("chatclear")
-							|| args[0].equalsIgnoreCase("chatrules"))) {
+							|| args[0].equalsIgnoreCase("chatrules") || args[0].equalsIgnoreCase("addworld")
+							|| args[0].equalsIgnoreCase("removeworld") || args[0].equalsIgnoreCase("worldlist"))) {
 						player.sendMessage(StaffUtils.format("&cInvalid command."));
 						return true;
 					}
@@ -188,7 +248,7 @@ public class StaffCommands implements Listener, CommandExecutor {
 					player.sendMessage(StaffUtils.format("&cPlayer cannot be found!"));
 				else {
 					if (StaffUtils.isInStaffMode(target)) {
-						StaffUtils.unStaff(target);
+						StaffUtils.toggleStaff(target);
 						return true;
 					} else {
 						sender.sendMessage(StaffUtils.format("&c" + target.getName() + " is not in Staff mode!"));
@@ -231,31 +291,31 @@ public class StaffCommands implements Listener, CommandExecutor {
 
 	private void addRules(Inventory inventory) {
 		StaffItems.createItem(inventory, 0, Material.PAPER, ChatColor.RED + "Flood", null);
-		StaffItems.createGlassWithColor(inventory, 1, " ", (short) 5);
+		StaffItems.createGlassWithColor(inventory, 1, " ", (short) 0);
 		StaffItems.createItem(inventory, 2, Material.PAPER, ChatColor.RED + "Spam", null);
-		StaffItems.createGlassWithColor(inventory, 3, " ", (short) 5);
+		StaffItems.createGlassWithColor(inventory, 3, " ", (short) 8);
 		StaffItems.createItem(inventory, 4, Material.PAPER, ChatColor.RED + "Caps", null);
-		StaffItems.createGlassWithColor(inventory, 5, " ", (short) 5);
+		StaffItems.createGlassWithColor(inventory, 5, " ", (short) 7);
 		StaffItems.createItem(inventory, 6, Material.PAPER, ChatColor.RED + "Hackusating", null);
-		StaffItems.createGlassWithColor(inventory, 7, " ", (short) 5);
+		StaffItems.createGlassWithColor(inventory, 7, " ", (short) 15);
 		StaffItems.createItem(inventory, 8, Material.PAPER, ChatColor.RED + "Arguing", null);
-		StaffItems.createGlassWithColor(inventory, 9, " ", (short) 5);
+		StaffItems.createGlassWithColor(inventory, 9, " ", (short) 15);
 		StaffItems.createItem(inventory, 10, Material.PAPER, ChatColor.RED + "ChatTrolling", null);
-		StaffItems.createGlassWithColor(inventory, 11, " ", (short) 5);
+		StaffItems.createGlassWithColor(inventory, 11, " ", (short) 7);
 		StaffItems.createItem(inventory, 12, Material.PAPER, ChatColor.RED + "Asking Staff for Items", null);
-		StaffItems.createGlassWithColor(inventory, 13, " ", (short) 5);
+		StaffItems.createGlassWithColor(inventory, 13, " ", (short) 8);
 		StaffItems.createItem(inventory, 14, Material.PAPER, ChatColor.RED + "Advertisement", null);
-		StaffItems.createGlassWithColor(inventory, 15, " ", (short) 5);
+		StaffItems.createGlassWithColor(inventory, 15, " ", (short) 0);
 		StaffItems.createItem(inventory, 16, Material.PAPER, ChatColor.RED + "Swearing", null);
-		StaffItems.createGlassWithColor(inventory, 17, " ", (short) 5);
+		StaffItems.createGlassWithColor(inventory, 17, " ", (short) 0);
 		StaffItems.createItem(inventory, 18, Material.PAPER, ChatColor.RED + "Server Disrespect", null);
-		StaffItems.createGlassWithColor(inventory, 19, " ", (short) 5);
+		StaffItems.createGlassWithColor(inventory, 19, " ", (short) 8);
 		StaffItems.createItem(inventory, 20, Material.PAPER, ChatColor.RED + "Staff Disrespect", null);
-		StaffItems.createGlassWithColor(inventory, 21, " ", (short) 5);
+		StaffItems.createGlassWithColor(inventory, 21, " ", (short) 7);
 		StaffItems.createItem(inventory, 22, Material.PAPER, ChatColor.RED + "Bypassing Chat Filter", null);
-		StaffItems.createGlassWithColor(inventory, 23, " ", (short) 5);
+		StaffItems.createGlassWithColor(inventory, 23, " ", (short) 15);
 		StaffItems.createItem(inventory, 24, Material.PAPER, ChatColor.RED + "DDoS Threat", null);
-		StaffItems.createGlassWithColor(inventory, 25, " ", (short) 5);
+		StaffItems.createGlassWithColor(inventory, 25, " ", (short) 3);
 		StaffItems.createItem(inventory, 26, Material.PAPER, ChatColor.RED + "Hack Threat", null);
 		StaffItems.createGlassWithColor(inventory, 27, " ", (short) 0);
 		StaffItems.createGlassWithColor(inventory, 28, " ", (short) 8);

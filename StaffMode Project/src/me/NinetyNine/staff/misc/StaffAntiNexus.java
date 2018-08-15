@@ -16,12 +16,15 @@ public class StaffAntiNexus implements Listener {
 		if (!(e.getBlock().getType() == Material.ENDER_STONE))
 			return;
 
-		for (String worlds : StaffConfig.getConfig().getStringList("anniWorlds"))
-			if (!(e.getPlayer().getWorld().getName().equals(worlds)))
-				return;
-
+		for (String worlds : StaffConfig.getStringList("anniWorlds")) {
+			if (e.getPlayer().getWorld().getName().equalsIgnoreCase(worlds))
+				continue;
+		}
+		
 		if (StaffUtils.isInStaffMode(e.getPlayer())) {
 			e.setCancelled(true);
+			e.getPlayer()
+					.sendMessage(StaffUtils.format("&cYou are in Staff mode, therefore you cannot break a nexus."));
 			Bukkit.getServer().getLogger()
 					.info(e.getPlayer().getName() + " tried to break a nexus while in Staff mode!");
 		} else
