@@ -53,6 +53,13 @@ public class StaffInspect implements StaffEntityInteractAbility {
 		StaffItems.createItemWithBMInfo(clicked, clickedInventory, 43, Material.EMERALD,
 				ChatColor.LIGHT_PURPLE + "BMInfo Information");
 
+		List<String> lore2 = new ArrayList<String>();
+		double health = clicked.getHealth() - 10.0;
+		lore.add(ChatColor.AQUA + clicked.getName() + "'s Information:");
+		lore2.add(ChatColor.RED + "Health: " + ChatColor.GOLD +  health + ChatColor.RED + "❤");
+		lore2.add(ChatColor.RED + "Food Level: " + ChatColor.GOLD + clicked.getFoodLevel() + "🍖");
+		StaffItems.createItem(clickedInventory, 44, Material.CHEST, ChatColor.AQUA + "Player Information", lore2);
+
 		player.openInventory(clickedInventory);
 		player.sendMessage(StaffUtils.format("&9Opening " + clicked.getName() + "'s inventory"));
 		return;

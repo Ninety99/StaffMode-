@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import me.NinetyNine.staff.utils.StaffUtils;
+import me.NinetyNine.staff.utils.Vanisher;
 import me.NinetyNine.staff.utils.interfaces.StaffInteractAbility;
 
 public class StaffRandomTP implements StaffInteractAbility {
@@ -20,22 +21,18 @@ public class StaffRandomTP implements StaffInteractAbility {
 			return;
 		} else {
 			Random random = new Random();
+			StaffUtils.getOnlinePlayers().remove(player);
 			int r = random.nextInt(StaffUtils.getOnlinePlayers().size());
-
 			Player target = StaffUtils.getOnlinePlayers().get(r);
-			if (target != null) {
-				if (player == target) {
-					Player target2 = StaffUtils.getOnlinePlayers().get(r);
-					player.teleport(target2);
-					player.sendMessage(StaffUtils.format("&7Randomly teleported to " + target2.getName()));
+			if (!StaffUtils.isInStaffMode(target) && !Vanisher.isInVanish(target)) {
+				if (target != null) {
+					player.teleport(target);
+					player.sendMessage(StaffUtils.format("&7Randomly teleported to " + target.getName()));
 					return;
-				}
-				
-				player.teleport(target);
-				player.sendMessage(StaffUtils.format("&7Randomly teleported to " + target.getName()));
-				return;
-			} else
-				return;
+				} else
+					return;
+			}
+			StaffUtils.getOnlinePlayers().add(player);
 		}
 	}
 

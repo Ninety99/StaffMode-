@@ -44,7 +44,6 @@ public class StaffItems implements Listener {
 	}
 
 	public static void createItem(Inventory inventory, int slot, Material item, String displayName, List<String> lore) {
-
 		ItemStack item2 = new ItemStack(item);
 		ItemMeta meta = item2.getItemMeta();
 		meta.setDisplayName(displayName);
@@ -108,7 +107,6 @@ public class StaffItems implements Listener {
 
 		if (!getStaffItems().contains(glass))
 			getStaffItems().add(glass);
-
 	}
 
 	@Getter
@@ -174,15 +172,23 @@ public class StaffItems implements Listener {
 
 		if (owner.getInventory().getHelmet() != null)
 			helmet = owner.getInventory().getHelmet().clone();
+		else
+			createItem(inventory, helmetSlot, Material.ITEM_FRAME, ChatColor.RED + "None", null);
 
 		if (owner.getInventory().getChestplate() != null)
 			chestplate = owner.getInventory().getChestplate().clone();
+		else
+			createItem(inventory, chestplateSlot, Material.ITEM_FRAME, ChatColor.RED + "None", null);
 
 		if (owner.getInventory().getLeggings() != null)
-			leggings = owner.getInventory().getChestplate().clone();
+			leggings = owner.getInventory().getLeggings().clone();
+		else
+			createItem(inventory, leggingsSlot, Material.ITEM_FRAME, ChatColor.RED + "None", null);
 
 		if (owner.getInventory().getBoots() != null)
 			boots = owner.getInventory().getBoots().clone();
+		else
+			createItem(inventory, bootsSlot, Material.ITEM_FRAME, ChatColor.RED + "None", null);
 
 		if (!getStaffItems().contains(helmet))
 			getStaffItems().add(helmet);
@@ -200,7 +206,6 @@ public class StaffItems implements Listener {
 	}
 
 	public static void clear() {
-		getStaffItems().clear();
 		getIn().clear();
 		getInWithSkull().clear();
 	}

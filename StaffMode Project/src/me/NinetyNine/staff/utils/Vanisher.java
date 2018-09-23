@@ -13,14 +13,16 @@ public class Vanisher implements Listener {
 			if (Bukkit.getPluginManager().getPlugin("Atials") == null) {
 				if (!isInVanish(player)) {
 					for (Player all : StaffUtils.getOnlinePlayers()) {
-						if (!all.hasPermission("staffmode.vanishbypass")) {
+						if (all.hasPermission("staffmode.vanishbypass")) {
+							StaffVanish.getVanishedPlayers().add(player);
+							all.showPlayer(player);
+							return;
+						} else {
 							all.hidePlayer(player);
 
 							StaffVanish.getVanishedPlayers().add(player);
-							if (!(StaffUtils.getOnlinePlayers().contains(all)))
-								StaffUtils.getOnlinePlayers().add(all);
-						} else
 							return;
+						}
 					}
 				} else
 					return;

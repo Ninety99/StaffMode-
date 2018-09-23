@@ -32,9 +32,9 @@ public class StaffVanish implements StaffInteractOnOrOffAbility {
 			return;
 		} else {
 			Vanisher.vanish(player);
+			on(item);
 			StaffActionBar.sendActionBar(player, ChatColor.GREEN + "You are now vanished", 1);
 			player.sendMessage(StaffUtils.format("&3Vanish &7has been &aenabled&7!"));
-			on(item);
 			return;
 		}
 	}

@@ -12,20 +12,22 @@ public class PlayerJoin implements Listener {
 
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent e) {
-		if (!(StaffUtils.getOnlinePlayers().contains(e.getPlayer())))
-			StaffUtils.getOnlinePlayers().add(e.getPlayer());
-
-		if (!e.getPlayer().hasPermission("staffmode.vanishbypass")) {
-			for (Player vanished : StaffVanish.getVanishedPlayers())
-				e.getPlayer().hidePlayer(vanished);
-		}
-
 		if (!e.getPlayer().hasPermission("staffmode.joinbypass")) {
 			for (Player all : StaffUtils.getOnlinePlayers()) {
 				if (all.hasPermission("staffmode.toggle"))
-					e.setJoinMessage(StaffUtils
-							.format("&98[&5Staff&8] &a" + e.getPlayer().getName() + " has joined the server."));
+					all.sendMessage(StaffUtils
+							.format("&9[&5Staff&9] &3" + e.getPlayer().getName() + " &ahas joined the server."));
 			}
 		}
+
+		for (Player vanished : StaffVanish.getVanishedPlayers()) {
+			if (!e.getPlayer().hasPermission("staffmode.vanishbypass"))
+				e.getPlayer().hidePlayer(vanished);
+			else
+				e.getPlayer().showPlayer(vanished);
+		}
+
+		if (!(StaffUtils.getOnlinePlayers().contains(e.getPlayer())))
+			StaffUtils.getOnlinePlayers().add(e.getPlayer());
 	}
 }

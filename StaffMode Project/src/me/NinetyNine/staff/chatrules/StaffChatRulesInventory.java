@@ -16,8 +16,8 @@ import org.bukkit.inventory.ItemStack;
 
 import lombok.Getter;
 import me.NinetyNine.staff.chatrules.utils.DetailUtils;
-import me.NinetyNine.staff.chatrules.utils.RuleType;
 import me.NinetyNine.staff.chatrules.utils.ExampleUtils;
+import me.NinetyNine.staff.chatrules.utils.RuleType;
 import me.NinetyNine.staff.utils.StaffConfig;
 import me.NinetyNine.staff.utils.StaffItems;
 import me.NinetyNine.staff.utils.StaffUtils;
@@ -25,7 +25,7 @@ import me.NinetyNine.staff.utils.StaffUtils;
 public class StaffChatRulesInventory implements Listener {
 
 	@Getter
-	private static Inventory chatrule = Bukkit.createInventory(null, 36, ChatColor.DARK_BLUE + "Chat Rules");
+	private static Inventory chatrule = Bukkit.createInventory(null, 45, ChatColor.DARK_BLUE + "Chat Rules");
 
 	@Getter
 	private static Inventory flood = Bukkit.createInventory(null, 9, ChatColor.RED + "Flood");
@@ -93,7 +93,7 @@ public class StaffChatRulesInventory implements Listener {
 		if (e.getCurrentItem() == null)
 			return;
 
-		if (!(((Player) e.getWhoClicked()).hasPermission("staffmoe.chatrules")))
+		if (!(((Player) e.getWhoClicked()).hasPermission("staffmode.chatrules")))
 			return;
 
 		List<Inventory> invs = new ArrayList<Inventory>(
@@ -101,8 +101,7 @@ public class StaffChatRulesInventory implements Listener {
 						getCaps(), getChatTrolling(), getDdos(), getHack(), getHackusating(), getInappb()));
 		for (Inventory inv : invs) {
 			if (!(e.getInventory().getType().equals(inv.getType())))
-				return;
-			break;
+				continue;
 		}
 
 		Player player = (Player) e.getWhoClicked();
@@ -111,7 +110,15 @@ public class StaffChatRulesInventory implements Listener {
 
 		if (e.getInventory().getTitle().equals(ChatColor.DARK_BLUE + "Chat Rules")) {
 			e.setCancelled(true);
-			String displayName = item.getItemMeta().getDisplayName();
+			String displayName = "";
+
+			if (item.getItemMeta() == null)
+				return;
+			
+			if (item.getItemMeta().getDisplayName() != null)
+				displayName = item.getItemMeta().getDisplayName();
+			else 
+				displayName = " ";
 
 			if (displayName.equals(ChatColor.RED + "Flood")) {
 				addBack(flood);

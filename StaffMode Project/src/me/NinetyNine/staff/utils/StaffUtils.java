@@ -23,7 +23,7 @@ public class StaffUtils implements Listener {
 	@Getter
 	private static HashMap<Player, ItemStack[]> staffArmor = new HashMap<Player, ItemStack[]>();
 
-	private static List<Player> all  = new ArrayList<Player>();
+	private static List<Player> all = new ArrayList<Player>();
 
 	public static String format(String message) {
 		return ChatColor.translateAlternateColorCodes('&', "&7[&c!&7] " + message);
@@ -42,7 +42,7 @@ public class StaffUtils implements Listener {
 			StaffItems.addStaffItems(player);
 			player.setFoodLevel(20);
 			player.setHealth(20);
-			player.sendMessage(format("&9Staff Mode has been &aenabled&9. &7(&6Vanish &7and &6Fly &aenabled&7)"));
+			player.sendMessage(format("&3Staff Mode has been &aenabled&9. &7(&6Vanish &7and &6Fly &aenabled&7)"));
 			return;
 		} else
 			removeStaff(player);
@@ -59,7 +59,7 @@ public class StaffUtils implements Listener {
 			getStaff().remove(player);
 			getStaffArmor().remove(player);
 			player.setGameMode(GameMode.SURVIVAL);
-			player.sendMessage(format("&9Staff Mode has been &cdisabled&9. &7(&6Vanish &7and &6Fly &cdisabled&7)"));
+			player.sendMessage(format("&3Staff Mode has been &cdisabled&9. &7(&6Vanish &7and &6Fly &cdisabled&7)"));
 			return;
 		} else
 			return;
@@ -103,7 +103,7 @@ public class StaffUtils implements Listener {
 
 		return itemNumber;
 	}
-	
+
 	public static void clear() {
 		getStaff().clear();
 		getStaffArmor().clear();

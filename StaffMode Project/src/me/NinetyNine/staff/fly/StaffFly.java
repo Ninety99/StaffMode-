@@ -27,13 +27,13 @@ public class StaffFly implements StaffInteractOnOrOffAbility {
 			getFly().remove(player);
 			off(item);
 			Flyer.removeFly(player);
-			player.sendMessage(StaffUtils.format("&9Fly &7mode has been &cdisabled!"));
+			player.sendMessage(StaffUtils.format("&3Fly &7mode has been &cdisabled&7!"));
 			return;
 		} else {
 			getFly().add(player);
 			Flyer.setFly(player);
 			on(item);
-			player.sendMessage(StaffUtils.format("&9Fly &7mode has been &aenabled!"));
+			player.sendMessage(StaffUtils.format("&3Fly &7mode has been &aenabled&7!"));
 			return;
 		}
 	}

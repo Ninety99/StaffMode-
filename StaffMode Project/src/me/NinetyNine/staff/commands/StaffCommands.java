@@ -284,41 +284,64 @@ public class StaffCommands implements Listener, CommandExecutor {
 	}
 
 	private void addRules(Inventory inventory) {
-		StaffItems.createItem(inventory, 0, Material.PAPER, ChatColor.RED + "Flood", null);
-		StaffItems.createGlassWithColor(inventory, 1, " ", (short) 0);
-		StaffItems.createItem(inventory, 2, Material.PAPER, ChatColor.RED + "Spam", null);
-		StaffItems.createGlassWithColor(inventory, 3, " ", (short) 8);
-		StaffItems.createItem(inventory, 4, Material.PAPER, ChatColor.RED + "Caps", null);
-		StaffItems.createGlassWithColor(inventory, 5, " ", (short) 7);
-		StaffItems.createItem(inventory, 6, Material.PAPER, ChatColor.RED + "Hackusating", null);
-		StaffItems.createGlassWithColor(inventory, 7, " ", (short) 15);
-		StaffItems.createItem(inventory, 8, Material.PAPER, ChatColor.RED + "Arguing", null);
-		StaffItems.createGlassWithColor(inventory, 9, " ", (short) 15);
-		StaffItems.createItem(inventory, 10, Material.PAPER, ChatColor.RED + "ChatTrolling", null);
-		StaffItems.createGlassWithColor(inventory, 11, " ", (short) 7);
-		StaffItems.createItem(inventory, 12, Material.PAPER, ChatColor.RED + "Asking Staff for Items", null);
-		StaffItems.createGlassWithColor(inventory, 13, " ", (short) 8);
-		StaffItems.createItem(inventory, 14, Material.PAPER, ChatColor.RED + "Advertisement", null);
+		StaffItems.createGlassWithColor(inventory, 0, " ", (short) 8);
+		StaffItems.createGlassWithColor(inventory, 1, " ", (short) 7);
+		StaffItems.createGlassWithColor(inventory, 2, " ", (short) 0);
+
+		StaffItems.createItem(inventory, 3, Material.PAPER, ChatColor.RED + "Flood", null);
+		StaffItems.createItem(inventory, 4, Material.PAPER, ChatColor.RED + "Spam", null);
+		StaffItems.createItem(inventory, 5, Material.PAPER, ChatColor.RED + "Caps", null);
+
+		StaffItems.createGlassWithColor(inventory, 9, " ", (short) 8);
+		StaffItems.createGlassWithColor(inventory, 10, " ", (short) 7);
+		StaffItems.createGlassWithColor(inventory, 11, " ", (short) 0);
+
+		StaffItems.createItem(inventory, 12, Material.PAPER, ChatColor.RED + "Hackusating", null);
+		StaffItems.createItem(inventory, 13, Material.PAPER, ChatColor.RED + "Arguing", null);
+		StaffItems.createItem(inventory, 14, Material.PAPER, ChatColor.RED + "ChatTrolling", null);
+
+		StaffItems.createGlassWithColor(inventory, 18, " ", (short) 8);
+		StaffItems.createGlassWithColor(inventory, 19, " ", (short) 7);
+		StaffItems.createGlassWithColor(inventory, 20, " ", (short) 0);
+
+		StaffItems.createItem(inventory, 21, Material.PAPER, ChatColor.RED + "Asking Staff for Items", null);
+		StaffItems.createItem(inventory, 22, Material.PAPER, ChatColor.RED + "Advertisement", null);
+		StaffItems.createItem(inventory, 23, Material.PAPER, ChatColor.RED + "Swearing", null);
+
+		StaffItems.createGlassWithColor(inventory, 27, " ", (short) 8);
+		StaffItems.createGlassWithColor(inventory, 28, " ", (short) 7);
+		StaffItems.createGlassWithColor(inventory, 29, " ", (short) 0);
+
+		StaffItems.createItem(inventory, 30, Material.PAPER, ChatColor.RED + "Server Disrespect", null);
+		StaffItems.createItem(inventory, 31, Material.PAPER, ChatColor.RED + "Staff Disrespect", null);
+		StaffItems.createItem(inventory, 32, Material.PAPER, ChatColor.RED + "Bypassing Chat Filter", null);
+
+		StaffItems.createGlassWithColor(inventory, 36, " ", (short) 8);
+		StaffItems.createGlassWithColor(inventory, 37, " ", (short) 7);
+		StaffItems.createGlassWithColor(inventory, 38, " ", (short) 0);
+
+		StaffItems.createItem(inventory, 39, Material.PAPER, ChatColor.RED + "DDoS Threat", null);
+		StaffItems.createItem(inventory, 40, Material.PAPER, ChatColor.RED + "Hack Threat", null);
+		StaffItems.createItem(inventory, 41, Material.PAPER, ChatColor.RED + "Inappropriate Behavior", null);
+
+		StaffItems.createGlassWithColor(inventory, 6, " ", (short) 0);
+		StaffItems.createGlassWithColor(inventory, 7, " ", (short) 7);
+		StaffItems.createGlassWithColor(inventory, 8, " ", (short) 8);
+
 		StaffItems.createGlassWithColor(inventory, 15, " ", (short) 0);
-		StaffItems.createItem(inventory, 16, Material.PAPER, ChatColor.RED + "Swearing", null);
-		StaffItems.createGlassWithColor(inventory, 17, " ", (short) 0);
-		StaffItems.createItem(inventory, 18, Material.PAPER, ChatColor.RED + "Server Disrespect", null);
-		StaffItems.createGlassWithColor(inventory, 19, " ", (short) 8);
-		StaffItems.createItem(inventory, 20, Material.PAPER, ChatColor.RED + "Staff Disrespect", null);
-		StaffItems.createGlassWithColor(inventory, 21, " ", (short) 7);
-		StaffItems.createItem(inventory, 22, Material.PAPER, ChatColor.RED + "Bypassing Chat Filter", null);
-		StaffItems.createGlassWithColor(inventory, 23, " ", (short) 15);
-		StaffItems.createItem(inventory, 24, Material.PAPER, ChatColor.RED + "DDoS Threat", null);
-		StaffItems.createGlassWithColor(inventory, 25, " ", (short) 3);
-		StaffItems.createItem(inventory, 26, Material.PAPER, ChatColor.RED + "Hack Threat", null);
-		StaffItems.createGlassWithColor(inventory, 27, " ", (short) 0);
-		StaffItems.createGlassWithColor(inventory, 28, " ", (short) 8);
-		StaffItems.createGlassWithColor(inventory, 29, " ", (short) 7);
-		StaffItems.createGlassWithColor(inventory, 30, " ", (short) 15);
-		StaffItems.createItem(inventory, 31, Material.PAPER, ChatColor.RED + "Inappropriate Behavior", null);
-		StaffItems.createGlassWithColor(inventory, 32, " ", (short) 15);
-		StaffItems.createGlassWithColor(inventory, 33, " ", (short) 7);
-		StaffItems.createGlassWithColor(inventory, 34, " ", (short) 8);
-		StaffItems.createGlassWithColor(inventory, 35, " ", (short) 0);
+		StaffItems.createGlassWithColor(inventory, 16, " ", (short) 7);
+		StaffItems.createGlassWithColor(inventory, 17, " ", (short) 8);
+
+		StaffItems.createGlassWithColor(inventory, 24, " ", (short) 0);
+		StaffItems.createGlassWithColor(inventory, 25, " ", (short) 7);
+		StaffItems.createGlassWithColor(inventory, 26, " ", (short) 8);
+
+		StaffItems.createGlassWithColor(inventory, 33, " ", (short) 0);
+		StaffItems.createGlassWithColor(inventory, 34, " ", (short) 7);
+		StaffItems.createGlassWithColor(inventory, 35, " ", (short) 8);
+
+		StaffItems.createGlassWithColor(inventory, 42, " ", (short) 0);
+		StaffItems.createGlassWithColor(inventory, 43, " ", (short) 7);
+		StaffItems.createGlassWithColor(inventory, 44, " ", (short) 8);
 	}
 }
