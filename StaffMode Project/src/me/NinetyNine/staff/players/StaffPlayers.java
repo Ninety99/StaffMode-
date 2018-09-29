@@ -42,17 +42,17 @@ public class StaffPlayers implements StaffInteractAbility {
 				ChatColor.BLUE + "Players (Page 4) " + ChatColor.DARK_GRAY + "(PlayerCount: " + playersOnline + ")");
 		i5 = Bukkit.createInventory(null, 54,
 				ChatColor.BLUE + "Players (Page 5) " + ChatColor.DARK_GRAY + "(PlayerCount: " + playersOnline + ")");
-	}
 
-	@Override
-	public void performAbility(Player player, ItemStack item) {
 		addSkulls();
 		addMisc(1);
 		addMisc(2);
 		addMisc(3);
 		addMisc(4);
 		addMisc(5);
+	}
 
+	@Override
+	public void performAbility(Player player, ItemStack item) {
 		player.openInventory(i);
 	}
 
