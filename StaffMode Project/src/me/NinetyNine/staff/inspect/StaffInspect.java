@@ -11,6 +11,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 
+import me.NinetyNine.staff.utils.Ping;
 import me.NinetyNine.staff.utils.StaffItems;
 import me.NinetyNine.staff.utils.StaffUtils;
 import me.NinetyNine.staff.utils.interfaces.StaffEntityInteractAbility;;
@@ -55,9 +56,10 @@ public class StaffInspect implements StaffEntityInteractAbility {
 
 		List<String> lore2 = new ArrayList<String>();
 		double health = clicked.getHealth() - 10.0;
-		lore.add(ChatColor.AQUA + clicked.getName() + "'s Information:");
-		lore2.add(ChatColor.RED + "Health: " + ChatColor.GOLD +  health + ChatColor.RED + "❤");
+		lore2.add(ChatColor.AQUA + clicked.getName() + "'s Information:");
+		lore2.add(ChatColor.RED + "Health: " + ChatColor.GOLD + health + ChatColor.RED + "❤");
 		lore2.add(ChatColor.RED + "Food Level: " + ChatColor.GOLD + clicked.getFoodLevel() + "🍖");
+		lore2.add(ChatColor.RED + "Ping: " + ChatColor.GOLD + Ping.getInstance().getPing(clicked) + "ms");
 		StaffItems.createItem(clickedInventory, 44, Material.CHEST, ChatColor.AQUA + "Player Information", lore2);
 
 		player.openInventory(clickedInventory);
