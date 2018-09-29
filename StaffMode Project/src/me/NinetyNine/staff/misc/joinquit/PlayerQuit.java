@@ -14,18 +14,18 @@ public class PlayerQuit implements Listener {
 	@EventHandler
 	public void onPlayerQuit(PlayerQuitEvent e) {
 		StaffUtils.unStaff(e.getPlayer());
+
 		if (!e.getPlayer().hasPermission("staffmode.quitbypass")) {
 			for (Player all : StaffUtils.getOnlinePlayers()) {
-				if (all.hasPermission("staffmode.toggle")) {
+				if (all.hasPermission("staffmode.toggle"))
 					all.sendMessage(StaffUtils
 							.format("&8[&5Staff&8] &3" + e.getPlayer().getName() + " &ahas left the server."));
-				}
 			}
 
 			if (StaffUtils.getOnlinePlayers().contains(e.getPlayer()))
 				StaffUtils.getOnlinePlayers().remove(e.getPlayer());
 		}
-		
+
 		if (StaffItems.getIn().containsKey(e.getPlayer())) {
 			if (StaffItems.getInWithSkull().containsKey(e.getPlayer())) {
 				if (StaffItems.getIn().get(e.getPlayer()).contains(StaffItems.getInWithSkull().get(e.getPlayer()))) {
@@ -35,7 +35,7 @@ public class PlayerQuit implements Listener {
 				}
 			}
 		}
-		
+
 		for (Player vanished : StaffVanish.getVanishedPlayers())
 			e.getPlayer().showPlayer(vanished);
 	}
