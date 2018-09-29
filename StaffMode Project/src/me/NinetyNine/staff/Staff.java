@@ -35,6 +35,7 @@ import me.NinetyNine.staff.players.StaffInventoryPlayers;
 import me.NinetyNine.staff.players.StaffPlayers;
 import me.NinetyNine.staff.randomtp.StaffRandomTP;
 import me.NinetyNine.staff.utils.Flyer;
+import me.NinetyNine.staff.utils.Ping;
 import me.NinetyNine.staff.utils.StaffConfig;
 import me.NinetyNine.staff.utils.StaffItems;
 import me.NinetyNine.staff.utils.StaffUtils;
@@ -106,6 +107,8 @@ public class Staff extends JavaPlugin {
 		pm.registerEvents(new StaffRandomTP(), this);
 		pm.registerEvents(new StaffUtils(), this);
 		pm.registerEvents(new StaffVanish(), this);
+		
+		pm.registerEvents(new Ping(), this);
 	}
 
 	private void clearAll() {
