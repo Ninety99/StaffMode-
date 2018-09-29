@@ -37,9 +37,6 @@ public class Flyer implements Listener {
 	}
 
 	public static boolean isInFly(Player player) {
-		if (StaffFly.getFly().contains(player))
-			return true;
-		else
-			return false;
+		return StaffFly.getFly().contains(player);
 	}
 }

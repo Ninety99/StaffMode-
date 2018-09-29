@@ -9,53 +9,48 @@ import me.NinetyNine.staff.vanish.StaffVanish;
 public class Vanisher implements Listener {
 
 	public static void vanish(Player player) {
-		if (StaffUtils.isInStaffMode(player)) {
-			if (Bukkit.getPluginManager().getPlugin("Atials") == null) {
-				if (!isInVanish(player)) {
-					for (Player all : StaffUtils.getOnlinePlayers()) {
-						if (all.hasPermission("staffmode.vanishbypass")) {
-							StaffVanish.getVanishedPlayers().add(player);
-							all.showPlayer(player);
-							return;
-						} else {
-							all.hidePlayer(player);
-
-							StaffVanish.getVanishedPlayers().add(player);
-							return;
-						}
-					}
-				} else
-					return;
-			} else {
-				player.performCommand("vanish");
-				return;
-			}
-		} else
+		if (!(StaffUtils.isInStaffMode(player)))
 			return;
+
+		if (Bukkit.getPluginManager().getPlugin("Atials") == null) {
+			if (isInVanish(player))
+				return;
+
+			StaffVanish.getVanishedPlayers().add(player);
+			for (Player all : StaffUtils.getOnlinePlayers()) {
+//				if (all.hasPermission("staffmode.vanishbypass")) {
+//					all.showPlayer(player);
+//					return;
+//				} else {
+					all.hidePlayer(player);
+					return;
+//				}
+			}
+		} else {
+			player.performCommand("vanish");
+			return;
+		}
 	}
 
 	public static void unvanish(Player player) {
-		if (StaffUtils.isInStaffMode(player)) {
-			if (Bukkit.getPluginManager().getPlugin("Atials") == null) {
-				if (isInVanish(player)) {
-					for (Player all : StaffUtils.getOnlinePlayers()) {
-						all.showPlayer(player);
-						StaffVanish.getVanishedPlayers().remove(player);
-					}
-				} else
-					return;
-			} else {
-				player.performCommand("vanish");
-				return;
-			}
-		} else
+		if (!(StaffUtils.isInStaffMode(player)))
 			return;
+
+		if (Bukkit.getPluginManager().getPlugin("Atials") == null) {
+			if (!(isInVanish(player)))
+				return;
+
+			for (Player all : StaffUtils.getOnlinePlayers()) {
+				all.showPlayer(player);
+				StaffVanish.getVanishedPlayers().remove(player);
+			}
+		} else {
+			player.performCommand("vanish");
+			return;
+		}
 	}
 
 	public static boolean isInVanish(Player player) {
-		if (StaffVanish.getVanishedPlayers().contains(player))
-			return true;
-		else
-			return false;
+		return StaffVanish.getVanishedPlayers().contains(player);
 	}
 }
