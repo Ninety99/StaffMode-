@@ -117,12 +117,15 @@ public class StaffCommands implements Listener, CommandExecutor {
 							String second = player
 									.isOp() ? "&5/staff worldlist &8>> &7List of Annihilation worlds(maps) just in case someone tries to abuse.\n" + "&5/staff addworld &8>> &7Adds the current world you are in to the Annihilation maps list.\n" + "&5/staff addworld &8>> &7Adds the current world you are in to the Annihilation maps list.\n" + "&5/staff removeworld &8>> &7Removes the current world you are in to the Annihilation maps list.\n" + "&5/unstaff <player> &8>> &7Toggles off Staff mode to the specified player.\n" : "";
 
+							String chatrules = player.isOp()
+									? "&5/staff chatrules &8>> &7Opens an inventory of chatrules. &7(You can edit or reset it on the inventory.)\n"
+									: "&5/staff chatrules &8>> &7Opens an inventory of chatrules.\n";
+
 							player.sendMessage(StaffUtils.format("&7-----&9[&bStaffMode&9]&7-----\n"
 									+ "&5/staff &8>> &7Toggles staff mode.\n"
 									+ "&5/staff chatclear &8>> &7Clears the chat.\n"
 									+ "&5/staff quitgmsp &8>> &7Puts your into survival gamemode after using spectator mode.\n"
-									+ "&5/staff chatrules &8>> &7Opens an inventory of chatrules.\n" + second
-									+ "&7-----&9[&bStaffMode&9]&7-----"));
+									+ chatrules + second + "&7-----&9[&bStaffMode&9]&7-----"));
 							return true;
 						} else {
 							player.sendMessage(
