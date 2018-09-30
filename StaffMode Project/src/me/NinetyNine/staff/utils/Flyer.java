@@ -1,6 +1,5 @@
 package me.NinetyNine.staff.utils;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
@@ -12,7 +11,7 @@ public class Flyer implements Listener {
 		if (!StaffUtils.isInStaffMode(player))
 			return;
 
-		if (Bukkit.getPluginManager().getPlugin("Atials") == null) {
+		if (!(StaffUtils.isAtialsEnabled())) {
 			StaffFly.getFly().add(player);
 			player.setAllowFlight(true);
 			return;
@@ -26,7 +25,7 @@ public class Flyer implements Listener {
 		if (!StaffUtils.isInStaffMode(player))
 			return;
 
-		if (Bukkit.getPluginManager().getPlugin("Atials") == null) {
+		if (!(StaffUtils.isAtialsEnabled())) {
 			StaffFly.getFly().remove(player);
 			player.setAllowFlight(false);
 			return;

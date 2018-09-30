@@ -108,4 +108,8 @@ public class StaffUtils implements Listener {
 		getStaff().clear();
 		getStaffArmor().clear();
 	}
+
+	public static boolean isAtialsEnabled() {
+		return Bukkit.getPluginManager().isPluginEnabled("Atials");
+	}
 }

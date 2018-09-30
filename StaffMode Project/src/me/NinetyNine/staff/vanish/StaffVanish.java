@@ -24,6 +24,9 @@ public class StaffVanish implements StaffInteractOnOrOffAbility {
 
 	@Override
 	public void performAbility(Player player, ItemStack item) {
+		if (StaffUtils.isAtialsEnabled())
+			return;
+
 		if (Vanisher.isInVanish(player)) {
 			Vanisher.unvanish(player);
 			off(item);
@@ -63,7 +66,7 @@ public class StaffVanish implements StaffInteractOnOrOffAbility {
 	public void on(ItemStack item) {
 		item.setType(Material.REDSTONE_TORCH_ON);
 		ItemMeta meta = item.getItemMeta();
-		meta.setDisplayName(ChatColor.GREEN + "Vanish");
+		meta.setDisplayName(getAbilityNameWhenOn());
 		meta.addEnchant(Enchantment.DURABILITY, 1, true);
 		item.setItemMeta(meta);
 
@@ -75,7 +78,7 @@ public class StaffVanish implements StaffInteractOnOrOffAbility {
 	public void off(ItemStack item) {
 		item.setType(Material.TORCH);
 		ItemMeta meta = item.getItemMeta();
-		meta.setDisplayName(ChatColor.RED + "Vanish");
+		meta.setDisplayName(getAbilityNameWhenOff());
 		meta.removeEnchant(Enchantment.DURABILITY);
 		item.setItemMeta(meta);
 

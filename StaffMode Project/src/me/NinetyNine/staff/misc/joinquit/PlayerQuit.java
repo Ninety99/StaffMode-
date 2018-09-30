@@ -16,14 +16,16 @@ public class PlayerQuit implements Listener {
 		StaffUtils.unStaff(e.getPlayer());
 
 		if (!e.getPlayer().hasPermission("staffmode.quitbypass")) {
-			for (Player all : StaffUtils.getOnlinePlayers()) {
-				if (all.hasPermission("staffmode.toggle"))
-					all.sendMessage(StaffUtils
-							.format("&8[&5Staff&8] &3" + e.getPlayer().getName() + " &ahas left the server."));
-			}
+			if (e.getPlayer().hasPermission("staffmode.toggle")) {
+				for (Player all : StaffUtils.getOnlinePlayers()) {
+					if (all.hasPermission("staffmode.toggle"))
+						all.sendMessage(StaffUtils
+								.format("&8[&5Staff&8] &3" + e.getPlayer().getName() + " &ahas left the server."));
+				}
 
-			if (StaffUtils.getOnlinePlayers().contains(e.getPlayer()))
-				StaffUtils.getOnlinePlayers().remove(e.getPlayer());
+				if (StaffUtils.getOnlinePlayers().contains(e.getPlayer()))
+					StaffUtils.getOnlinePlayers().remove(e.getPlayer());
+			}
 		}
 
 		if (StaffItems.getIn().containsKey(e.getPlayer())) {

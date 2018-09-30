@@ -23,6 +23,9 @@ public class StaffFly implements StaffInteractOnOrOffAbility {
 
 	@Override
 	public void performAbility(Player player, ItemStack item) {
+		if (StaffUtils.isAtialsEnabled())
+			return;
+
 		if (Flyer.isInFly(player)) {
 			getFly().remove(player);
 			off(item);
@@ -62,9 +65,9 @@ public class StaffFly implements StaffInteractOnOrOffAbility {
 	public void on(ItemStack item) {
 		ItemMeta meta = item.getItemMeta();
 		meta.addEnchant(Enchantment.DURABILITY, 1, true);
-		meta.setDisplayName(ChatColor.GREEN + "Fly");
+		meta.setDisplayName(getAbilityNameWhenOn());
 		item.setItemMeta(meta);
-		
+
 		if (!(StaffItems.getStaffItems().contains(item)))
 			StaffItems.getStaffItems().add(item);
 	}
@@ -73,9 +76,9 @@ public class StaffFly implements StaffInteractOnOrOffAbility {
 	public void off(ItemStack item) {
 		ItemMeta meta = item.getItemMeta();
 		meta.removeEnchant(Enchantment.DURABILITY);
-		meta.setDisplayName(ChatColor.RED + "Fly");
+		meta.setDisplayName(getAbilityNameWhenOff());
 		item.setItemMeta(meta);
-		
+
 		if (!(StaffItems.getStaffItems().contains(item)))
 			StaffItems.getStaffItems().add(item);
 	}

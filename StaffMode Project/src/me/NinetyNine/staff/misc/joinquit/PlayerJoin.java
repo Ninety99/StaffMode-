@@ -13,10 +13,12 @@ public class PlayerJoin implements Listener {
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent e) {
 		if (!e.getPlayer().hasPermission("staffmode.joinbypass")) {
-			for (Player all : StaffUtils.getOnlinePlayers()) {
-				if (all.hasPermission("staffmode.toggle"))
-					all.sendMessage(StaffUtils
-							.format("&9[&5Staff&9] &3" + e.getPlayer().getName() + " &ahas joined the server."));
+			if (e.getPlayer().hasPermission("staffmode.toggle")) {
+				for (Player all : StaffUtils.getOnlinePlayers()) {
+					if (all.hasPermission("staffmode.toggle"))
+						all.sendMessage(StaffUtils
+								.format("&9[&5Staff&9] &3" + e.getPlayer().getName() + " &ahas joined the server."));
+				}
 			}
 		}
 
