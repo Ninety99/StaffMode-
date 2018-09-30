@@ -182,7 +182,7 @@ public class StaffCommands implements Listener, CommandExecutor {
 					}
 
 					if (args[0].equalsIgnoreCase("addworld")) {
-						if (player.hasPermission("staffmode.addworld")) {
+						if (player.isOp()) {
 							if (!StaffConfig.getStringList("anniWorlds").contains(player.getWorld().getName())) {
 								StaffConfig.addStringToList(player.getWorld().getName());
 								player.sendMessage(StaffUtils.format("&aSuccesfully added &c"
@@ -201,7 +201,7 @@ public class StaffCommands implements Listener, CommandExecutor {
 					}
 
 					if (args[0].equalsIgnoreCase("removeworld")) {
-						if (player.hasPermission("staffmode.removeworld")) {
+						if (player.isOp()) {
 							if (!StaffConfig.getStringList("anniWorlds").contains(player.getWorld().getName())) {
 								player.sendMessage(StaffUtils.format(
 										"&c" + player.getWorld().getName() + " &7is not on the anni world list!"));
@@ -220,7 +220,7 @@ public class StaffCommands implements Listener, CommandExecutor {
 					}
 
 					if (args[0].equalsIgnoreCase("worldlist")) {
-						if (player.hasPermission("staffmode.worldlist")) {
+						if (player.isOp()) {
 							player.sendMessage(ChatColor.RED + "Annihilation Worlds:\n");
 
 							player.sendMessage(ChatColor.GRAY + StaffConfig.getStringList("anniWorlds").toString()
@@ -249,7 +249,7 @@ public class StaffCommands implements Listener, CommandExecutor {
 			}
 
 			if (cmd.getName().equalsIgnoreCase("unstaff")) {
-				if (!player.hasPermission("staffmode.unstaff")) {
+				if (!player.isOp()) {
 					player.sendMessage(StaffUtils.format("&cYou cannot execute this command!"));
 					return true;
 				}

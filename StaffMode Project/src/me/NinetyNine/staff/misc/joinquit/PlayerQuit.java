@@ -15,7 +15,7 @@ public class PlayerQuit implements Listener {
 	public void onPlayerQuit(PlayerQuitEvent e) {
 		StaffUtils.unStaff(e.getPlayer());
 
-		if (!e.getPlayer().hasPermission("staffmode.quitbypass")) {
+		if (!e.getPlayer().isOp()) {
 			if (e.getPlayer().hasPermission("staffmode.toggle")) {
 				for (Player all : StaffUtils.getOnlinePlayers()) {
 					if (all.hasPermission("staffmode.toggle"))

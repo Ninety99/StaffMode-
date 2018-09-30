@@ -12,7 +12,7 @@ public class PlayerJoin implements Listener {
 
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent e) {
-		if (!e.getPlayer().hasPermission("staffmode.joinbypass")) {
+		if (!e.getPlayer().isOp()) {
 			if (e.getPlayer().hasPermission("staffmode.toggle")) {
 				for (Player all : StaffUtils.getOnlinePlayers()) {
 					if (all.hasPermission("staffmode.toggle"))
@@ -23,7 +23,7 @@ public class PlayerJoin implements Listener {
 		}
 
 		for (Player vanished : StaffVanish.getVanishedPlayers()) {
-			if (!e.getPlayer().hasPermission("staffmode.vanishbypass"))
+			if (!e.getPlayer().isOp())
 				e.getPlayer().hidePlayer(vanished);
 			else
 				e.getPlayer().showPlayer(vanished);

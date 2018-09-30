@@ -631,14 +631,14 @@ public class StaffChatRulesInventory implements Listener {
 	}
 
 	private void addEdit(Player player, Inventory inventory) {
-		if (player.hasPermission("staff.chatrules.set"))
+		if (player.isOp())
 			StaffItems.createItem(inventory, 4, Material.PAPER, ChatColor.GOLD + "Edit Details", null);
 		else
 			return;
 	}
 
 	private void addReset(Player player, Inventory inventory) {
-		if (player.hasPermission("staff.chatrules.reset"))
+		if (player.isOp())
 			StaffItems.createItem(inventory, 8, Material.BARRIER, ChatColor.RED + "Reset Details", null);
 		else
 			return;

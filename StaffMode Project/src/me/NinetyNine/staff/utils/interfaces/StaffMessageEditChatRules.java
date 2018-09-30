@@ -13,7 +13,7 @@ public interface StaffMessageEditChatRules extends Listener {
 
 	@EventHandler
 	public default void onAsyncPlayerChat(AsyncPlayerChatEvent e) {
-		if (!(e.getPlayer().hasPermission("staffmode.chatrules.set")))
+		if (e.getPlayer().isOp())
 			return;
 		
 		if (!(StaffChatRulesInventory.getInEditMode().contains(e.getPlayer())))

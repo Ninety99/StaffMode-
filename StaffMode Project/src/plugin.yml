@@ -31,44 +31,4 @@ permissions:
     default: op
     admin: true
     mod: true
-    helper: true
-  staffmode.chatrules.set:
-    default: op
-    admin: false
-    mod: false
-    helper: false
-  staffmode.unstaff:
-    default: op
-    admin: false
-    helper: false
-    mod: false
-  staffmode.joinbypass:
-    default: op
-    admin: false
-    helper: false
-    mod: false
-  staffmode.quitbypass:
-    default: op
-    admin: false
-    helper: false
-    mod: false
-  staffmode.vanishbypass:
-    default: op
-    admin: false
-    helper: false
-    mod: false
-  staffmode.addworld:
-    default: op
-    admin: false
-    helper: false
-    mod: false
-  staffmode.removeworld:
-    default: op
-    admin: false
-    helper: false
-    mod: false
-  staffmode.worldlist:
-    default: op
-    admin: false
-    helper: false
-    mod: false
+    helper: true\
