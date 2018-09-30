@@ -21,6 +21,12 @@ public class Vanisher implements Listener {
 				all.hidePlayer(player);
 
 			StaffVanish.getVanishedPlayers().add(player);
+			
+			for (Player op : StaffVanish.getVanishedPlayers()) {
+				if (op.isOp())
+					op.showPlayer(player);
+			}
+			
 			return;
 		} else {
 			TPlayer.getPlayer(player).setVanish(true);

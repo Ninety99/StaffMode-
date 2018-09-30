@@ -112,6 +112,20 @@ public class StaffCommands implements Listener, CommandExecutor {
 				}
 
 				if (args.length == 1) {
+					if (args[0].equalsIgnoreCase("help")) {
+						player.sendMessage(StaffUtils.format("&7-----&9[&bStaffMode&9]&7-----\n"
+								+ "&5/staff &8>> &7Toggles staff mode.\n"
+								+ "&5/staff chatclear &8>> &7Clears the chat.\n"
+								+ "&5/staff quitgmsp &8>> &7Puts your into survival gamemode after using spectator mode.\n"
+								+ "&5/staff chatrules &8>> &7Opens an inventory of chatrules.\n"
+								+ "&5/staff worldlist &8>> &7List of Annihilation worlds(maps) just in case someone tries to abuse.\n"
+								+ "&5/staff addworld &8>> &7Adds the current world you are in to the Annihilation maps list.\n"
+								+ "&5/staff removeworld &8>> &7Removes the current world you are in to the Annihilation maps list.\n"
+								+ "&5/unstaff <player> &8>> &7Toggles off Staff mode to the specified player.\n"
+								+ "&7-----&9[&bStaffMode&9]&7-----"));
+						return true;
+					}
+
 					if (args[0].equalsIgnoreCase("quitgmsp")) {
 						if (player.hasPermission("staffmode.gm0")) {
 							if (player.getGameMode() != GameMode.SURVIVAL
@@ -206,9 +220,10 @@ public class StaffCommands implements Listener, CommandExecutor {
 						}
 					}
 
-					if (!(args[0].equalsIgnoreCase("quitgmsp") || args[0].equalsIgnoreCase("chatclear")
-							|| args[0].equalsIgnoreCase("chatrules") || args[0].equalsIgnoreCase("addworld")
-							|| args[0].equalsIgnoreCase("removeworld") || args[0].equalsIgnoreCase("worldlist"))) {
+					if (!(args[0].equalsIgnoreCase("help") || args[0].equalsIgnoreCase("quitgmsp")
+							|| args[0].equalsIgnoreCase("chatclear") || args[0].equalsIgnoreCase("chatrules")
+							|| args[0].equalsIgnoreCase("addworld") || args[0].equalsIgnoreCase("removeworld")
+							|| args[0].equalsIgnoreCase("worldlist"))) {
 						player.sendMessage(StaffUtils.format("&cInvalid command."));
 						return true;
 					}
