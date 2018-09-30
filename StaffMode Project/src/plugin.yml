@@ -2,7 +2,7 @@ name: StaffMode
 main: me.NinetyNine.staff.Staff
 version: 0.1
 author: NinetyNine
-softdepend: [ProtocolLib, GCBanz]
+softdepend: [ProtocolLib, GCBanz, Atials]
 description: A Staff Mode plugin.
 commands:
   staff:

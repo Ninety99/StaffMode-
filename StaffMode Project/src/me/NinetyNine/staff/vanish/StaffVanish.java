@@ -24,9 +24,6 @@ public class StaffVanish implements StaffInteractOnOrOffAbility {
 
 	@Override
 	public void performAbility(Player player, ItemStack item) {
-		if (StaffUtils.isAtialsEnabled())
-			return;
-
 		if (Vanisher.isInVanish(player)) {
 			Vanisher.unvanish(player);
 			off(item);
@@ -36,7 +33,7 @@ public class StaffVanish implements StaffInteractOnOrOffAbility {
 		} else {
 			Vanisher.vanish(player);
 			on(item);
-			StaffActionBar.sendActionBar(player, ChatColor.GREEN + "You are now vanished", 1);
+			StaffActionBar.sendActionBar(player, ChatColor.RED + "You are now vanished", 1);
 			player.sendMessage(StaffUtils.format("&3Vanish &7has been &aenabled&7!"));
 			return;
 		}

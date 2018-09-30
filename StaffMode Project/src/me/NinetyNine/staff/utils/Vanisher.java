@@ -2,6 +2,8 @@ package me.NinetyNine.staff.utils;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
+import org.guildcraft.atials.TPlayer;
+import org.guildcraft.atials.VanishManager;
 
 import me.NinetyNine.staff.vanish.StaffVanish;
 
@@ -21,7 +23,8 @@ public class Vanisher implements Listener {
 			StaffVanish.getVanishedPlayers().add(player);
 			return;
 		} else {
-			player.performCommand("vanish");
+			TPlayer.getPlayer(player).setVanish(true);
+			VanishManager.Vanish(player, false);
 			return;
 		}
 	}
@@ -40,12 +43,13 @@ public class Vanisher implements Listener {
 			StaffVanish.getVanishedPlayers().remove(player);
 			return;
 		} else {
-			player.performCommand("vanish");
+			TPlayer.getPlayer(player).setVanish(false);
+			VanishManager.unVanish(player, false);
 			return;
 		}
 	}
 
 	public static boolean isInVanish(Player player) {
-		return StaffVanish.getVanishedPlayers().contains(player);
+		return VanishManager.isGVanished(player);
 	}
 }

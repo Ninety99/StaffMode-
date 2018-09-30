@@ -23,9 +23,6 @@ public class StaffFly implements StaffInteractOnOrOffAbility {
 
 	@Override
 	public void performAbility(Player player, ItemStack item) {
-		if (StaffUtils.isAtialsEnabled())
-			return;
-
 		if (Flyer.isInFly(player)) {
 			getFly().remove(player);
 			off(item);

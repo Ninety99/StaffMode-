@@ -58,6 +58,7 @@ public class Staff extends JavaPlugin {
 		StaffPLChest.setupSoundListener();
 		StaffConfig.loadConfig();
 		StaffConfig.save();
+
 		Bukkit.getServer().getLogger().info("StaffMode has been enabled");
 	}
 
@@ -66,6 +67,7 @@ public class Staff extends JavaPlugin {
 		StaffConfig.save();
 		giveItemsBack();
 		clearAll();
+		
 		Bukkit.getServer().getLogger().info("StaffMode has been disabled");
 	}
 
@@ -107,7 +109,7 @@ public class Staff extends JavaPlugin {
 		pm.registerEvents(new StaffRandomTP(), this);
 		pm.registerEvents(new StaffUtils(), this);
 		pm.registerEvents(new StaffVanish(), this);
-		
+
 		pm.registerEvents(new Ping(), this);
 	}
 
