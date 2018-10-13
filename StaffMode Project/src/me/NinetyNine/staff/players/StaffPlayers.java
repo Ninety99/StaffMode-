@@ -22,20 +22,19 @@ public class StaffPlayers implements StaffInteractAbility {
 
 	@Getter
 	private static Inventory i = Bukkit.createInventory(null, 54,
-			ChatColor.BLUE + "Players " + ChatColor.DARK_GRAY + "(PlayerCount: " + playersOnline + ")");
-
+			ChatColor.BLUE + "Players " + ChatColor.DARK_GRAY + "(Players: " + playersOnline + ")");
 	@Getter
 	private static Inventory i2 = Bukkit.createInventory(null, 54,
-			ChatColor.BLUE + "Players (Page 2) " + ChatColor.DARK_GRAY + "(PlayerCount: " + playersOnline + ")");
+			ChatColor.BLUE + "Players (2) " + ChatColor.DARK_GRAY + "(Players: " + playersOnline + ")");
 	@Getter
 	private static Inventory i3 = Bukkit.createInventory(null, 54,
-			ChatColor.BLUE + "Players (Page 3) " + ChatColor.DARK_GRAY + "(PlayerCount: " + playersOnline + ")");
+			ChatColor.BLUE + "Players (3) " + ChatColor.DARK_GRAY + "(Players: " + playersOnline + ")");
 	@Getter
 	private static Inventory i4 = Bukkit.createInventory(null, 54,
-			ChatColor.BLUE + "Players (Page 4) " + ChatColor.DARK_GRAY + "(PlayerCount: " + playersOnline + ")");
+			ChatColor.BLUE + "Players (4) " + ChatColor.DARK_GRAY + "(Players: " + playersOnline + ")");
 	@Getter
 	private static Inventory i5 = Bukkit.createInventory(null, 54,
-			ChatColor.BLUE + "Players (Page 5) " + ChatColor.DARK_GRAY + "(PlayerCount: " + playersOnline + ")");
+			ChatColor.BLUE + "Players (5) " + ChatColor.DARK_GRAY + "(Players: " + playersOnline + ")");
 
 	@Override
 	public void performAbility(Player player, ItemStack item) {
