@@ -146,23 +146,14 @@ public class StaffPlayers implements StaffInteractAbility {
 	}
 
 	private void addEmerald(Inventory inventory, List<String> lore) {
-		if (inventory.contains(Material.EMERALD))
-			return;
-
 		StaffItems.createItem(inventory, 49, Material.EMERALD, ChatColor.AQUA + "Info", lore);
 	}
 
 	private void addPrevious(Inventory inventory) {
-		if (inventory.contains(Material.BARRIER))
-			return;
-
 		StaffItems.createItem(inventory, 45, Material.BARRIER, ChatColor.RED + "Previous", null);
 	}
 
 	private void addNext(Inventory inventory) {
-		if (inventory.contains(Material.BARRIER))
-			return;
-
 		StaffItems.createItem(inventory, 53, Material.BARRIER, ChatColor.GREEN + "Next", null);
 	}
 }

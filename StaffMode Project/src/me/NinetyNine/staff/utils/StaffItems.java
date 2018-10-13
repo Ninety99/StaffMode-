@@ -117,11 +117,16 @@ public class StaffItems implements Listener {
 
 	public static void addSkullsWithBMInfo(Inventory inventory) {
 		ItemStack skull = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
-		for (Player all : StaffUtils.getOnlinePlayers()) {
-			if (!getIn().containsKey(all))
-				getIn().put(all, inventory);
+		SkullMeta meta = (SkullMeta) skull.getItemMeta();
 
-			SkullMeta meta = (SkullMeta) skull.getItemMeta();
+		for (Player all : StaffUtils.getOnlinePlayers()) {
+			if (getInWithSkull().containsKey(all))
+				continue;
+
+			if (getIn().containsKey(all))
+				continue;
+
+			getIn().put(all, inventory);
 
 			meta.setDisplayName(all.getName());
 			meta.setOwner(all.getName());
@@ -140,15 +145,15 @@ public class StaffItems implements Listener {
 			meta.setLore(lore);
 			skull.setItemMeta(meta);
 
-			if (!getStaffItems().contains(skull))
-				getStaffItems().add(skull);
+			if (getStaffItems().contains(skull))
+				continue;
 
-			if (!getIn().get(all).contains(skull)) {
-				if (!getInWithSkull().containsKey(all)) {
-					getInWithSkull().put(all, skull);
-					inventory.addItem(skull);
-				}
-			}
+			getStaffItems().add(skull);
+
+			getInWithSkull().put(all, skull);
+
+			if (getInWithSkull().containsKey(all))
+				inventory.addItem(skull);
 		}
 	}
 

@@ -28,8 +28,5 @@ public class PlayerJoin implements Listener {
 			else
 				e.getPlayer().showPlayer(vanished);
 		}
-
-		if (!(StaffUtils.getOnlinePlayers().contains(e.getPlayer())))
-			StaffUtils.getOnlinePlayers().add(e.getPlayer());
 	}
 }

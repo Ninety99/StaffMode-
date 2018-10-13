@@ -23,8 +23,6 @@ public class StaffUtils implements Listener {
 	@Getter
 	private static HashMap<Player, ItemStack[]> staffArmor = new HashMap<Player, ItemStack[]>();
 
-	private static List<Player> all = new ArrayList<Player>();
-
 	public static String format(String message) {
 		return ChatColor.translateAlternateColorCodes('&', "&7[&c!&7] " + message);
 	}
@@ -81,11 +79,13 @@ public class StaffUtils implements Listener {
 	}
 
 	public static List<Player> getOnlinePlayers() {
+		List<Player> all = new ArrayList<Player>();
+
 		for (Player players : Bukkit.getServer().getOnlinePlayers()) {
 			if (!all.contains(players))
 				all.add(players);
 		}
-
+		
 		return all;
 	}
 
