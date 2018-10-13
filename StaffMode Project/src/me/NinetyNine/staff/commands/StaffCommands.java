@@ -300,10 +300,9 @@ public class StaffCommands implements Listener, CommandExecutor {
 						.broadcastMessage(ChatColor.GRAY + "           -=[+]----===================----[+]=-\n"
 								+ ChatColor.GOLD + "            Chat has been cleared by " + ChatColor.RED
 								+ sender.getName() + ChatColor.GOLD + "!\n" + ChatColor.GRAY
-								+ "           -=[+]----===================----[+]=-\n" + ChatColor.GREEN
-								+ "You did not get the chat cleared because of your permissions!");
+								+ "           -=[+]----===================----[+]=-");
+				sender.sendMessage(ChatColor.GREEN + "You did not get your chat cleared because of your permissions!");
 				return;
-
 			}
 		} else {
 			Bukkit.getServer()

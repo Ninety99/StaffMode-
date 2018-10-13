@@ -21,18 +21,14 @@ public class StaffRandomTP implements StaffInteractAbility {
 			return;
 		} else {
 			Random random = new Random();
-			StaffUtils.getOnlinePlayers().remove(player);
 			int r = random.nextInt(StaffUtils.getOnlinePlayers().size());
 			Player target = StaffUtils.getOnlinePlayers().get(r);
 			if (!StaffUtils.isInStaffMode(target) && !Vanisher.isInVanish(target)) {
 				if (target != null) {
 					player.teleport(target);
 					player.sendMessage(StaffUtils.format("&7Randomly teleported to " + target.getName()));
-					return;
-				} else
-					return;
+				}
 			}
-			StaffUtils.getOnlinePlayers().add(player);
 		}
 	}
 

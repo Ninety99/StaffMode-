@@ -11,7 +11,7 @@ import me.NinetyNine.staff.utils.StaffUtils;
 
 public class StaffAntiNexus implements Listener {
 
-	@EventHandler
+	@EventHandler(ignoreCancelled = false)
 	public void onBlockBreak(BlockBreakEvent e) {
 		if (!(e.getBlock().getType() == Material.ENDER_STONE))
 			return;

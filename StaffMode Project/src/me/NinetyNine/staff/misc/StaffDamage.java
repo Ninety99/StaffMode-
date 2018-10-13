@@ -9,7 +9,7 @@ import me.NinetyNine.staff.utils.StaffUtils;
 
 public class StaffDamage implements Listener {
 
-	@EventHandler
+	@EventHandler(ignoreCancelled = false)
 	public void onEntityDamage(EntityDamageEvent e) {
 		if (!(e.getEntity() instanceof Player))
 			return;

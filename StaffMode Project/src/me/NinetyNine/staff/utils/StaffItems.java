@@ -120,9 +120,6 @@ public class StaffItems implements Listener {
 		SkullMeta meta = (SkullMeta) skull.getItemMeta();
 
 		for (Player all : StaffUtils.getOnlinePlayers()) {
-			if (getInWithSkull().containsKey(all))
-				continue;
-
 			if (getIn().containsKey(all))
 				continue;
 
@@ -150,10 +147,12 @@ public class StaffItems implements Listener {
 
 			getStaffItems().add(skull);
 
+			if (getInWithSkull().containsKey(all))
+				continue;
+
 			getInWithSkull().put(all, skull);
 
-			if (getInWithSkull().containsKey(all))
-				inventory.addItem(skull);
+			inventory.addItem(skull);
 		}
 	}
 

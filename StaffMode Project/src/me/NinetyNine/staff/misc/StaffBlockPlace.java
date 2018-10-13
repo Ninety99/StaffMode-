@@ -9,7 +9,7 @@ import me.NinetyNine.staff.utils.StaffUtils;
 
 public class StaffBlockPlace implements Listener {
 
-	@EventHandler
+	@EventHandler(ignoreCancelled = false)
 	public void onBlockPlace(BlockPlaceEvent e) {
 		if (!(StaffUtils.isInStaffMode(e.getPlayer())))
 			return;

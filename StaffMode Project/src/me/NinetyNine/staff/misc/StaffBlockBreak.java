@@ -12,7 +12,7 @@ import me.NinetyNine.staff.utils.StaffUtils;
 
 public class StaffBlockBreak implements Listener {
 
-	@EventHandler
+	@EventHandler(ignoreCancelled = false)
 	public void onBlockBreak(BlockBreakEvent e) {
 		if (!StaffUtils.isInStaffMode(e.getPlayer()))
 			return;

@@ -17,18 +17,24 @@ permissions:
   staffmode.toggle:
     default: op
     admin: true
+    helper: false
+    mod: false
+    guide: false
   staffmode.help:
     default: op
     admin: true
     helper: false
     mod: true
+    guide: true
   staffmode.gmsp:
     default: op
     admin: true
     mod: false
     helper: false
+    guide: false
   staffmode.chatrules:
     default: op
     admin: true
     mod: true
-    helper: true\
+    helper: true
+    guide: true
