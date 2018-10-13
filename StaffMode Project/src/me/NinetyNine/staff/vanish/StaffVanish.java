@@ -25,15 +25,15 @@ public class StaffVanish implements StaffInteractOnOrOffAbility {
 	@Override
 	public void performAbility(Player player, ItemStack item) {
 		if (Vanisher.isInVanish(player)) {
+			StaffActionBar.sendActionBar(player, ChatColor.RED + "You are now unvanished", 1);
 			Vanisher.unvanish(player);
 			off(item);
-			StaffActionBar.sendActionBar(player, ChatColor.RED + "You are now unvanished", 1);
 			player.sendMessage(StaffUtils.format("&3Vanish &7has been &cdisabled&7!"));
 			return;
 		} else {
+			StaffActionBar.sendActionBar(player, ChatColor.GREEN + "You are now vanished", 1);
 			Vanisher.vanish(player);
 			on(item);
-			StaffActionBar.sendActionBar(player, ChatColor.RED + "You are now vanished", 1);
 			player.sendMessage(StaffUtils.format("&3Vanish &7has been &aenabled&7!"));
 			return;
 		}
