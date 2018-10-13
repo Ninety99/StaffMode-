@@ -37,8 +37,8 @@ public class StaffInspect implements StaffEntityInteractAbility {
 
 		if (getPotionEffects(clicked).size() > 0) {
 			for (PotionEffect effects : getPotionEffects(clicked)) {
-				effectstring.add(("" + effects.getType().getName().charAt(0)).toUpperCase()
-						+ effects.getType().getName().substring(1).toLowerCase() + ChatColor.RED + " Duration: "
+				effectstring.add(ChatColor.AQUA + ("" + effects.getType().getName().charAt(0)).toUpperCase()
+						+ effects.getType().getName().substring(1).toLowerCase() + ":" + ChatColor.RED + " Duration: "
 						+ ChatColor.GOLD + effects.getDuration() + ChatColor.RED + " Amplifier: " + ChatColor.GOLD
 						+ effects.getAmplifier());
 			}
